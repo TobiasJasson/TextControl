@@ -24,7 +24,7 @@ namespace BLL.Servicios
             string body = $"Hola {empleado.Nombre} {empleado.Apellido},\n\n" +
                           "Si has seleccionado la opción recuperar la clave en el sistema TextControl, " +
                           $"por favor realiza click en el siguiente link para ingresar tu nueva clave:\n" +
-                          $"http://localhost:5500/cambiarClave?usuario={empleado.Gmail}&token={token}&nameUser={nameUser}\n\n" +
+                          $"http://localhost:5500/cambiarClave?usuario={nameUser}&token={token}\n\n" +
                           "Si no lo has solicitado, por favor ignore este mensaje.";
 
             var smtp = new SmtpClient

@@ -51,14 +51,14 @@ namespace API.Server.Controllers
                 }
             }
 
-            return Ok("Contraseña actualizada correctamente.");
+            return Ok(new { message = "Contraseña actualizada correctamente." });
         }
 
         public class CambiarClaveRequest
         {
-            public string UserName { get; set; }
-            public string Token { get; set; }
-            public string NuevaClave { get; set; }
+            public required string UserName { get; set; }
+            public required string Token { get; set; }
+            public required string NuevaClave { get; set; }
         }
     }
 }
