@@ -1,4 +1,4 @@
-﻿using Domain_Model;
+﻿using DomainModel;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -15,7 +15,7 @@ namespace BLL.Servicios
         private readonly string fromEmail = ConfigurationManager.AppSettings["EmailSistema"];
         private readonly string fromPassword = ConfigurationManager.AppSettings["PasswordEmailSistema"];
 
-        public void EnviarRecuperacionClave(Empleado empleado, string token, string nameUser)
+        public void EnviarRecuperacionClave(Empleados empleado, string token, string nameUser)
         {
             var fromAddress = new MailAddress(fromEmail, "TextControl System");
             var toAddress = new MailAddress(empleado.Gmail, empleado.Nombre + " " + empleado.Apellido);

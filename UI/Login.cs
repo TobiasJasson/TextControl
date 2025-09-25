@@ -1,6 +1,6 @@
 ﻿using BLL;
 using BLL.Servicios;
-using Domain_Model;
+using DomainModel;
 using DomainModel;
 using System;
 using System.Collections.Generic;
@@ -13,6 +13,8 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UI.Admin;
+using UI.EmpleadosForms;
 
 namespace UI
 {
@@ -80,7 +82,28 @@ namespace UI
                 // abrir pantalla principal
                 var empleadoService = new EmpleadoService();
                 var empleado = empleadoService.GetEmpleadoById(user.IdEmpleado);
-                MessageBox.Show($"Bienvenido {empleado.Nombre} {empleado.Apellido}");
+                SessionManager.Instance.SetUsuario(user);
+                SessionManager.Instance.SetEmpeleado(empleado);
+
+                this.Hide();
+                FormWelcome welcome = new FormWelcome();
+                welcome.ShowDialog();
+                welcome.Hide();
+
+                if (empleado.IdRol == 1)
+                {
+                    HomeAdmin admin = new HomeAdmin();
+                    admin.Show();
+                } else if (empleado.IdRol == 2)
+                {
+                    HomeEmpleado empleadoForm = new HomeEmpleado();
+                    empleadoForm.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Usted no contiene un rol, avise al Administrador");
+                }
+
 
                 // Ahora puedes abrir la pantalla principal pasando 'empleado'
                 //var mainForm = new MainForm(empleado);

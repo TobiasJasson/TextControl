@@ -1,4 +1,4 @@
-﻿using Domain_Model;
+﻿using DomainModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +13,9 @@ namespace DomainModel
         public string UserName { get; set; }            
         public string Password { get; set; }           
         public string EmailRecuperacion { get; set; }  
-        public int IdEmpleado { get; set; }            
+        public int IdEmpleado { get; set; }
 
         // Navegación opcional
-        public Empleado Empleado { get; set; }
+        public List<Empleados> Empleados { get; set; } = new List<Empleados>();
     }
 }

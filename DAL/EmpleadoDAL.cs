@@ -1,4 +1,4 @@
-﻿using Domain_Model;
+﻿using DomainModel;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -12,7 +12,7 @@ namespace DAL
     {
         private readonly Conexion _conexion = new Conexion();
 
-        public Empleado GetById(int id)
+        public Empleados GetById(int id)
         {
             using (var conn = _conexion.GetConnection())
             {
@@ -25,7 +25,7 @@ namespace DAL
                     {
                         if (reader.Read())
                         {
-                            return new Empleado
+                            return new Empleados
                             {
                                 IdEmpleado = (int)reader["ID_Empleado"],
                                 Nombre = reader["Nombre_Empleado"].ToString(),
@@ -33,6 +33,7 @@ namespace DAL
                                 Gmail = reader["Gmail_Empleado"].ToString(),
                                 DNI = reader["DNI_Empleado"].ToString(),
                                 Contacto = reader["Contacto_Empleado"].ToString(),
+                                IdRol = (int)reader["ID_Rol"],
                             };
                         }
                         else

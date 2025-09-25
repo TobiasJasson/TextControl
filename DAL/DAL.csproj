@@ -58,6 +58,7 @@
     <Content Include="ScriptsSQL\TextControl.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="ScriptsSQL\TextControlDB.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
