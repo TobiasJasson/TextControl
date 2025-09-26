@@ -83,7 +83,7 @@ namespace UI
                 var empleadoService = new EmpleadoService();
                 var empleado = empleadoService.GetEmpleadoById(user.IdEmpleado);
                 SessionManager.Instance.SetUsuario(user);
-                SessionManager.Instance.SetEmpeleado(empleado);
+                SessionManager.Instance.SetEmpleado(empleado);
 
                 this.Hide();
                 FormWelcome welcome = new FormWelcome();

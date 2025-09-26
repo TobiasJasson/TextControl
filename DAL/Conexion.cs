@@ -15,7 +15,8 @@ namespace DAL
         public Conexion()
         {
             // Lee la cadena de conexión del App.config (ejecutable)
-            _connectionString = ConfigurationManager.ConnectionStrings["TextControlDb"].ConnectionString;
+            //_connectionString = ConfigurationManager.ConnectionStrings["TextControlDb"].ConnectionString;
+            _connectionString = DAL.ScriptsSQL.DatabaseInitializer.GetConnectionString();
         }
 
         public SqlConnection GetConnection()

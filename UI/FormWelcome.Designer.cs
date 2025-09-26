@@ -44,7 +44,8 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::UI.Properties.Resources.logo_Ibericos;
-            this.pictureBox1.Location = new System.Drawing.Point(-2, 92);
+            this.pictureBox1.Location = new System.Drawing.Point(-2, 74);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(325, 310);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -56,8 +57,9 @@
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(47)))), ((int)(((byte)(90)))));
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(-2, -1);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1004, 87);
+            this.panel1.Size = new System.Drawing.Size(753, 71);
             this.panel1.TabIndex = 1;
             // 
             // label1
@@ -65,9 +67,10 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Silver;
-            this.label1.Location = new System.Drawing.Point(95, 23);
+            this.label1.Location = new System.Drawing.Point(71, 19);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(194, 40);
+            this.label1.Size = new System.Drawing.Size(165, 33);
             this.label1.TabIndex = 0;
             this.label1.Text = "TextControl";
             // 
@@ -76,9 +79,10 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Silver;
-            this.label2.Location = new System.Drawing.Point(352, 108);
+            this.label2.Location = new System.Drawing.Point(327, 88);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(213, 40);
+            this.label2.Size = new System.Drawing.Size(173, 33);
             this.label2.TabIndex = 2;
             this.label2.Text = "BIENVENIDO";
             // 
@@ -87,9 +91,10 @@
             this.lbl_Username.AutoSize = true;
             this.lbl_Username.Font = new System.Drawing.Font("Century Gothic", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Username.ForeColor = System.Drawing.Color.Silver;
-            this.lbl_Username.Location = new System.Drawing.Point(383, 164);
+            this.lbl_Username.Location = new System.Drawing.Point(350, 133);
+            this.lbl_Username.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_Username.Name = "lbl_Username";
-            this.lbl_Username.Size = new System.Drawing.Size(176, 40);
+            this.lbl_Username.Size = new System.Drawing.Size(146, 33);
             this.lbl_Username.TabIndex = 3;
             this.lbl_Username.Text = "Username";
             this.lbl_Username.Click += new System.EventHandler(this.lbl_Username_Click);
@@ -114,7 +119,8 @@
             this.circularProgressBar1.InnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(35)))), ((int)(((byte)(49)))));
             this.circularProgressBar1.InnerMargin = 2;
             this.circularProgressBar1.InnerWidth = -1;
-            this.circularProgressBar1.Location = new System.Drawing.Point(555, 252);
+            this.circularProgressBar1.Location = new System.Drawing.Point(416, 205);
+            this.circularProgressBar1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.circularProgressBar1.MarqueeAnimationSpeed = 2000;
             this.circularProgressBar1.Name = "circularProgressBar1";
             this.circularProgressBar1.OuterColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(47)))), ((int)(((byte)(66)))));
@@ -123,7 +129,7 @@
             this.circularProgressBar1.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(100)))), ((int)(((byte)(182)))));
             this.circularProgressBar1.ProgressWidth = 25;
             this.circularProgressBar1.SecondaryFont = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.circularProgressBar1.Size = new System.Drawing.Size(150, 150);
+            this.circularProgressBar1.Size = new System.Drawing.Size(112, 122);
             this.circularProgressBar1.StartAngle = 270;
             this.circularProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.circularProgressBar1.SubscriptColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(166)))), ((int)(((byte)(166)))));
@@ -140,16 +146,17 @@
             // 
             // FormWelcome
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(47)))), ((int)(((byte)(66)))));
-            this.ClientSize = new System.Drawing.Size(1000, 500);
+            this.ClientSize = new System.Drawing.Size(750, 406);
             this.Controls.Add(this.circularProgressBar1);
             this.Controls.Add(this.lbl_Username);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FormWelcome";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormWelcome";

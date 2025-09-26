@@ -16,11 +16,11 @@ namespace UI
         static void Main()
         {
             DatabaseInitializer.Initialize();
+            Console.WriteLine("Base de datos lista.");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Login());
 
-            Console.WriteLine("Base de datos lista.");
         }
     }
 }

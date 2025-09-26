@@ -45,7 +45,7 @@ namespace UI
         private void FormWelcome_Load(object sender, EventArgs e)
         {
             var empleadoActual = SessionManager.Instance.EmpleadoActual;
-            lbl_Username.Text = empleadoActual.Nombre + " " + empleadoActual.Nombre;
+            lbl_Username.Text = empleadoActual.Nombre + " " + empleadoActual.Apellido;
             this.Opacity = 0.0;
             circularProgressBar1.Value = 0;
             circularProgressBar1.Minimum = 0;
