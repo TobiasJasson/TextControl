@@ -9,6 +9,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BLL
 {
@@ -47,8 +48,8 @@ namespace BLL
                    SET RecoveryToken = @token, RecoveryTokenExpiry = @expiry
                    WHERE UserName_Usuario = @username";
 
-            // Usar la cadena de conexión de App.config
-            string connectionString = ConfigurationManager.ConnectionStrings["TextControlDb"].ConnectionString;
+            // Usar la misma conexión dinámica que todo el sistema
+            string connectionString = DAL.ScriptsSQL.DatabaseInitializer.GetConnectionString();
 
             using (var conn = new SqlConnection(connectionString))
             {
