@@ -1,0 +1,29 @@
+﻿{
+  ///LOGIN
+  "Login_Titulo": "LOGIN",
+  "Login_Usuario": "Usuario",
+  "Login_Contraseña": "Contraseña",
+  "Login_MostrarContraseña": "Mostrar contraseña",
+  "Login_BotonIngresar": "INGRESAR",
+  "Login_OlvidoClave": "¿Ha olvidado su clave?",
+  "Login_MensajeUsuarioRequerido": "Tiene que escribir el Usuario primero",
+  "Login_MensajeUsuarioNoEncontrado": "Usuario no encontrado",
+  "Login_MensajeMailEnviado": "Ya se ha enviado el mail de recuperación a su Gmail: ",
+  "Login_MensajeErrorEnvioMail": "Error al enviar el mail: ",
+  "Login_MensajeErrorCredenciales": "Usuario o contraseña incorrectos",
+  "Login_BotonIdioma": "EN-US",
+  "Login_MensajeUsuarioSinRol": "Usted no contiene un rol, avise al Administrador",
+
+  ///WELCOME
+  "Welcome_Bienvenido": "Bienvenido",
+
+  //Dashboard
+  "Dashboard_Titulo": "Menu Principal",
+
+  //SideMenu
+  "SideMenu_Usuario": "Usuario",
+  "SideMenu_Reporte": "Reporte",
+  "SideMenu_Stock": "Stock",
+  "SideMenu_Configuraciones": "Configuraciones",
+  "SideMenu_Salir": "Salir"
+}

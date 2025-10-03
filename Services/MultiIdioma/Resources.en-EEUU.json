@@ -1,0 +1,30 @@
+﻿{
+  ///LOGIN
+  "Login_Titulo": "LOGIN",
+  "Login_Usuario": "Name",
+  "Login_Contraseña": "Password",
+  "Login_MostrarContraseña": "Show password",
+  "Login_BotonIngresar": "LOGIN",
+  "Login_OlvidoClave": "Forgot your password?",
+  "Login_MensajeUsuarioRequerido": "You must enter the Username first",
+  "Login_MensajeMailEnviado": "The recovery email has now been sent to your Gmail: ",
+  "Login_MensajeErrorEnvioMail": "Error sending email: ",
+  "Login_MensajeUsuarioNoEncontrado": "User not found",
+  "Login_MensajeErrorCredenciales": "Incorrect username or password",
+  "Login_BotonIdioma": "ES-AR",
+  "Login_MensajeUsuarioSinRol": "You don't have a role, please notify the Administrator.",
+
+  ///WELCOME
+  "Welcome_Bienvenido": "Welcome",
+
+  //Dashboard
+  "Dashboard_Titulo": "Main Menu",
+
+
+  //SideMenu
+  "SideMenu_Usuario": "User",
+  "SideMenu_Reporte": "Report",
+  "SideMenu_Stock": "Stock",
+  "SideMenu_Configuraciones": "Settings",
+  "SideMenu_Salir": "Exit"
+}

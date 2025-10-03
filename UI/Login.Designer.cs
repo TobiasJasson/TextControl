@@ -36,10 +36,11 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblTitulo = new System.Windows.Forms.Label();
             this.Btn_Cerrar = new System.Windows.Forms.Button();
             this.Btn_Minimize = new System.Windows.Forms.Button();
             this.ChBox_MostrarContraseña = new System.Windows.Forms.CheckBox();
+            this.BtnCambiarIdioma = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -82,9 +83,9 @@
             this.Btn_Ingresar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(118)))), ((int)(((byte)(126)))));
             this.Btn_Ingresar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_Ingresar.ForeColor = System.Drawing.Color.LightGray;
-            this.Btn_Ingresar.Location = new System.Drawing.Point(326, 247);
+            this.Btn_Ingresar.Location = new System.Drawing.Point(301, 236);
             this.Btn_Ingresar.Name = "Btn_Ingresar";
-            this.Btn_Ingresar.Size = new System.Drawing.Size(408, 40);
+            this.Btn_Ingresar.Size = new System.Drawing.Size(356, 40);
             this.Btn_Ingresar.TabIndex = 4;
             this.Btn_Ingresar.Text = "INGRESAR";
             this.Btn_Ingresar.UseVisualStyleBackColor = false;
@@ -94,7 +95,7 @@
             // 
             this.LiL_RecuperarPass.AutoSize = true;
             this.LiL_RecuperarPass.LinkColor = System.Drawing.Color.Silver;
-            this.LiL_RecuperarPass.Location = new System.Drawing.Point(458, 305);
+            this.LiL_RecuperarPass.Location = new System.Drawing.Point(339, 295);
             this.LiL_RecuperarPass.Name = "LiL_RecuperarPass";
             this.LiL_RecuperarPass.Size = new System.Drawing.Size(148, 16);
             this.LiL_RecuperarPass.TabIndex = 0;
@@ -112,7 +113,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(286, 331);
             this.panel1.TabIndex = 4;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             // 
             // pictureBox1
@@ -135,16 +135,16 @@
             this.pictureBox2.TabIndex = 6;
             this.pictureBox2.TabStop = false;
             // 
-            // label1
+            // lblTitulo
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Silver;
-            this.label1.Location = new System.Drawing.Point(490, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(103, 34);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "LOGIN";
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.Font = new System.Drawing.Font("Century Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitulo.ForeColor = System.Drawing.Color.Silver;
+            this.lblTitulo.Location = new System.Drawing.Point(445, 9);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Size = new System.Drawing.Size(103, 34);
+            this.lblTitulo.TabIndex = 7;
+            this.lblTitulo.Text = "LOGIN";
             // 
             // Btn_Cerrar
             // 
@@ -192,16 +192,33 @@
             this.ChBox_MostrarContraseña.UseVisualStyleBackColor = true;
             this.ChBox_MostrarContraseña.CheckedChanged += new System.EventHandler(this.ChBox_MostrarContraseña_CheckedChanged);
             // 
+            // BtnCambiarIdioma
+            // 
+            this.BtnCambiarIdioma.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(53)))), ((int)(((byte)(73)))));
+            this.BtnCambiarIdioma.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(159)))), ((int)(((byte)(127)))));
+            this.BtnCambiarIdioma.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.BtnCambiarIdioma.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(118)))), ((int)(((byte)(126)))));
+            this.BtnCambiarIdioma.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnCambiarIdioma.ForeColor = System.Drawing.Color.LightGray;
+            this.BtnCambiarIdioma.Location = new System.Drawing.Point(692, 283);
+            this.BtnCambiarIdioma.Name = "BtnCambiarIdioma";
+            this.BtnCambiarIdioma.Size = new System.Drawing.Size(76, 40);
+            this.BtnCambiarIdioma.TabIndex = 10;
+            this.BtnCambiarIdioma.Text = "ES-AR";
+            this.BtnCambiarIdioma.UseVisualStyleBackColor = false;
+            this.BtnCambiarIdioma.Click += new System.EventHandler(this.BtnCambiarIdioma_Click);
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(57)))), ((int)(((byte)(80)))));
             this.ClientSize = new System.Drawing.Size(780, 330);
+            this.Controls.Add(this.BtnCambiarIdioma);
             this.Controls.Add(this.ChBox_MostrarContraseña);
             this.Controls.Add(this.Btn_Minimize);
             this.Controls.Add(this.Btn_Cerrar);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel1);
@@ -232,10 +249,11 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Button Btn_Cerrar;
         private System.Windows.Forms.Button Btn_Minimize;
         private System.Windows.Forms.CheckBox ChBox_MostrarContraseña;
+        private System.Windows.Forms.Button BtnCambiarIdioma;
     }
 }
 

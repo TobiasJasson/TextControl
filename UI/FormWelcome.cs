@@ -1,12 +1,14 @@
 ﻿using BLL;
 using DAL;
 using DomainModel;
+using Services.MultiIdioma;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -44,12 +46,15 @@ namespace UI
 
         private void FormWelcome_Load(object sender, EventArgs e)
         {
+            LanguageManager.LoadLastLanguage();
+
             var empleadoActual = SessionManager.Instance.EmpleadoActual;
             lbl_Username.Text = empleadoActual.Nombre + " " + empleadoActual.Apellido;
             this.Opacity = 0.0;
             circularProgressBar1.Value = 0;
             circularProgressBar1.Minimum = 0;
             circularProgressBar1.Maximum = 100;
+            label2.Text = LanguageManager.Translate("Welcome_Bienvenido");
             timer1.Start();
         }
 
@@ -60,6 +65,11 @@ namespace UI
 
 
         private void circularProgressBar1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }

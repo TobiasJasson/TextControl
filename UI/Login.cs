@@ -1,8 +1,7 @@
 ﻿using BLL;
 using BLL.Servicios;
 using DomainModel;
-using DomainModel;
-using System;
+using Services.MultiIdioma;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +14,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using UI.Admin;
 using UI.EmpleadosForms;
+using System;
 
 namespace UI
 {
@@ -34,9 +34,9 @@ namespace UI
         {
             string username = TxtNameUser.Text.Trim();
 
-            if (string.IsNullOrEmpty(username) || username == "Usuario")
+            if (string.IsNullOrEmpty(username) || username == LanguageManager.Translate("Login_Usuario"))
             {
-                MessageBox.Show("Tiene que escribir el Usuario primero");
+                MessageBox.Show(LanguageManager.Translate("Login_MensajeUsuarioRequerido"));
                 return;
             }
 
@@ -45,13 +45,13 @@ namespace UI
 
             if (user == null)
             {
-                MessageBox.Show("Usuario no encontrado");
+                MessageBox.Show(LanguageManager.Translate("Login_MensajeUsuarioNoEncontrado"));
                 return;
             }
 
             if (string.IsNullOrEmpty(user.EmailRecuperacion))
             {
-                MessageBox.Show("No hay email de recuperacion registrado para este usuario");
+                MessageBox.Show(LanguageManager.Translate("Login_MensajeSinEmail"));
                 return;
             }
             var empleadoService = new EmpleadoService();
@@ -64,11 +64,12 @@ namespace UI
             {
                 var emailService = new EmailService();
                 emailService.EnviarRecuperacionClave(empleado, token, username);
-                MessageBox.Show($"Ya se ha enviado el mail de recuperación a su Gmail: {user.EmailRecuperacion}");
+
+                MessageBox.Show($"{LanguageManager.Translate("Login_MensajeMailEnviado")} {user.EmailRecuperacion}");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al enviar el mail: {ex.Message}");
+                MessageBox.Show($"{LanguageManager.Translate("Login_MensajeErrorEnvioMail")} {ex.Message}");
             }
         }
 
@@ -89,29 +90,35 @@ namespace UI
                 FormWelcome welcome = new FormWelcome();
                 welcome.ShowDialog();
                 welcome.Hide();
-
-                if (empleado.IdRol == 1)
+                try
                 {
-                    HomeAdmin admin = new HomeAdmin();
-                    admin.Show();
-                } else if (empleado.IdRol == 2)
+                    MainScreen mainScreen = new MainScreen();
+                    mainScreen.Show();
+                }catch
                 {
-                    HomeEmpleado empleadoForm = new HomeEmpleado();
-                    empleadoForm.Show();
-                }
-                else
-                {
-                    MessageBox.Show("Usted no contiene un rol, avise al Administrador");
+                    MessageBox.Show(LanguageManager.Translate("Login_MensajeUsuarioSinRol"));
                 }
 
+                //if (empleado.IdRol == 1)
+                //{
+                //    MainScreen admin = new MainScreen("admin");
+                //    admin.Show();
+                //} else if (empleado.IdRol == 2)
+                //{
+                //    MainScreen empleadoForm = new MainScreen("empleado");
+                //    empleadoForm.Show();
+                //}
+                //else
+                //{
 
-                // Ahora puedes abrir la pantalla principal pasando 'empleado'
-                //var mainForm = new MainForm(empleado);
-                //mainForm.Show();
+                //    MessageBox.Show(LanguageManager.Translate("Login_MensajeUsuarioSinRol"));
+                //}
+
             }
             else
             {
-                MessageBox.Show("Usuario o contraseña incorrectos");
+
+                MessageBox.Show(LanguageManager.Translate("Login_MensajeErrorCredenciales"));
             }
         }
 
@@ -179,17 +186,21 @@ namespace UI
 
         private void Login_Load(object sender, EventArgs e)
         {
-            ReleaseCapture();
-            SendMessage(this.Handle, 0x112, 0xf012, 0);
-            TxtPassword.Text = "Contraseña";
-            TxtPassword.ForeColor = Color.Silver;
-            TxtPassword.UseSystemPasswordChar = false;
+            LanguageManager.LoadLastLanguage();
+            BtnCambiarIdioma.Text = LanguageManager.Translate("Login_BotonIdioma");
+            lblTitulo.Text = LanguageManager.Translate("Login_Titulo");
+            TxtNameUser.Text = LanguageManager.Translate("Login_Usuario");
+            TxtPassword.Text = LanguageManager.Translate("Login_Contraseña");
+            ChBox_MostrarContraseña.Text = LanguageManager.Translate("Login_MostrarContraseña");
+            Btn_Ingresar.Text = LanguageManager.Translate("Login_BotonIngresar");
+            LiL_RecuperarPass.Text = LanguageManager.Translate("Login_OlvidoClave");
+            //ReleaseCapture();   
+            //SendMessage(this.Handle, 0x112, 0xf012, 0);
+            //TxtPassword.Text = "Contraseña";
+            //TxtPassword.ForeColor = Color.Silver;
+            //TxtPassword.UseSystemPasswordChar = false;
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void ChBox_MostrarContraseña_CheckedChanged(object sender, EventArgs e)
         {
@@ -203,6 +214,23 @@ namespace UI
                 // Ocultar la contraseña con "*"
                 TxtPassword.UseSystemPasswordChar = true;
             }
+        }
+
+        private void BtnCambiarIdioma_Click(object sender, EventArgs e)
+        {
+            string nuevoIdioma = LanguageManager.CurrentLanguage == "es-AR" ? "en-EEUU" : "es-AR";
+            LanguageManager.LoadLanguage(nuevoIdioma);
+            ApplyTranslations();
+        }
+        private void ApplyTranslations()
+        {
+            lblTitulo.Text = LanguageManager.Translate("Login_Titulo");
+            TxtNameUser.Text = LanguageManager.Translate("Login_Usuario");
+            TxtPassword.Text = LanguageManager.Translate("Login_Contraseña");
+            ChBox_MostrarContraseña.Text = LanguageManager.Translate("Login_MostrarContraseña");
+            Btn_Ingresar.Text = LanguageManager.Translate("Login_BotonIngresar");
+            LiL_RecuperarPass.Text = LanguageManager.Translate("Login_OlvidoClave");
+            BtnCambiarIdioma.Text = LanguageManager.Translate("Login_BotonIdioma");
         }
     }
 
