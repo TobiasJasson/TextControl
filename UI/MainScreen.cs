@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UI.FormsComun;
+using UI.LocalWidget;
 
 namespace UI
 {
@@ -96,6 +98,7 @@ namespace UI
             Btn_Usuarios.Text = LanguageManager.Translate("SideMenu_Usuario");
             BtnReporte.Text = LanguageManager.Translate("SideMenu_Reporte");
             BtnStock.Text = LanguageManager.Translate("SideMenu_Stock");
+            Btn_Venta.Text = LanguageManager.Translate("SideMenu_Venta");
             BtnConfig.Text = LanguageManager.Translate("SideMenu_Configuraciones");
             Btn_LogOut.Text = LanguageManager.Translate("SideMenu_Salir");
         }
@@ -131,5 +134,71 @@ namespace UI
 
         }
 
+        private void BtnConfig_Click(object sender, EventArgs e)
+        {
+            lblTitle.Text = LanguageManager.Translate("SideMenu_Configuraciones");
+
+            panelContenido.Controls.Clear();
+
+            // Crear el formulario de configuración
+            FormConfig formConfig = new FormConfig();
+            formConfig.TopLevel = false;
+            formConfig.FormBorderStyle = FormBorderStyle.None;
+            formConfig.Dock = DockStyle.Fill;
+
+            // Agregar al panel
+            panelContenido.Controls.Add(formConfig);
+            formConfig.Show();
+        }
+
+        private void BtnStock_Click(object sender, EventArgs e)
+        {
+            lblTitle.Text = LanguageManager.Translate("SideMenu_Stock");
+        }
+
+        private void BtnReporte_Click(object sender, EventArgs e)
+        {
+            lblTitle.Text = LanguageManager.Translate("SideMenu_Reporte");  
+        }
+
+        private void Btn_Usuarios_Click(object sender, EventArgs e)
+        {
+            lblTitle.Text = LanguageManager.Translate("SideMenu_Usuario");
+        }
+
+        private void Btn_Venta_Click(object sender, EventArgs e)
+        {
+            lblTitle.Text = LanguageManager.Translate("SideMenu_Venta");
+        }
+
+        private void Btn_LogOut_Click(object sender, EventArgs e)
+        {
+            var result = CustomMessageBox.Show(
+                LanguageManager.Translate("SideMenu_BoxLogOut"),
+                LanguageManager.Translate("SideMenu_Usuario")
+            );
+
+            switch (result)
+            {
+                case DialogResult.Yes:
+                    SessionManager.Instance.SetUsuario(null);
+                    SessionManager.Instance.SetEmpleado(null);
+
+                    Login login = new Login();
+                    login.Show();
+
+                    this.Close();
+                    break;
+
+                case DialogResult.No:
+                    Application.Exit();
+                    break;
+
+                case DialogResult.Cancel:
+                    break;
+            }
+        }
+
+        
     }
 }

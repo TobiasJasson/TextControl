@@ -30,12 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainScreen));
             this.Panel_Title = new System.Windows.Forms.Panel();
+            this.Btn_MenuDesplegable = new System.Windows.Forms.Button();
             this.BtnMaximize = new System.Windows.Forms.Button();
             this.Btn_Minimize = new System.Windows.Forms.Button();
             this.Btn_Cerrar = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
             this.panel_Menu = new System.Windows.Forms.Panel();
-            this.Btn_MenuDesplegable = new System.Windows.Forms.Button();
             this.Btn_Usuarios = new System.Windows.Forms.Button();
             this.BtnReporte = new System.Windows.Forms.Button();
             this.BtnStock = new System.Windows.Forms.Button();
@@ -44,6 +44,7 @@
             this.BtnCambiarIdioma = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panelContenido = new System.Windows.Forms.Panel();
+            this.Btn_Venta = new System.Windows.Forms.Button();
             this.Panel_Title.SuspendLayout();
             this.panel_Menu.SuspendLayout();
             this.SuspendLayout();
@@ -62,6 +63,22 @@
             this.Panel_Title.Size = new System.Drawing.Size(1314, 64);
             this.Panel_Title.TabIndex = 2;
             this.Panel_Title.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel_Title_Paint);
+            // 
+            // Btn_MenuDesplegable
+            // 
+            this.Btn_MenuDesplegable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Btn_MenuDesplegable.BackgroundImage")));
+            this.Btn_MenuDesplegable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Btn_MenuDesplegable.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(47)))), ((int)(((byte)(90)))));
+            this.Btn_MenuDesplegable.FlatAppearance.BorderSize = 0;
+            this.Btn_MenuDesplegable.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.Btn_MenuDesplegable.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_MenuDesplegable.ForeColor = System.Drawing.Color.Silver;
+            this.Btn_MenuDesplegable.Location = new System.Drawing.Point(11, 8);
+            this.Btn_MenuDesplegable.Name = "Btn_MenuDesplegable";
+            this.Btn_MenuDesplegable.Size = new System.Drawing.Size(58, 50);
+            this.Btn_MenuDesplegable.TabIndex = 17;
+            this.Btn_MenuDesplegable.UseVisualStyleBackColor = true;
+            this.Btn_MenuDesplegable.Click += new System.EventHandler(this.Btn_MenuDesplegable_Click);
             // 
             // BtnMaximize
             // 
@@ -129,6 +146,7 @@
             // 
             this.panel_Menu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(47)))), ((int)(((byte)(90)))));
             this.panel_Menu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.panel_Menu.Controls.Add(this.Btn_Venta);
             this.panel_Menu.Controls.Add(this.Btn_Usuarios);
             this.panel_Menu.Controls.Add(this.BtnReporte);
             this.panel_Menu.Controls.Add(this.BtnStock);
@@ -141,22 +159,6 @@
             this.panel_Menu.TabIndex = 5;
             this.panel_Menu.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Menu_Paint);
             // 
-            // Btn_MenuDesplegable
-            // 
-            this.Btn_MenuDesplegable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Btn_MenuDesplegable.BackgroundImage")));
-            this.Btn_MenuDesplegable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.Btn_MenuDesplegable.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(47)))), ((int)(((byte)(90)))));
-            this.Btn_MenuDesplegable.FlatAppearance.BorderSize = 0;
-            this.Btn_MenuDesplegable.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.Btn_MenuDesplegable.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_MenuDesplegable.ForeColor = System.Drawing.Color.Silver;
-            this.Btn_MenuDesplegable.Location = new System.Drawing.Point(11, 8);
-            this.Btn_MenuDesplegable.Name = "Btn_MenuDesplegable";
-            this.Btn_MenuDesplegable.Size = new System.Drawing.Size(58, 50);
-            this.Btn_MenuDesplegable.TabIndex = 17;
-            this.Btn_MenuDesplegable.UseVisualStyleBackColor = true;
-            this.Btn_MenuDesplegable.Click += new System.EventHandler(this.Btn_MenuDesplegable_Click);
-            // 
             // Btn_Usuarios
             // 
             this.Btn_Usuarios.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(47)))), ((int)(((byte)(90)))));
@@ -166,10 +168,11 @@
             this.Btn_Usuarios.ForeColor = System.Drawing.Color.Silver;
             this.Btn_Usuarios.Location = new System.Drawing.Point(11, 84);
             this.Btn_Usuarios.Name = "Btn_Usuarios";
-            this.Btn_Usuarios.Size = new System.Drawing.Size(265, 41);
+            this.Btn_Usuarios.Size = new System.Drawing.Size(265, 59);
             this.Btn_Usuarios.TabIndex = 12;
             this.Btn_Usuarios.Text = "Usuario";
             this.Btn_Usuarios.UseVisualStyleBackColor = true;
+            this.Btn_Usuarios.Click += new System.EventHandler(this.Btn_Usuarios_Click);
             // 
             // BtnReporte
             // 
@@ -180,10 +183,11 @@
             this.BtnReporte.ForeColor = System.Drawing.Color.Silver;
             this.BtnReporte.Location = new System.Drawing.Point(11, 155);
             this.BtnReporte.Name = "BtnReporte";
-            this.BtnReporte.Size = new System.Drawing.Size(265, 41);
+            this.BtnReporte.Size = new System.Drawing.Size(265, 64);
             this.BtnReporte.TabIndex = 13;
             this.BtnReporte.Text = "Reporte";
             this.BtnReporte.UseVisualStyleBackColor = true;
+            this.BtnReporte.Click += new System.EventHandler(this.BtnReporte_Click);
             // 
             // BtnStock
             // 
@@ -194,10 +198,11 @@
             this.BtnStock.ForeColor = System.Drawing.Color.Silver;
             this.BtnStock.Location = new System.Drawing.Point(11, 230);
             this.BtnStock.Name = "BtnStock";
-            this.BtnStock.Size = new System.Drawing.Size(265, 41);
+            this.BtnStock.Size = new System.Drawing.Size(265, 59);
             this.BtnStock.TabIndex = 14;
             this.BtnStock.Text = "Stock";
             this.BtnStock.UseVisualStyleBackColor = true;
+            this.BtnStock.Click += new System.EventHandler(this.BtnStock_Click);
             // 
             // BtnConfig
             // 
@@ -208,13 +213,15 @@
             this.BtnConfig.ForeColor = System.Drawing.Color.Silver;
             this.BtnConfig.Location = new System.Drawing.Point(11, 309);
             this.BtnConfig.Name = "BtnConfig";
-            this.BtnConfig.Size = new System.Drawing.Size(265, 41);
+            this.BtnConfig.Size = new System.Drawing.Size(265, 69);
             this.BtnConfig.TabIndex = 15;
             this.BtnConfig.Text = "Configuraciones";
             this.BtnConfig.UseVisualStyleBackColor = true;
+            this.BtnConfig.Click += new System.EventHandler(this.BtnConfig_Click);
             // 
             // Btn_LogOut
             // 
+            this.Btn_LogOut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.Btn_LogOut.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(47)))), ((int)(((byte)(90)))));
             this.Btn_LogOut.FlatAppearance.BorderSize = 0;
             this.Btn_LogOut.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
@@ -226,9 +233,11 @@
             this.Btn_LogOut.TabIndex = 16;
             this.Btn_LogOut.Text = "Salir";
             this.Btn_LogOut.UseVisualStyleBackColor = true;
+            this.Btn_LogOut.Click += new System.EventHandler(this.Btn_LogOut_Click);
             // 
             // BtnCambiarIdioma
             // 
+            this.BtnCambiarIdioma.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnCambiarIdioma.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(53)))), ((int)(((byte)(73)))));
             this.BtnCambiarIdioma.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(159)))), ((int)(((byte)(127)))));
             this.BtnCambiarIdioma.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
@@ -252,11 +261,26 @@
             // 
             // panelContenido
             // 
-            this.panelContenido.Location = new System.Drawing.Point(282, 65);
+            this.panelContenido.Location = new System.Drawing.Point(283, 65);
             this.panelContenido.Name = "panelContenido";
-            this.panelContenido.Size = new System.Drawing.Size(1031, 672);
+            this.panelContenido.Size = new System.Drawing.Size(1032, 672);
             this.panelContenido.TabIndex = 6;
             this.panelContenido.Paint += new System.Windows.Forms.PaintEventHandler(this.panelContenido_Paint);
+            // 
+            // Btn_Venta
+            // 
+            this.Btn_Venta.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(47)))), ((int)(((byte)(90)))));
+            this.Btn_Venta.FlatAppearance.BorderSize = 0;
+            this.Btn_Venta.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.Btn_Venta.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_Venta.ForeColor = System.Drawing.Color.Silver;
+            this.Btn_Venta.Location = new System.Drawing.Point(11, 19);
+            this.Btn_Venta.Name = "Btn_Venta";
+            this.Btn_Venta.Size = new System.Drawing.Size(265, 59);
+            this.Btn_Venta.TabIndex = 17;
+            this.Btn_Venta.Text = "Nuevo Pedido";
+            this.Btn_Venta.UseVisualStyleBackColor = true;
+            this.Btn_Venta.Click += new System.EventHandler(this.Btn_Venta_Click);
             // 
             // MainScreen
             // 
@@ -297,5 +321,6 @@
         public System.Windows.Forms.Button Btn_LogOut;
         public System.Windows.Forms.Button BtnConfig;
         public System.Windows.Forms.Button BtnStock;
+        public System.Windows.Forms.Button Btn_Venta;
     }
 }

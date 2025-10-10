@@ -25,5 +25,13 @@
   "SideMenu_Reporte": "Reporte",
   "SideMenu_Stock": "Stock",
   "SideMenu_Configuraciones": "Configuraciones",
-  "SideMenu_Salir": "Salir"
+  "SideMenu_Salir": "Salir",
+  "SideMenu_Venta": "Nuevo Pedido",
+  "SideMenu_UsuarioLogOut": "Cerrar Sesión",
+  "SideMenu_BoxLogOut": "¿Qué desea hacer?",
+
+  //Message Box
+  "Btn_CerrarSesion": "Cerrar Sesion",
+  "Btn_Salir": "Salir",
+  "Btn_Cancel": "Cancelar"
 }
