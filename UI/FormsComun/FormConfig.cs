@@ -1,4 +1,5 @@
 ﻿using Services.Conifguraciones;
+using Services.MultiIdioma;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,6 +24,15 @@ namespace UI.FormsComun
             bool oscuro = ThemeManager.ModoOscuro;
             Switch_modoOscuro.Checked = oscuro;
             ThemeManager.ApplyTheme(this, oscuro);
+            LanguageManager.LoadLastLanguage();
+            Lbl_ModoOscuro.Text = LanguageManager.Translate("Lbl_ModoOscuro");
+            Lbl_titleCambiarClave.Text = LanguageManager.Translate("Lbl_titleCambiarClave");
+            Lbl_titleCambioMail.Text = LanguageManager.Translate("Lbl_titleCambioMail");
+            TxtNuevaClave.Text = LanguageManager.Translate("TxtNuevaClave");
+            TxtConfirmarClave.Text = LanguageManager.Translate("TxtConfirmarClave");
+            BtnCambiarClave.Text = LanguageManager.Translate("BtnCambiarClave");
+            Txt_NuevoMail.Text = LanguageManager.Translate("Txt_NuevoMail");
+            Btn_NuevoMail.Text = LanguageManager.Translate("Btn_NuevoMail");
         }
 
         private void Switch_modoOscuro_CheckedChanged(object sender, EventArgs e)

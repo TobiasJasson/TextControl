@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.Switch_modoOscuro = new RJCodeAdvance.RJControls.RJToggleButton();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.Lbl_ModoOscuro = new System.Windows.Forms.Label();
+            this.Lbl_titleCambiarClave = new System.Windows.Forms.Label();
             this.TxtNuevaClave = new System.Windows.Forms.TextBox();
             this.TxtConfirmarClave = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.BtnCambiarClave = new System.Windows.Forms.Button();
             this.Btn_NuevoMail = new System.Windows.Forms.Button();
             this.Txt_NuevoMail = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.Lbl_titleCambioMail = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Switch_modoOscuro
@@ -55,25 +55,25 @@
             this.Switch_modoOscuro.UseVisualStyleBackColor = true;
             this.Switch_modoOscuro.CheckedChanged += new System.EventHandler(this.Switch_modoOscuro_CheckedChanged);
             // 
-            // label1
+            // Lbl_ModoOscuro
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(30, 24);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(142, 23);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Modo Oscuro";
+            this.Lbl_ModoOscuro.AutoSize = true;
+            this.Lbl_ModoOscuro.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_ModoOscuro.Location = new System.Drawing.Point(30, 24);
+            this.Lbl_ModoOscuro.Name = "Lbl_ModoOscuro";
+            this.Lbl_ModoOscuro.Size = new System.Drawing.Size(142, 23);
+            this.Lbl_ModoOscuro.TabIndex = 1;
+            this.Lbl_ModoOscuro.Text = "Modo Oscuro";
             // 
-            // label2
+            // Lbl_titleCambiarClave
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(30, 81);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(163, 23);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Cambiar Clave";
+            this.Lbl_titleCambiarClave.AutoSize = true;
+            this.Lbl_titleCambiarClave.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_titleCambiarClave.Location = new System.Drawing.Point(30, 81);
+            this.Lbl_titleCambiarClave.Name = "Lbl_titleCambiarClave";
+            this.Lbl_titleCambiarClave.Size = new System.Drawing.Size(163, 23);
+            this.Lbl_titleCambiarClave.TabIndex = 2;
+            this.Lbl_titleCambiarClave.Text = "Cambiar Clave";
             // 
             // TxtNuevaClave
             // 
@@ -101,16 +101,16 @@
             this.TxtConfirmarClave.Text = "Confirmar Contraseña";
             this.TxtConfirmarClave.TextChanged += new System.EventHandler(this.TxtConfirmarClave_TextChanged);
             // 
-            // button1
+            // BtnCambiarClave
             // 
-            this.button1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(42, 223);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(202, 43);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Cambiar Clave";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.BtnCambiarClave.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnCambiarClave.Location = new System.Drawing.Point(42, 223);
+            this.BtnCambiarClave.Name = "BtnCambiarClave";
+            this.BtnCambiarClave.Size = new System.Drawing.Size(202, 43);
+            this.BtnCambiarClave.TabIndex = 5;
+            this.BtnCambiarClave.Text = "Cambiar Clave";
+            this.BtnCambiarClave.UseVisualStyleBackColor = true;
+            this.BtnCambiarClave.Click += new System.EventHandler(this.button1_Click);
             // 
             // Btn_NuevoMail
             // 
@@ -133,18 +133,18 @@
             this.Txt_NuevoMail.Name = "Txt_NuevoMail";
             this.Txt_NuevoMail.Size = new System.Drawing.Size(307, 25);
             this.Txt_NuevoMail.TabIndex = 7;
-            this.Txt_NuevoMail.Text = "Email";
+            this.Txt_NuevoMail.Text = "Nuevo Email";
             this.Txt_NuevoMail.TextChanged += new System.EventHandler(this.Txt_NuevoMail_TextChanged);
             // 
-            // label3
+            // Lbl_titleCambioMail
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(38, 311);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(141, 23);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Cambiar Mail";
+            this.Lbl_titleCambioMail.AutoSize = true;
+            this.Lbl_titleCambioMail.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_titleCambioMail.Location = new System.Drawing.Point(38, 311);
+            this.Lbl_titleCambioMail.Name = "Lbl_titleCambioMail";
+            this.Lbl_titleCambioMail.Size = new System.Drawing.Size(141, 23);
+            this.Lbl_titleCambioMail.TabIndex = 6;
+            this.Lbl_titleCambioMail.Text = "Cambiar Mail";
             // 
             // FormConfig
             // 
@@ -153,12 +153,12 @@
             this.ClientSize = new System.Drawing.Size(821, 481);
             this.Controls.Add(this.Btn_NuevoMail);
             this.Controls.Add(this.Txt_NuevoMail);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.Lbl_titleCambioMail);
+            this.Controls.Add(this.BtnCambiarClave);
             this.Controls.Add(this.TxtConfirmarClave);
             this.Controls.Add(this.TxtNuevaClave);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.Lbl_titleCambiarClave);
+            this.Controls.Add(this.Lbl_ModoOscuro);
             this.Controls.Add(this.Switch_modoOscuro);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormConfig";
@@ -172,13 +172,13 @@
         #endregion
 
         private RJCodeAdvance.RJControls.RJToggleButton Switch_modoOscuro;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label Lbl_ModoOscuro;
+        private System.Windows.Forms.Label Lbl_titleCambiarClave;
         private System.Windows.Forms.TextBox TxtNuevaClave;
         private System.Windows.Forms.TextBox TxtConfirmarClave;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button BtnCambiarClave;
         private System.Windows.Forms.Button Btn_NuevoMail;
         private System.Windows.Forms.TextBox Txt_NuevoMail;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label Lbl_titleCambioMail;
     }
 }

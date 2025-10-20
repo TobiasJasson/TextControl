@@ -35,5 +35,15 @@
   //Message Box
   "Btn_CerrarSesion": "log out",
   "Btn_Salir": "Exit",
-  "Btn_Cancel": "Cancel"
+  "Btn_Cancel": "Cancel",
+
+  //Configuraciones
+  "Lbl_ModoOscuro": "Dark Mode",
+  "Lbl_titleCambiarClave": "Change Password",
+  "TxtNuevaClave": "New Password",
+  "TxtConfirmarClave": "Confirm Password",
+  "BtnCambiarClave": "Change Password",
+  "Lbl_titleCambioMail": "Change Email",
+  "Txt_NuevoMail": "New Email",
+  "Btn_NuevoMail": "Change Email"
 }

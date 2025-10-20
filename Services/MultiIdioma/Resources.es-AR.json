@@ -33,5 +33,15 @@
   //Message Box
   "Btn_CerrarSesion": "Cerrar Sesion",
   "Btn_Salir": "Salir",
-  "Btn_Cancel": "Cancelar"
+  "Btn_Cancel": "Cancelar",
+
+  //Configuraciones
+  "Lbl_ModoOscuro": "Modo Oscuro",
+  "Lbl_titleCambiarClave": "Cambiar Contraseña",
+  "TxtNuevaClave": "Contraseña Nueva",
+  "TxtConfirmarClave": "Confirmar Contraseña",
+  "BtnCambiarClave": "Cambiar Contraseña",
+  "Lbl_titleCambioMail": "Cambiar Mail",
+  "Txt_NuevoMail": "Nuevo Email",
+  "Btn_NuevoMail": "Cambiar Email"
 }
