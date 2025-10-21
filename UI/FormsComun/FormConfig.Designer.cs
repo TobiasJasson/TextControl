@@ -86,7 +86,6 @@
             this.TxtNuevaClave.Size = new System.Drawing.Size(307, 25);
             this.TxtNuevaClave.TabIndex = 3;
             this.TxtNuevaClave.Text = "Contraseña Nueva";
-            this.TxtNuevaClave.TextChanged += new System.EventHandler(this.TxtNuevaClave_TextChanged);
             // 
             // TxtConfirmarClave
             // 
@@ -99,7 +98,7 @@
             this.TxtConfirmarClave.Size = new System.Drawing.Size(307, 25);
             this.TxtConfirmarClave.TabIndex = 4;
             this.TxtConfirmarClave.Text = "Confirmar Contraseña";
-            this.TxtConfirmarClave.TextChanged += new System.EventHandler(this.TxtConfirmarClave_TextChanged);
+            //this.TxtConfirmarClave.TextChanged += new System.EventHandler(this.TxtConfirmarClave_TextChanged);
             // 
             // BtnCambiarClave
             // 
@@ -110,7 +109,7 @@
             this.BtnCambiarClave.TabIndex = 5;
             this.BtnCambiarClave.Text = "Cambiar Clave";
             this.BtnCambiarClave.UseVisualStyleBackColor = true;
-            this.BtnCambiarClave.Click += new System.EventHandler(this.button1_Click);
+            //this.BtnCambiarClave.Click += new System.EventHandler(this.button1_Click);
             // 
             // Btn_NuevoMail
             // 
@@ -134,7 +133,7 @@
             this.Txt_NuevoMail.Size = new System.Drawing.Size(307, 25);
             this.Txt_NuevoMail.TabIndex = 7;
             this.Txt_NuevoMail.Text = "Nuevo Email";
-            this.Txt_NuevoMail.TextChanged += new System.EventHandler(this.Txt_NuevoMail_TextChanged);
+            //this.Txt_NuevoMail.TextChanged += new System.EventHandler(this.Txt_NuevoMail_TextChanged);
             // 
             // Lbl_titleCambioMail
             // 

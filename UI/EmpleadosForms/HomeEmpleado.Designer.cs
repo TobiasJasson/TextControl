@@ -1,4 +1,4 @@
-﻿namespace UI.EmpleadosForms
+﻿namespace Services.EmpleadosForms
 {
     partial class HomeEmpleado
     {

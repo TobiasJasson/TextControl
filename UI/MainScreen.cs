@@ -6,11 +6,12 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using UI.FormsComun;
 using UI.LocalWidget;
+using UI.FormsComun;
 
 namespace UI
 {
@@ -20,22 +21,27 @@ namespace UI
         {
             InitializeComponent();
         }
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
+
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(System.IntPtr hwnd, int wmsg, int wparam, int lparam);
         bool menuExpandido = true;
         private void BtnCambiarIdioma_Click(object sender, EventArgs e)
         {
-            string nuevoIdioma = LanguageManager.CurrentLanguage == "es-AR" ? "en-EEUU" : "es-AR";
-            LanguageManager.LoadLanguage(nuevoIdioma);
+            string nuevoIdioma = LanguageManager.IdiomaActual == "es-AR" ? "en-EEUU" : "es-AR";
+            LanguageManager.CargarIdioma(nuevoIdioma);
             ApplyTranslations();
         }
         private void ApplyTranslations()
         {
-            lblTitle.Text = LanguageManager.Translate("Dashboard_Titulo");
-            BtnCambiarIdioma.Text = LanguageManager.Translate("Login_BotonIdioma");
-            Btn_Usuarios.Text = LanguageManager.Translate("SideMenu_Usuario");
-            BtnReporte.Text = LanguageManager.Translate("SideMenu_Reporte");
-            BtnStock.Text = LanguageManager.Translate("SideMenu_Stock");
-            BtnConfig.Text = LanguageManager.Translate("SideMenu_Configuraciones");
-            Btn_LogOut.Text = LanguageManager.Translate("SideMenu_Salir");
+            lblTitle.Text = LanguageManager.Traducir("Dashboard_Titulo");
+            BtnCambiarIdioma.Text = LanguageManager.Traducir("Login_BotonIdioma");
+            Btn_Usuarios.Text = LanguageManager.Traducir("SideMenu_Usuario");
+            BtnReporte.Text = LanguageManager.Traducir("SideMenu_Reporte");
+            BtnStock.Text = LanguageManager.Traducir("SideMenu_Stock");
+            BtnConfig.Text = LanguageManager.Traducir("SideMenu_Configuraciones");
+            Btn_LogOut.Text = LanguageManager.Traducir("SideMenu_Salir");
         }
 
         private void Btn_Cerrar_Click(object sender, EventArgs e)
@@ -92,20 +98,26 @@ namespace UI
                 BtnReporte.Visible = true;
             }
 
-            LanguageManager.LoadLastLanguage();
-            lblTitle.Text = LanguageManager.Translate("Dashboard_Titulo");
-            BtnCambiarIdioma.Text = LanguageManager.Translate("Login_BotonIdioma");
-            Btn_Usuarios.Text = LanguageManager.Translate("SideMenu_Usuario");
-            BtnReporte.Text = LanguageManager.Translate("SideMenu_Reporte");
-            BtnStock.Text = LanguageManager.Translate("SideMenu_Stock");
-            Btn_Venta.Text = LanguageManager.Translate("SideMenu_Venta");
-            BtnConfig.Text = LanguageManager.Translate("SideMenu_Configuraciones");
-            Btn_LogOut.Text = LanguageManager.Translate("SideMenu_Salir");
+            LanguageManager.CargarUltimoIdioma();
+            lblTitle.Text = LanguageManager.Traducir("Dashboard_Titulo");
+            BtnCambiarIdioma.Text = LanguageManager.Traducir("Login_BotonIdioma");
+            Btn_Usuarios.Text = LanguageManager.Traducir("SideMenu_Usuario");
+            BtnReporte.Text = LanguageManager.Traducir("SideMenu_Reporte");
+            BtnStock.Text = LanguageManager.Traducir("SideMenu_Stock");
+            Btn_Venta.Text = LanguageManager.Traducir("SideMenu_Venta");
+            BtnConfig.Text = LanguageManager.Traducir("SideMenu_Configuraciones");
+            Btn_LogOut.Text = LanguageManager.Traducir("SideMenu_Salir");
         }
 
         private void Panel_Title_Paint(object sender, PaintEventArgs e)
         {
+          
+        }
 
+        private void panel_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
 
         private void panel_Menu_Paint(object sender, PaintEventArgs e)
@@ -136,7 +148,7 @@ namespace UI
 
         private void BtnConfig_Click(object sender, EventArgs e)
         {
-            lblTitle.Text = LanguageManager.Translate("SideMenu_Configuraciones");
+            lblTitle.Text = LanguageManager.Traducir("SideMenu_Configuraciones");
 
             panelContenido.Controls.Clear();
 
@@ -153,29 +165,29 @@ namespace UI
 
         private void BtnStock_Click(object sender, EventArgs e)
         {
-            lblTitle.Text = LanguageManager.Translate("SideMenu_Stock");
+            lblTitle.Text = LanguageManager.Traducir("SideMenu_Stock");
         }
 
         private void BtnReporte_Click(object sender, EventArgs e)
         {
-            lblTitle.Text = LanguageManager.Translate("SideMenu_Reporte");  
+            lblTitle.Text = LanguageManager.Traducir("SideMenu_Reporte");  
         }
 
         private void Btn_Usuarios_Click(object sender, EventArgs e)
         {
-            lblTitle.Text = LanguageManager.Translate("SideMenu_Usuario");
+            lblTitle.Text = LanguageManager.Traducir("SideMenu_Usuario");
         }
 
         private void Btn_Venta_Click(object sender, EventArgs e)
         {
-            lblTitle.Text = LanguageManager.Translate("SideMenu_Venta");
+            lblTitle.Text = LanguageManager.Traducir("SideMenu_Venta");
         }
 
         private void Btn_LogOut_Click(object sender, EventArgs e)
         {
             var result = CustomMessageBox.Show(
-                LanguageManager.Translate("SideMenu_BoxLogOut"),
-                LanguageManager.Translate("SideMenu_Usuario")
+                LanguageManager.Traducir("SideMenu_BoxLogOut"),
+                LanguageManager.Traducir("SideMenu_Usuario")
             );
 
             switch (result)

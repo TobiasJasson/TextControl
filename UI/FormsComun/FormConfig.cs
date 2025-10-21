@@ -17,6 +17,21 @@ namespace UI.FormsComun
         public FormConfig()
         {
             InitializeComponent();
+            LanguageManager.IdiomaCambiado += OnIdiomaCambiado;
+        }
+
+        private void OnIdiomaCambiado()
+        {
+            ActualizarTraducciones();
+        }
+
+        private void ActualizarTraducciones()
+        {
+            Lbl_ModoOscuro.Text = LanguageManager.Traducir("Lbl_ModoOscuro");
+            Lbl_titleCambiarClave.Text = LanguageManager.Traducir("Lbl_titleCambiarClave");
+            Lbl_titleCambioMail.Text = LanguageManager.Traducir("Lbl_titleCambioMail");
+            BtnCambiarClave.Text = LanguageManager.Traducir("BtnCambiarClave");
+            Btn_NuevoMail.Text = LanguageManager.Traducir("Btn_NuevoMail");
         }
 
         private void FormConfig_Load(object sender, EventArgs e)
@@ -24,15 +39,44 @@ namespace UI.FormsComun
             bool oscuro = ThemeManager.ModoOscuro;
             Switch_modoOscuro.Checked = oscuro;
             ThemeManager.ApplyTheme(this, oscuro);
-            LanguageManager.LoadLastLanguage();
-            Lbl_ModoOscuro.Text = LanguageManager.Translate("Lbl_ModoOscuro");
-            Lbl_titleCambiarClave.Text = LanguageManager.Translate("Lbl_titleCambiarClave");
-            Lbl_titleCambioMail.Text = LanguageManager.Translate("Lbl_titleCambioMail");
-            TxtNuevaClave.Text = LanguageManager.Translate("TxtNuevaClave");
-            TxtConfirmarClave.Text = LanguageManager.Translate("TxtConfirmarClave");
-            BtnCambiarClave.Text = LanguageManager.Translate("BtnCambiarClave");
-            Txt_NuevoMail.Text = LanguageManager.Translate("Txt_NuevoMail");
-            Btn_NuevoMail.Text = LanguageManager.Translate("Btn_NuevoMail");
+
+            LanguageManager.CargarUltimoIdioma();
+            ActualizarTraducciones();
+
+            ConfigurarTextBox(TxtNuevaClave, "Nueva clave...");
+            ConfigurarTextBox(TxtConfirmarClave, "Confirmar clave...");
+            ConfigurarTextBox(Txt_NuevoMail, "Nuevo correo...");
+        }
+
+        private void ConfigurarTextBox(TextBox textBox, string placeholder)
+        {
+            textBox.Tag = placeholder;
+            textBox.Text = placeholder;
+            textBox.ForeColor = Color.Silver;
+
+            textBox.Enter += (s, e) =>
+            {
+                if (textBox.Text == placeholder)
+                {
+                    textBox.Text = "";
+                    textBox.ForeColor = Color.Black;
+                }
+            };
+
+            textBox.Leave += (s, e) =>
+            {
+                if (string.IsNullOrWhiteSpace(textBox.Text))
+                {
+                    textBox.Text = placeholder;
+                    textBox.ForeColor = Color.Silver;
+                }
+            };
+        }
+
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            LanguageManager.IdiomaCambiado -= OnIdiomaCambiado;
+            base.OnFormClosed(e);
         }
 
         private void Switch_modoOscuro_CheckedChanged(object sender, EventArgs e)
@@ -42,29 +86,12 @@ namespace UI.FormsComun
             ThemeManager.ApplyTheme(this, oscuro);
         }
 
-        private void TxtNuevaClave_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TxtConfirmarClave_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Txt_NuevoMail_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void Btn_NuevoMail_Click(object sender, EventArgs e)
         {
+        }
 
+        private void BtnCambiarClave_Click(object sender, EventArgs e)
+        {
         }
     }
 }

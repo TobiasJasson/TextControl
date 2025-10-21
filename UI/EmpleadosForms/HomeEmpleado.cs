@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UI.EmpleadosForms
+namespace Services.EmpleadosForms
 {
     public partial class HomeEmpleado : Form
     {

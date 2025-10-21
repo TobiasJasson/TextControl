@@ -8,13 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UI.Admin
+namespace Services.Admin
 {
     public partial class HomeAdmin : Form
     {
         public HomeAdmin()
         {
             InitializeComponent();
+        }
+
+        private void HomeAdmin_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

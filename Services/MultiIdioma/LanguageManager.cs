@@ -1,109 +1,121 @@
-﻿using Newtonsoft.Json;
+﻿using BLL;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace Services.MultiIdioma
 {
     public static class LanguageManager
     {
-        private static Dictionary<string, string> _translations = new Dictionary<string, string>();
-        private static string _currentLanguage = "es-AR";
-        private static readonly string _appFolder = Path.Combine(
+        // Diccionario de traducciones cargadas
+        private static Dictionary<string, string> _traducciones = new Dictionary<string, string>();
+
+        // Idioma actual
+        private static string _idiomaActual = "es-AR";
+
+        // Carpetas y archivos de configuración
+        private static readonly string _carpetaApp = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
             "TextControl");
-        private static readonly string _configFilePath = Path.Combine(_appFolder, "lang.config");
+
+        private static readonly string _rutaConfig = Path.Combine(_carpetaApp, "lang.config");
+
+        /// <summary>
+        /// Evento que notifica cuando se cambia el idioma.
+        /// Las pantallas pueden suscribirse a este evento para actualizar sus textos automáticamente.
+        /// </summary>
+        public static event Action IdiomaCambiado;
 
         /// <summary>
         /// Carga al iniciar la última preferencia guardada (o el idioma por defecto).
         /// </summary>
-        public static void LoadLastLanguage()
+        public static void CargarUltimoIdioma()
         {
             try
             {
-                if (!Directory.Exists(_appFolder)) Directory.CreateDirectory(_appFolder);
+                if (!Directory.Exists(_carpetaApp))
+                    Directory.CreateDirectory(_carpetaApp);
 
-                string lang = null;
-                if (File.Exists(_configFilePath))
+                string idioma = null;
+                if (File.Exists(_rutaConfig))
                 {
-                    lang = File.ReadAllText(_configFilePath).Trim();
+                    idioma = File.ReadAllText(_rutaConfig).Trim();
                 }
 
-                if (string.IsNullOrWhiteSpace(lang))
-                {
-                    lang = _currentLanguage;
-                }
+                if (string.IsNullOrWhiteSpace(idioma))
+                    idioma = _idiomaActual;
 
-                LoadLanguage(lang);
+                CargarIdioma(idioma);
             }
             catch
             {
-                // Si algo falla, cargar el idioma por defecto
-                LoadLanguage(_currentLanguage);
+                // Si algo falla, cargar idioma por defecto
+                CargarIdioma(_idiomaActual);
             }
         }
 
         /// <summary>
-        /// Fuerza la carga del idioma indicado (ej: "es-AR" o "en-EEUU").
+        /// Carga el idioma indicado (ej: "es-AR" o "en-US").
         /// </summary>
-        public static void LoadLanguage(string langCode)
+        public static void CargarIdioma(string codigoIdioma)
         {
-            if (string.IsNullOrWhiteSpace(langCode)) langCode = _currentLanguage;
+            if (string.IsNullOrWhiteSpace(codigoIdioma))
+                codigoIdioma = _idiomaActual;
 
-            // Intentar encontrar el archivo para el idioma pedido
-            var file = FindResourceFile(langCode);
+            var archivo = BuscarArchivoRecurso(codigoIdioma);
 
-            // Si no se encuentra, intentar con el idioma por defecto
-            if (file == null && !string.Equals(langCode, "es-AR", StringComparison.OrdinalIgnoreCase))
+            if (archivo == null && !string.Equals(codigoIdioma, "es-AR", StringComparison.OrdinalIgnoreCase))
             {
-                langCode = "es-AR";
-                file = FindResourceFile(langCode);
+                codigoIdioma = "es-AR";
+                archivo = BuscarArchivoRecurso(codigoIdioma);
             }
 
-            if (file != null)
+            if (archivo != null)
             {
                 try
                 {
-                    var json = File.ReadAllText(file);
-                    _translations = JsonConvert.DeserializeObject<Dictionary<string, string>>(json)
+                    var json = File.ReadAllText(archivo);
+                    _traducciones = JsonConvert.DeserializeObject<Dictionary<string, string>>(json)
                                     ?? new Dictionary<string, string>();
-                    _currentLanguage = langCode;
-                    SaveLastLanguage(langCode);
+                    _idiomaActual = codigoIdioma;
+                    GuardarUltimoIdioma(codigoIdioma);
+
+                    // 🔔 Notificar a las pantallas que el idioma cambió
+                    IdiomaCambiado?.Invoke();
                     return;
                 }
                 catch
                 {
-                    // si falla la lectura/json -> dejar translations vacías (fallback)
-                    _translations = new Dictionary<string, string>();
+                    _traducciones = new Dictionary<string, string>();
                 }
             }
 
-            // Si no hay archivo válido, aseguramos que _translations no sea null
-            _translations = _translations ?? new Dictionary<string, string>();
-            _currentLanguage = langCode;
+            _traducciones = new Dictionary<string, string>();
+            _idiomaActual = codigoIdioma;
+            IdiomaCambiado?.Invoke(); // notificar incluso si no se pudo cargar archivo
         }
 
         /// <summary>
-        /// Busca el archivo Resources.{langCode}.json en varios lugares razonables.
-        /// Devuelve la ruta absoluta si lo encuentra, o null.
+        /// Busca el archivo Resources.{codigoIdioma}.json en ubicaciones posibles.
         /// </summary>
-        private static string FindResourceFile(string langCode)
+        private static string BuscarArchivoRecurso(string codigoIdioma)
         {
-            string fileName = $"Resources.{langCode}.json";
+            string nombreArchivo = $"Resources.{codigoIdioma}.json";
             var baseDir = AppDomain.CurrentDomain.BaseDirectory;
-            var candidates = new List<string>
+
+            var candidatos = new List<string>
             {
-                Path.Combine(baseDir, fileName),
-                Path.Combine(baseDir, "Services", "MultiIdioma", fileName),
-                Path.Combine(Directory.GetCurrentDirectory(), fileName),
-                // rutas relativas comunes (subir desde bin a la raíz del proyecto)
-                Path.Combine(baseDir, "..", "..", "..", "Services", "MultiIdioma", fileName),
-                Path.Combine(baseDir, "..", "..", "Services", "MultiIdioma", fileName),
-                Path.Combine(baseDir, "..", "Services", "MultiIdioma", fileName)
+                Path.Combine(baseDir, nombreArchivo),
+                Path.Combine(baseDir, "Services", "MultiIdioma", nombreArchivo),
+                Path.Combine(Directory.GetCurrentDirectory(), nombreArchivo),
+                Path.Combine(baseDir, "..", "..", "..", "Services", "MultiIdioma", nombreArchivo),
+                Path.Combine(baseDir, "..", "..", "Services", "MultiIdioma", nombreArchivo),
+                Path.Combine(baseDir, "..", "Services", "MultiIdioma", nombreArchivo)
             };
 
-            // Añadir búsquedas subiendo varios niveles y buscando Services\MultiIdioma
             string dir = baseDir;
             for (int i = 0; i < 6; i++)
             {
@@ -111,22 +123,23 @@ namespace Services.MultiIdioma
                 {
                     dir = Path.GetDirectoryName(dir);
                     if (string.IsNullOrEmpty(dir)) break;
-                    candidates.Add(Path.Combine(dir, "Services", "MultiIdioma", fileName));
+                    candidatos.Add(Path.Combine(dir, "Services", "MultiIdioma", nombreArchivo));
                 }
                 catch { break; }
             }
 
-            foreach (var c in candidates)
+            foreach (var c in candidatos)
             {
                 try
                 {
                     var full = Path.GetFullPath(c);
-                    if (File.Exists(full)) return full;
+                    if (File.Exists(full))
+                        return full;
                 }
                 catch { }
             }
 
-            // Último recurso: intentar buscar (SearchOption.AllDirectories) en carpetas padres hasta 3 niveles
+            // Buscar en carpetas padres
             dir = baseDir;
             for (int i = 0; i < 3; i++)
             {
@@ -134,8 +147,8 @@ namespace Services.MultiIdioma
                 {
                     dir = Path.GetDirectoryName(dir);
                     if (string.IsNullOrEmpty(dir)) break;
-                    var found = Directory.EnumerateFiles(dir, fileName, SearchOption.AllDirectories).FirstOrDefault();
-                    if (!string.IsNullOrEmpty(found)) return found;
+                    var encontrado = Directory.EnumerateFiles(dir, nombreArchivo, SearchOption.AllDirectories).FirstOrDefault();
+                    if (!string.IsNullOrEmpty(encontrado)) return encontrado;
                 }
                 catch { }
             }
@@ -143,28 +156,40 @@ namespace Services.MultiIdioma
             return null;
         }
 
-        private static void SaveLastLanguage(string langCode)
+        /// <summary>
+        /// Guarda el último idioma seleccionado.
+        /// </summary>
+        private static void GuardarUltimoIdioma(string codigoIdioma)
         {
             try
             {
-                if (!Directory.Exists(_appFolder)) Directory.CreateDirectory(_appFolder);
-                File.WriteAllText(_configFilePath, langCode);
+                if (!Directory.Exists(_carpetaApp))
+                    Directory.CreateDirectory(_carpetaApp);
+
+                File.WriteAllText(_rutaConfig, codigoIdioma);
             }
             catch
             {
-                // no hacemos nada si no se puede guardar; la app sigue funcionando con la selección en memoria
+                
             }
         }
 
-        public static void SetLanguage(string langCode) => LoadLanguage(langCode);
+        /// <summary>
+        /// Cambia el idioma actual forzando su recarga.
+        /// </summary>
+        public static void EstablecerIdioma(string codigoIdioma) => CargarIdioma(codigoIdioma);
 
-        public static string Translate(string key)
+        /// <summary>
+        /// Devuelve la traducción correspondiente a la clave indicada.
+        /// </summary>
+        public static string Traducir(string clave)
         {
-            if (_translations != null && _translations.TryGetValue(key, out var value))
-                return value;
-            return key;
+            if (_traducciones != null && _traducciones.TryGetValue(clave, out var valor))
+                return valor;
+
+            return clave;
         }
 
-        public static string CurrentLanguage => _currentLanguage;
+        public static string IdiomaActual => _idiomaActual;
     }
 }

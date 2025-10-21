@@ -46,7 +46,7 @@ namespace UI
 
         private void FormWelcome_Load(object sender, EventArgs e)
         {
-            LanguageManager.LoadLastLanguage();
+            LanguageManager.CargarUltimoIdioma();
 
             var empleadoActual = SessionManager.Instance.EmpleadoActual;
             lbl_Username.Text = empleadoActual.Nombre + " " + empleadoActual.Apellido;
@@ -54,7 +54,7 @@ namespace UI
             circularProgressBar1.Value = 0;
             circularProgressBar1.Minimum = 0;
             circularProgressBar1.Maximum = 100;
-            label2.Text = LanguageManager.Translate("Welcome_Bienvenido");
+            label2.Text = LanguageManager.Traducir("Welcome_Bienvenido");
             timer1.Start();
         }
 
