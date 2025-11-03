@@ -1,4 +1,5 @@
-﻿using DAL;
+﻿using BLL.Servicios;
+using DAL;
 using DAL.ScriptsSQL;
 using DomainModel;
 using System;
@@ -24,10 +25,8 @@ namespace BLL
 
         public Usuario Login(string username, string password)
         {
-            // Convertir la contraseña ingresada a Base64
             string passwordEnBase64 = Servicios.PasswordHelper.ConvertirABase64(password);
 
-            // Buscar el usuario validando también la contraseña
             var user = _repo.GetByUserAndPassword(username, passwordEnBase64);
             if (user == null) return null;
 
@@ -74,6 +73,12 @@ namespace BLL
                           .Replace("+", "")
                           .Replace("/", "")
                           .Replace("=", "");
+        }
+
+        public bool CambiarClave(string username, string nuevaClave)
+        {
+            string passwordBase64 = PasswordHelper.ConvertirABase64(nuevaClave);
+            return _repo.ActualizarClave(username, passwordBase64);
         }
     }
 }

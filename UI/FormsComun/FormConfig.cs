@@ -1,4 +1,5 @@
-﻿using Services.Conifguraciones;
+﻿using BLL;
+using Services.Conifguraciones;
 using Services.MultiIdioma;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,10 @@ namespace UI.FormsComun
 {
     public partial class FormConfig : Form
     {
+
+        private readonly UsuarioService _usuarioService = new UsuarioService();
+        private readonly EmpleadoService _empleadoService = new EmpleadoService();
+
         public FormConfig()
         {
             InitializeComponent();
@@ -88,10 +93,60 @@ namespace UI.FormsComun
 
         private void Btn_NuevoMail_Click(object sender, EventArgs e)
         {
-        }
+            string nuevoMail = Txt_NuevoMail.Text.Trim();
 
-        private void BtnCambiarClave_Click(object sender, EventArgs e)
+            if (string.IsNullOrEmpty(nuevoMail) || nuevoMail == "Nuevo correo...")
+            {
+                MessageBox.Show(LanguageManager.Traducir("Config_MensajeMailVacio"),
+                "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!System.Text.RegularExpressions.Regex.IsMatch(nuevoMail, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+            {
+                MessageBox.Show(LanguageManager.Traducir("Config_MensajeMailInvalido"),
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            int idEmpleado = SessionManager.Instance.EmpleadoActual.IdEmpleado;
+
+            bool exito = _empleadoService.CambiarGmail(idEmpleado, nuevoMail);
+
+            MessageBox.Show(exito
+                ? LanguageManager.Traducir("Config_MensajeMailCambiado")
+                : LanguageManager.Traducir("Config_MensajeErrorMail"),
+                            "Configuración", MessageBoxButtons.OK,
+                            exito ? MessageBoxIcon.Information : MessageBoxIcon.Error);
+                }
+
+        private void BtnCambiarClave_Click_1(object sender, EventArgs e)
         {
+            string nuevaClave = TxtNuevaClave.Text.Trim();
+            string confirmarClave = TxtConfirmarClave.Text.Trim();
+
+            if (string.IsNullOrEmpty(nuevaClave) || nuevaClave == "Nueva clave...")
+            {
+                MessageBox.Show(LanguageManager.Traducir("Config_MensajeClaveVacia"),
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (nuevaClave != confirmarClave)
+            {
+                MessageBox.Show(LanguageManager.Traducir("Config_MensajeClavesNoCoinciden"),
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            string username = SessionManager.Instance.UsuarioActual.UserName;
+            bool exito = _usuarioService.CambiarClave(username, nuevaClave);
+
+            MessageBox.Show(exito
+                ? LanguageManager.Traducir("Config_MensajeClaveCambiada")
+                : LanguageManager.Traducir("Config_MensajeErrorClave"),
+                "Configuración", MessageBoxButtons.OK,
+                exito ? MessageBoxIcon.Information : MessageBoxIcon.Error);
         }
     }
 }

@@ -42,6 +42,7 @@ namespace UI
             BtnStock.Text = LanguageManager.Traducir("SideMenu_Stock");
             BtnConfig.Text = LanguageManager.Traducir("SideMenu_Configuraciones");
             Btn_LogOut.Text = LanguageManager.Traducir("SideMenu_Salir");
+            Btn_Venta.Text = LanguageManager.Traducir("SideMenu_Venta");
         }
 
         private void Btn_Cerrar_Click(object sender, EventArgs e)

@@ -44,5 +44,24 @@ namespace DAL
                 }
             }
         }
+
+        public bool ActualizarGmail(int idEmpleado, string nuevoGmail)
+        {
+            using (var conn = _conexion.GetConnection())
+            {
+                conn.Open();
+
+                var query = @"UPDATE Empleado 
+                      SET Gmail_Empleado = @nuevoGmail 
+                      WHERE ID_Empleado = @idEmpleado";
+
+                using (var cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@nuevoGmail", nuevoGmail);
+                    cmd.Parameters.AddWithValue("@idEmpleado", idEmpleado);
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
     }
 }

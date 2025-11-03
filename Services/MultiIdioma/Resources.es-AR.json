@@ -35,6 +35,15 @@
   "Btn_Salir": "Salir",
   "Btn_Cancel": "Cancelar",
 
+  "Config_MensajeClaveVacia": "Debe ingresar una nueva contraseña.",
+  "Config_MensajeClavesNoCoinciden": "Las contraseñas no coinciden.",
+  "Config_MensajeClaveCambiada": "La contraseña se actualizó correctamente.",
+  "Config_MensajeErrorClave": "Ocurrió un error al intentar actualizar la contraseña",
+  "Config_MensajeMailVacio": "Debe ingresar un nuevo correo electrónico.",
+  "Config_MensajeMailInvalido": "El formato del correo electrónico no es válido",
+  "Config_MensajeMailCambiado": "El correo electrónico se actualizó correctamente",
+  "Config_MensajeErrorMail": "Ocurrió un error al intentar actualizar el correo electrónico.",
+
   //Configuraciones
   "Lbl_ModoOscuro": "Modo Oscuro",
   "Lbl_titleCambiarClave": "Cambiar Contraseña",

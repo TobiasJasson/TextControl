@@ -50,6 +50,26 @@ namespace DAL
             return null;
         }
 
+        public bool ActualizarClave(string username, string nuevaClaveBase64)
+        {
+            using (var conn = _conexion.GetConnection())
+            {
+                conn.Open();
+
+                var query = @"UPDATE Usuario 
+                      SET Password_Usuario = @password 
+                      WHERE UserName_Usuario = @username";
+
+                using (var cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@password", nuevaClaveBase64);
+                    cmd.Parameters.AddWithValue("@username", username);
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+
+
         public Usuario GetByName(string userName)
         {
             using (var conn = _conexion.GetConnection())

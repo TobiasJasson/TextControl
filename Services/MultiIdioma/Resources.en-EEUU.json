@@ -37,6 +37,15 @@
   "Btn_Salir": "Exit",
   "Btn_Cancel": "Cancel",
 
+  "Config_MensajeClaveVacia": "You must enter a new password.",
+  "Config_MensajeClavesNoCoinciden": "Passwords do not match.",
+  "Config_MensajeClaveCambiada": "Password updated successfully.",
+  "Config_MensajeErrorClave": "An error occurred while updating the password",
+  "Config_MensajeMailVacio": "You must enter a new email address.",
+  "Config_MensajeMailInvalido": "Invalid email address format",
+  "Config_MensajeMailCambiado": "Email updated successfully",
+  "Config_MensajeErrorMail": "An error occurred while updating the email address.",
+
   //Configuraciones
   "Lbl_ModoOscuro": "Dark Mode",
   "Lbl_titleCambiarClave": "Change Password",

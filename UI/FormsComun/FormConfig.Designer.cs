@@ -43,14 +43,15 @@
             // 
             this.Switch_modoOscuro.AutoSize = true;
             this.Switch_modoOscuro.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Switch_modoOscuro.Location = new System.Drawing.Point(199, 26);
-            this.Switch_modoOscuro.MinimumSize = new System.Drawing.Size(45, 22);
+            this.Switch_modoOscuro.Location = new System.Drawing.Point(149, 21);
+            this.Switch_modoOscuro.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Switch_modoOscuro.MinimumSize = new System.Drawing.Size(34, 18);
             this.Switch_modoOscuro.Name = "Switch_modoOscuro";
             this.Switch_modoOscuro.OffBackColor = System.Drawing.Color.Gray;
             this.Switch_modoOscuro.OffToggleColor = System.Drawing.Color.Gainsboro;
             this.Switch_modoOscuro.OnBackColor = System.Drawing.Color.MidnightBlue;
             this.Switch_modoOscuro.OnToggleColor = System.Drawing.Color.WhiteSmoke;
-            this.Switch_modoOscuro.Size = new System.Drawing.Size(45, 22);
+            this.Switch_modoOscuro.Size = new System.Drawing.Size(34, 18);
             this.Switch_modoOscuro.TabIndex = 0;
             this.Switch_modoOscuro.UseVisualStyleBackColor = true;
             this.Switch_modoOscuro.CheckedChanged += new System.EventHandler(this.Switch_modoOscuro_CheckedChanged);
@@ -59,9 +60,10 @@
             // 
             this.Lbl_ModoOscuro.AutoSize = true;
             this.Lbl_ModoOscuro.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lbl_ModoOscuro.Location = new System.Drawing.Point(30, 24);
+            this.Lbl_ModoOscuro.Location = new System.Drawing.Point(22, 20);
+            this.Lbl_ModoOscuro.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Lbl_ModoOscuro.Name = "Lbl_ModoOscuro";
-            this.Lbl_ModoOscuro.Size = new System.Drawing.Size(142, 23);
+            this.Lbl_ModoOscuro.Size = new System.Drawing.Size(115, 21);
             this.Lbl_ModoOscuro.TabIndex = 1;
             this.Lbl_ModoOscuro.Text = "Modo Oscuro";
             // 
@@ -69,9 +71,10 @@
             // 
             this.Lbl_titleCambiarClave.AutoSize = true;
             this.Lbl_titleCambiarClave.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lbl_titleCambiarClave.Location = new System.Drawing.Point(30, 81);
+            this.Lbl_titleCambiarClave.Location = new System.Drawing.Point(22, 66);
+            this.Lbl_titleCambiarClave.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Lbl_titleCambiarClave.Name = "Lbl_titleCambiarClave";
-            this.Lbl_titleCambiarClave.Size = new System.Drawing.Size(163, 23);
+            this.Lbl_titleCambiarClave.Size = new System.Drawing.Size(130, 21);
             this.Lbl_titleCambiarClave.TabIndex = 2;
             this.Lbl_titleCambiarClave.Text = "Cambiar Clave";
             // 
@@ -81,9 +84,10 @@
             this.TxtNuevaClave.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TxtNuevaClave.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtNuevaClave.ForeColor = System.Drawing.Color.Black;
-            this.TxtNuevaClave.Location = new System.Drawing.Point(34, 132);
+            this.TxtNuevaClave.Location = new System.Drawing.Point(26, 107);
+            this.TxtNuevaClave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.TxtNuevaClave.Name = "TxtNuevaClave";
-            this.TxtNuevaClave.Size = new System.Drawing.Size(307, 25);
+            this.TxtNuevaClave.Size = new System.Drawing.Size(230, 20);
             this.TxtNuevaClave.TabIndex = 3;
             this.TxtNuevaClave.Text = "Contraseña Nueva";
             // 
@@ -93,30 +97,32 @@
             this.TxtConfirmarClave.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TxtConfirmarClave.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtConfirmarClave.ForeColor = System.Drawing.Color.Black;
-            this.TxtConfirmarClave.Location = new System.Drawing.Point(34, 181);
+            this.TxtConfirmarClave.Location = new System.Drawing.Point(26, 147);
+            this.TxtConfirmarClave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.TxtConfirmarClave.Name = "TxtConfirmarClave";
-            this.TxtConfirmarClave.Size = new System.Drawing.Size(307, 25);
+            this.TxtConfirmarClave.Size = new System.Drawing.Size(230, 20);
             this.TxtConfirmarClave.TabIndex = 4;
             this.TxtConfirmarClave.Text = "Confirmar Contraseña";
-            //this.TxtConfirmarClave.TextChanged += new System.EventHandler(this.TxtConfirmarClave_TextChanged);
             // 
             // BtnCambiarClave
             // 
             this.BtnCambiarClave.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnCambiarClave.Location = new System.Drawing.Point(42, 223);
+            this.BtnCambiarClave.Location = new System.Drawing.Point(32, 181);
+            this.BtnCambiarClave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.BtnCambiarClave.Name = "BtnCambiarClave";
-            this.BtnCambiarClave.Size = new System.Drawing.Size(202, 43);
+            this.BtnCambiarClave.Size = new System.Drawing.Size(152, 35);
             this.BtnCambiarClave.TabIndex = 5;
             this.BtnCambiarClave.Text = "Cambiar Clave";
             this.BtnCambiarClave.UseVisualStyleBackColor = true;
-            //this.BtnCambiarClave.Click += new System.EventHandler(this.button1_Click);
+            this.BtnCambiarClave.Click += new System.EventHandler(this.BtnCambiarClave_Click_1);
             // 
             // Btn_NuevoMail
             // 
             this.Btn_NuevoMail.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_NuevoMail.Location = new System.Drawing.Point(42, 404);
+            this.Btn_NuevoMail.Location = new System.Drawing.Point(32, 328);
+            this.Btn_NuevoMail.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Btn_NuevoMail.Name = "Btn_NuevoMail";
-            this.Btn_NuevoMail.Size = new System.Drawing.Size(202, 43);
+            this.Btn_NuevoMail.Size = new System.Drawing.Size(152, 35);
             this.Btn_NuevoMail.TabIndex = 8;
             this.Btn_NuevoMail.Text = "Cambiar Email";
             this.Btn_NuevoMail.UseVisualStyleBackColor = true;
@@ -128,28 +134,29 @@
             this.Txt_NuevoMail.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Txt_NuevoMail.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Txt_NuevoMail.ForeColor = System.Drawing.Color.Black;
-            this.Txt_NuevoMail.Location = new System.Drawing.Point(42, 362);
+            this.Txt_NuevoMail.Location = new System.Drawing.Point(32, 294);
+            this.Txt_NuevoMail.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Txt_NuevoMail.Name = "Txt_NuevoMail";
-            this.Txt_NuevoMail.Size = new System.Drawing.Size(307, 25);
+            this.Txt_NuevoMail.Size = new System.Drawing.Size(230, 20);
             this.Txt_NuevoMail.TabIndex = 7;
             this.Txt_NuevoMail.Text = "Nuevo Email";
-            //this.Txt_NuevoMail.TextChanged += new System.EventHandler(this.Txt_NuevoMail_TextChanged);
             // 
             // Lbl_titleCambioMail
             // 
             this.Lbl_titleCambioMail.AutoSize = true;
             this.Lbl_titleCambioMail.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lbl_titleCambioMail.Location = new System.Drawing.Point(38, 311);
+            this.Lbl_titleCambioMail.Location = new System.Drawing.Point(28, 253);
+            this.Lbl_titleCambioMail.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Lbl_titleCambioMail.Name = "Lbl_titleCambioMail";
-            this.Lbl_titleCambioMail.Size = new System.Drawing.Size(141, 23);
+            this.Lbl_titleCambioMail.Size = new System.Drawing.Size(115, 21);
             this.Lbl_titleCambioMail.TabIndex = 6;
             this.Lbl_titleCambioMail.Text = "Cambiar Mail";
             // 
             // FormConfig
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(821, 481);
+            this.ClientSize = new System.Drawing.Size(616, 391);
             this.Controls.Add(this.Btn_NuevoMail);
             this.Controls.Add(this.Txt_NuevoMail);
             this.Controls.Add(this.Lbl_titleCambioMail);
@@ -160,6 +167,7 @@
             this.Controls.Add(this.Lbl_ModoOscuro);
             this.Controls.Add(this.Switch_modoOscuro);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FormConfig";
             this.Text = "FormConfig";
             this.Load += new System.EventHandler(this.FormConfig_Load);

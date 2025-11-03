@@ -14,8 +14,12 @@ namespace BLL
 
         public Empleados GetEmpleadoById(int id)
         {
-            // Aquí podrías agregar validaciones si quieres
             return _empleadoDAO.GetById(id);
+        }
+
+        public bool CambiarGmail(int idEmpleado, string nuevoGmail)
+        {
+            return _empleadoDAO.ActualizarGmail(idEmpleado, nuevoGmail);
         }
     }
 }
