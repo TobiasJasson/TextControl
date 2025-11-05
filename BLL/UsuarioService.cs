@@ -1,7 +1,7 @@
-﻿using BLL.Servicios;
-using DAL;
-using DAL.ScriptsSQL;
-using DomainModel;
+﻿using BLL.Interfaces;
+using BLL.Servicios;
+using DAL.Repository;
+using Services.DomainModel;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -14,54 +14,36 @@ using System.Windows.Forms;
 
 namespace BLL
 {
-    public class UsuarioService
+    public class UsuarioService : IUsuarioService
     {
-        private readonly UsuarioRepository _repo;
+        public readonly IUsuarioRepository _repo;
 
-        public UsuarioService()
+        public UsuarioService(IUsuarioRepository repo)
         {
-            _repo = new UsuarioRepository();
+            _repo = repo;
+        }
+
+        public UsuarioService() : this(new UsuarioRepository())
+        {
         }
 
         public Usuario Login(string username, string password)
         {
-            string passwordEnBase64 = Servicios.PasswordHelper.ConvertirABase64(password);
-
+            string passwordEnBase64 = PasswordHelper.ConvertirABase64(password);
             var user = _repo.GetByUserAndPassword(username, passwordEnBase64);
-            if (user == null) return null;
-
             return user;
         }
 
         public Usuario RecuperarClave(string userName)
         {
-            var user = _repo.GetByName(userName);
-            if (user == null) return null;
-
-            return user;
+            return _repo.GetByName(userName);
         }
 
         public void SaveRecoveryToken(string username, string token, DateTime expiry)
         {
-            string sql = @"UPDATE dbo.Usuario
-                   SET RecoveryToken = @token, RecoveryTokenExpiry = @expiry
-                   WHERE UserName_Usuario = @username";
-
-            // Usar la misma conexión dinámica que todo el sistema
-            string connectionString = DAL.ScriptsSQL.DatabaseInitializer.GetConnectionString();
-
-            using (var conn = new SqlConnection(connectionString))
-            {
-                conn.Open();
-                using (var cmd = new SqlCommand(sql, conn))
-                {
-                    cmd.Parameters.AddWithValue("@token", token);
-                    cmd.Parameters.AddWithValue("@expiry", expiry);
-                    cmd.Parameters.AddWithValue("@username", username);
-                    cmd.ExecuteNonQuery();
-                }
-            }
+            _repo.SaveRecoveryToken(username, token, expiry);
         }
+
         public static string GenerateToken(int length = 32)
         {
             byte[] bytes = new byte[length];

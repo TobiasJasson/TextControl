@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmpleadoService.cs" />
+    <Compile Include="Interfaces\IUsuarioService.cs" />
     <Compile Include="Servicios\EmailService.cs" />
     <Compile Include="Servicios\PasswordHelper.cs" />
     <Compile Include="SessionManager.cs" />
@@ -69,8 +70,12 @@
       <Name>DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\Domain Model\DomainModel.csproj">
-      <Project>{9B5E6F95-0C85-4046-99E3-A6DB75620708}</Project>
+      <Project>{9b5e6f95-0c85-4046-99e3-a6db75620708}</Project>
       <Name>DomainModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services\Services.csproj">
+      <Project>{72264f09-0a54-4e08-8414-f1abc9615efa}</Project>
+      <Name>Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

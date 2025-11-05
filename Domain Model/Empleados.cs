@@ -17,7 +17,5 @@ namespace DomainModel
         public string Contacto { get; set; }
         public int IdRol { get; set; }
 
-        // Relación con Usuario
-        public List<Usuario> Usuarios { get; set; } = new List<Usuario>();
     }
 }

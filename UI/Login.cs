@@ -77,6 +77,8 @@ namespace UI
             LiL_RecuperarPass.Text = LanguageManager.Traducir("Login_OlvidoClave");
             ChBox_MostrarContraseña.Text = LanguageManager.Traducir("Login_MostrarContraseña");
             BtnCambiarIdioma.Text = LanguageManager.Traducir("Login_BotonIdioma");
+            TxtNameUser.Text = LanguageManager.Traducir("Login_Usuario");
+            TxtPassword.Text = LanguageManager.Traducir("Login_Contraseña");
         }
 
         private void BtnCambiarIdioma_Click(object sender, EventArgs e)

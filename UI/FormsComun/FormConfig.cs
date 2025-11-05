@@ -15,9 +15,10 @@ namespace UI.FormsComun
 {
     public partial class FormConfig : Form
     {
-
-        private readonly UsuarioService _usuarioService = new UsuarioService();
-        private readonly EmpleadoService _empleadoService = new EmpleadoService();
+        //private readonly UsuarioService _usuarioService = new UsuarioService();
+        //private readonly EmpleadoService _empleadoService = new EmpleadoService();
+        private UsuarioService _usuarioService;
+        private EmpleadoService _empleadoService;
 
         public FormConfig()
         {
@@ -37,45 +38,83 @@ namespace UI.FormsComun
             Lbl_titleCambioMail.Text = LanguageManager.Traducir("Lbl_titleCambioMail");
             BtnCambiarClave.Text = LanguageManager.Traducir("BtnCambiarClave");
             Btn_NuevoMail.Text = LanguageManager.Traducir("Btn_NuevoMail");
+            TxtNuevaClave.Text = LanguageManager.Traducir("TxtNuevaClave");
+            TxtConfirmarClave.Text = LanguageManager.Traducir("TxtConfirmarClave");
+            Txt_NuevoMail.Text = LanguageManager.Traducir("Txt_NuevoMail");
         }
 
-        private void FormConfig_Load(object sender, EventArgs e)
+        private async void FormConfig_Load(object sender, EventArgs e)
         {
+
+            await InicializarAsync();
+
+            //bool oscuro = ThemeManager.ModoOscuro;
+            //Switch_modoOscuro.Checked = oscuro;
+            //ThemeManager.ApplyTheme(this, oscuro);
+
+            //LanguageManager.CargarUltimoIdioma();
+            //ActualizarTraducciones();
+
+            //ConfigurarTextBox(TxtNuevaClave, "Nueva clave...");
+            //ConfigurarTextBox(TxtConfirmarClave, "Confirmar clave...");
+            //ConfigurarTextBox(Txt_NuevoMail, "Nuevo correo...");
+        }
+
+        private async Task InicializarAsync()
+        {
+            await Task.Run(() =>
+            {
+                _usuarioService = new UsuarioService();
+                _empleadoService = new EmpleadoService();
+            });
+
+            // Luego seguís con el resto sin bloquear
             bool oscuro = ThemeManager.ModoOscuro;
             Switch_modoOscuro.Checked = oscuro;
             ThemeManager.ApplyTheme(this, oscuro);
-
             LanguageManager.CargarUltimoIdioma();
             ActualizarTraducciones();
-
-            ConfigurarTextBox(TxtNuevaClave, "Nueva clave...");
-            ConfigurarTextBox(TxtConfirmarClave, "Confirmar clave...");
+            ConfigurarTextBox(TxtNuevaClave, "Nueva clave...", true);
+            ConfigurarTextBox(TxtConfirmarClave, "Confirmar clave...", true);
             ConfigurarTextBox(Txt_NuevoMail, "Nuevo correo...");
         }
 
-        private void ConfigurarTextBox(TextBox textBox, string placeholder)
+        private void ConfigurarTextBox(TextBox textBox, string placeholder, bool esPassword = false)
         {
-            textBox.Tag = placeholder;
-            textBox.Text = placeholder;
-            textBox.ForeColor = Color.Silver;
+            textBox.Tag = Tuple.Create(placeholder, esPassword);
+
+            SetPlaceholder(textBox);
 
             textBox.Enter += (s, e) =>
             {
-                if (textBox.Text == placeholder)
+                var tup = (Tuple<string, bool>)textBox.Tag;
+                string ph = tup.Item1;
+                bool isPwd = tup.Item2;
+
+                if (textBox.Text == ph)
                 {
                     textBox.Text = "";
-                    textBox.ForeColor = Color.Black;
+                    textBox.ForeColor = ThemeManager.ModoOscuro ? Color.White : Color.Black;
+                    if (isPwd) textBox.UseSystemPasswordChar = true;
                 }
             };
 
             textBox.Leave += (s, e) =>
             {
                 if (string.IsNullOrWhiteSpace(textBox.Text))
-                {
-                    textBox.Text = placeholder;
-                    textBox.ForeColor = Color.Silver;
-                }
+                    SetPlaceholder(textBox);
             };
+        }
+
+        private void SetPlaceholder(TextBox textBox)
+        {
+            var tup = (Tuple<string, bool>)textBox.Tag;
+            string ph = tup.Item1;
+            bool isPwd = tup.Item2;
+
+            textBox.Text = ph;
+            textBox.ForeColor = Color.Silver;
+            textBox.UseSystemPasswordChar = false;
         }
 
         protected override void OnFormClosed(FormClosedEventArgs e)
@@ -118,7 +157,13 @@ namespace UI.FormsComun
                 : LanguageManager.Traducir("Config_MensajeErrorMail"),
                             "Configuración", MessageBoxButtons.OK,
                             exito ? MessageBoxIcon.Information : MessageBoxIcon.Error);
-                }
+
+            if (exito)
+            {
+                SetPlaceholder(Txt_NuevoMail);
+                Txt_NuevoMail.ForeColor = Color.Silver;
+            }
+        }
 
         private void BtnCambiarClave_Click_1(object sender, EventArgs e)
         {
@@ -147,6 +192,18 @@ namespace UI.FormsComun
                 : LanguageManager.Traducir("Config_MensajeErrorClave"),
                 "Configuración", MessageBoxButtons.OK,
                 exito ? MessageBoxIcon.Information : MessageBoxIcon.Error);
+
+            if (exito)
+            {
+                SetPlaceholder(TxtNuevaClave);
+                SetPlaceholder(TxtConfirmarClave);
+                TxtNuevaClave.ForeColor = TxtConfirmarClave.ForeColor = Color.Silver;
+            }
+        }
+
+        private void Lbl_titleCambiarClave_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

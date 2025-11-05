@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DomainModel
+namespace Services.DomainModel
 {
-    public class Roles
+    public class Rol
     {
         public int IdRol { get; set; }
         public string DescipcionRol { get; set; }

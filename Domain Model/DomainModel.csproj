@@ -63,8 +63,6 @@
     <Compile Include="PagoAdelantado.cs" />
     <Compile Include="Pedido.cs" />
     <Compile Include="Prioridad.cs" />
-    <Compile Include="Roles.cs" />
-    <Compile Include="Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -71,14 +71,40 @@ namespace Services.Conifguraciones
             {
                 if (ctrl is Label || ctrl is Button || ctrl is CheckBox)
                 {
-                    ctrl.ForeColor = colorTexto;
+                    ctrl.ForeColor = oscuro ? Color.Silver : Color.Black;
                     ctrl.BackColor = colorFondo;
                 }
                 else if (ctrl is TextBox txt)
                 {
-                    txt.ForeColor = colorTexto;
+                    string placeholder = null;
+                    bool tienePlaceholderInfo = false;
+
+                    Tuple<string, bool> tup = null;
+
+                    if (txt.Tag is Tuple<string, bool> tempTup)
+                    {
+                        placeholder = tempTup.Item1;
+                        tienePlaceholderInfo = true;
+                        tup = tempTup; 
+                    }
+
+                    bool esPlaceholder = tienePlaceholderInfo && txt.Text == placeholder;
+
                     txt.BackColor = oscuro ? Color.FromArgb(40, 40, 40) : Color.WhiteSmoke;
                     txt.BorderStyle = BorderStyle.FixedSingle;
+
+                    if (esPlaceholder)
+                    {
+                        txt.ForeColor = Color.Silver;
+                        if (tup != null && tup.Item2)
+                            txt.UseSystemPasswordChar = false;
+                    }
+                    else
+                    {
+                        txt.ForeColor = oscuro ? Color.White : Color.Black;
+                        if (tup != null && tup.Item2)
+                            txt.UseSystemPasswordChar = true;
+                    }
                 }
                 else if (ctrl.HasChildren)
                 {

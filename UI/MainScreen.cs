@@ -1,4 +1,5 @@
 ﻿using BLL;
+using Services.Conifguraciones;
 using Services.MultiIdioma;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,8 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using UI.LocalWidget;
 using UI.FormsComun;
+using UI.LocalWidget;
 
 namespace UI
 {
@@ -147,19 +148,37 @@ namespace UI
 
         }
 
-        private void BtnConfig_Click(object sender, EventArgs e)
+        private async void BtnConfig_Click(object sender, EventArgs e)
         {
             lblTitle.Text = LanguageManager.Traducir("SideMenu_Configuraciones");
 
             panelContenido.Controls.Clear();
 
-            // Crear el formulario de configuración
+                bool oscuro = ThemeManager.ModoOscuro;
+            // Mostrar un mensaje o loader temporal
+            Label lblCargando = new Label()
+            {
+                Text = "Cargando configuración...",
+                ForeColor = Color.Gray,
+                BackColor = (oscuro == true) ?Color.Black :Color.White,
+                Dock = DockStyle.Fill,
+                TextAlign = ContentAlignment.MiddleCenter
+            };
+            panelContenido.Controls.Add(lblCargando);
+            panelContenido.Refresh();
+
+            await Task.Run(() =>
+            {
+                System.Threading.Thread.Sleep(500);
+            });
+
+            // Ahora crear el form ya en el hilo UI
             FormConfig formConfig = new FormConfig();
             formConfig.TopLevel = false;
             formConfig.FormBorderStyle = FormBorderStyle.None;
             formConfig.Dock = DockStyle.Fill;
 
-            // Agregar al panel
+            panelContenido.Controls.Clear();
             panelContenido.Controls.Add(formConfig);
             formConfig.Show();
         }

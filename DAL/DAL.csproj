@@ -57,8 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmpleadoDAL.cs" />
+    <Compile Include="Repository\IUsuarioRepository.cs" />
     <Compile Include="ScriptsSQL\DatabaseInitializer.cs" />
-    <Compile Include="UsuarioRepository.cs" />
+    <Compile Include="Repository\UsuarioRepository.cs" />
     <Compile Include="Conexion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -66,6 +67,10 @@
     <ProjectReference Include="..\Domain Model\DomainModel.csproj">
       <Project>{9b5e6f95-0c85-4046-99e3-a6db75620708}</Project>
       <Name>DomainModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services\Services.csproj">
+      <Project>{72264f09-0a54-4e08-8414-f1abc9615efa}</Project>
+      <Name>Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +80,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

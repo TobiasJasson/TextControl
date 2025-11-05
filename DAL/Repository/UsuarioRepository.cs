@@ -4,11 +4,11 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DomainModel;
+using Services.DomainModel;
 
-namespace DAL
+namespace DAL.Repository
 {
-    public class UsuarioRepository
+    public class UsuarioRepository : IUsuarioRepository
     {
         private readonly Conexion _conexion;
 
@@ -16,15 +16,15 @@ namespace DAL
         {
             _conexion = new Conexion();
         }
+
         public Usuario GetByUserAndPassword(string username, string passwordBase64)
         {
             using (var conn = _conexion.GetConnection())
             {
                 conn.Open();
-                var query = @"SELECT TOP 1 * 
-                      FROM Usuario 
-                      WHERE UserName_Usuario = @username 
-                        AND Password_Usuario = @password";
+                var query = @"SELECT TOP 1 * FROM Usuario 
+                              WHERE UserName_Usuario = @username 
+                              AND Password_Usuario = @password";
 
                 using (var cmd = new SqlCommand(query, conn))
                 {
@@ -49,26 +49,6 @@ namespace DAL
             }
             return null;
         }
-
-        public bool ActualizarClave(string username, string nuevaClaveBase64)
-        {
-            using (var conn = _conexion.GetConnection())
-            {
-                conn.Open();
-
-                var query = @"UPDATE Usuario 
-                      SET Password_Usuario = @password 
-                      WHERE UserName_Usuario = @username";
-
-                using (var cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@password", nuevaClaveBase64);
-                    cmd.Parameters.AddWithValue("@username", username);
-                    return cmd.ExecuteNonQuery() > 0;
-                }
-            }
-        }
-
 
         public Usuario GetByName(string userName)
         {
@@ -95,6 +75,43 @@ namespace DAL
                 }
             }
             return null;
+        }
+
+        public bool ActualizarClave(string username, string nuevaClaveBase64)
+        {
+            using (var conn = _conexion.GetConnection())
+            {
+                conn.Open();
+                var query = @"UPDATE Usuario 
+                              SET Password_Usuario = @password 
+                              WHERE UserName_Usuario = @username";
+
+                using (var cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@password", nuevaClaveBase64);
+                    cmd.Parameters.AddWithValue("@username", username);
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+
+        public void SaveRecoveryToken(string username, string token, DateTime expiry)
+        {
+            using (var conn = _conexion.GetConnection())
+            {
+                conn.Open();
+                var query = @"UPDATE Usuario 
+                              SET RecoveryToken = @token, RecoveryTokenExpiry = @expiry 
+                              WHERE UserName_Usuario = @username";
+
+                using (var cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@token", token);
+                    cmd.Parameters.AddWithValue("@expiry", expiry);
+                    cmd.Parameters.AddWithValue("@username", username);
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
     }
 }
