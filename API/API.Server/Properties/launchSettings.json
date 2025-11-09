@@ -17,9 +17,7 @@
       "applicationUrl": "http://localhost:5237",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy",
-        "CONNECTION_STRING_SEGURIDAD": "Server=tcp:yamanote.proxy.rlwy.net,58677;Database=SeguridadTexControl;User ID=sa;Password=Qn~KcDQCsGcl6UCOCtGq3ATncJUrAk2k;Encrypt=True;TrustServerCertificate=True;",
-        "RAILWAY_CLIENT_URL": "https://textcontrol-production.up.railway.app"
+        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
       }
     },
     "https": {
@@ -30,9 +28,7 @@
       "applicationUrl": "https://localhost:7022;http://localhost:5237",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy",
-        "CONNECTION_STRING_SEGURIDAD": "Server=tcp:yamanote.proxy.rlwy.net,58677;Database=SeguridadTexControl;User ID=sa;Password=Qn~KcDQCsGcl6UCOCtGq3ATncJUrAk2k;Encrypt=True;TrustServerCertificate=True;",
-        "RAILWAY_CLIENT_URL": "https://textcontrol-production.up.railway.app"
+        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
       }
     },
     "IIS Express": {
@@ -41,9 +37,7 @@
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy",
-        "CONNECTION_STRING_SEGURIDAD": "Server=tcp:yamanote.proxy.rlwy.net,58677;Database=SeguridadTexControl;User ID=sa;Password=Qn~KcDQCsGcl6UCOCtGq3ATncJUrAk2k;Encrypt=True;TrustServerCertificate=True;",
-        "RAILWAY_CLIENT_URL": "https://textcontrol-production.up.railway.app"
+        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
       }
     }
   }

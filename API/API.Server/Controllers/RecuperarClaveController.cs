@@ -9,33 +9,18 @@ namespace API.Server.Controllers
     [Route("api/[controller]")]
     public class RecuperarClaveController : ControllerBase
     {
-        // ✅ Redirige al frontend Node (API.Client) cuando el usuario abre el link del mail
-        [HttpGet("/cambiarClave")]
-        public IActionResult RedirigirFormulario([FromQuery] string usuario, [FromQuery] string token)
-        {
-            if (string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(token))
-                return BadRequest("Faltan parámetros.");
-
-            // URL del servicio CLIENT (Node.js en Railway)
-            string frontendUrl = Environment.GetEnvironmentVariable("RAILWAY_CLIENT_URL")
-                ?? "https://textcontrol-client-production.up.railway.app";
-
-            string redirectUrl = $"{frontendUrl}/cambiarClave?usuario={usuario}&token={token}";
-            return Redirect(redirectUrl);
-        }
-
-        [HttpPost("cambiarClave")]
+        [HttpPost]
+        [Route("cambiarClave")]
         public IActionResult CambiarClave([FromBody] CambiarClaveRequest request)
         {
-            string connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING_SEGURIDAD")
-                ?? @"Data Source=localhost\SQLEXPRESS;Initial Catalog=SeguridadTexControl;Integrated Security=True;TrustServerCertificate=True";
+            string connectionString = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=TextControl;Integrated Security=True;TrustServerCertificate=True";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
 
                 string query = @"SELECT ID_Usuario FROM Usuario 
-                                 WHERE UserName = @username 
+                                 WHERE UserName_Usuario = @username 
                                    AND RecoveryToken = @token 
                                    AND RecoveryTokenExpiry > GETDATE()";
 
@@ -50,12 +35,12 @@ namespace API.Server.Controllers
                 }
 
                 if (userId == null)
-                    return BadRequest(new { message = "Token inválido o expirado para este usuario." });
+                    return BadRequest("Token inválido o expirado para este usuario.");
 
                 string passBase64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(request.NuevaClave));
 
                 string update = @"UPDATE Usuario 
-                                  SET PasswordHash = @pass, RecoveryToken = NULL, RecoveryTokenExpiry = NULL
+                                  SET Password_Usuario = @pass, RecoveryToken = NULL, RecoveryTokenExpiry = NULL
                                   WHERE ID_Usuario = @id";
 
                 using (SqlCommand cmd = new SqlCommand(update, conn))

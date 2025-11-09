@@ -1,36 +1,26 @@
-﻿using DAL.ScriptsSQL;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DAL.ScriptsSQL;
+
 namespace UI
 {
     internal static class Program
     {
+        /// <summary>
+        /// Punto de entrada principal para la aplicación.
+        /// </summary>
         [STAThread]
         static void Main()
         {
-            string connStr = ConfigurationManager.ConnectionStrings["SeguridadTextControlDb"].ConnectionString;
-
-            try
-            {
-                using (var conn = new SqlConnection(connStr))
-                {
-                    conn.Open();
-                    Console.WriteLine("✅ Conexión local exitosa.");
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("❌ Error local: " + ex.Message);
-            }
-
+            DatabaseInitializer.Initialize();
+            Console.WriteLine("Base de datos lista.");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Login());
+
         }
     }
 }

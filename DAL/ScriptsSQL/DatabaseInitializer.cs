@@ -23,15 +23,6 @@ namespace DAL.ScriptsSQL
 
         public static void Initialize()
         {
-            // Si estamos en Railway (variable CONNECTION_STRING presente), no crear nada.
-            string remoteConn = Environment.GetEnvironmentVariable("CONNECTION_STRING");
-            if (!string.IsNullOrEmpty(remoteConn))
-            {
-                Console.WriteLine("🌐 Modo Railway detectado. Se usará la base de datos remota configurada.");
-                return;
-            }
-
-            // En modo local, sigue igual
             InitializeDatabase("TextControlDb", _dbNegocio, "TextControlDB.sql");
             InitializeDatabase("SeguridadTextControlDb", _dbSeguridad, "SeguridadTextControlDB.sql");
         }
@@ -103,7 +94,7 @@ namespace DAL.ScriptsSQL
                 }
             }
 
-            throw new Exception("❌ No se encontró ninguna instancia válida de SQL Server local.");
+            throw new Exception("❌ No se encontró ninguna instancia válida de SQL Server.");
         }
 
         private static void ExecuteSqlScript(string masterConn, string script, string dbName)
@@ -142,7 +133,6 @@ namespace DAL.ScriptsSQL
 
         public static string GetConnectionString()
         {
-            // TextControl siempre local
             string baseConnection = ConfigurationManager.ConnectionStrings["TextControlDb"].ConnectionString;
             string workingServer = GetWorkingServer(baseConnection);
             var builder = new SqlConnectionStringBuilder(baseConnection)
@@ -155,12 +145,6 @@ namespace DAL.ScriptsSQL
 
         public static string GetConnectionStringSeguridad()
         {
-            // Seguridad siempre remota (Railway)
-            string envConn = Environment.GetEnvironmentVariable("CONNECTION_STRING_SEGURIDAD");
-            if (!string.IsNullOrEmpty(envConn))
-                return envConn;
-
-            // fallback local (solo si no hay variable)
             string baseConnection = ConfigurationManager.ConnectionStrings["SeguridadTextControlDb"].ConnectionString;
             string workingServer = GetWorkingServer(baseConnection);
             var builder = new SqlConnectionStringBuilder(baseConnection)
