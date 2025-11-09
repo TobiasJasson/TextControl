@@ -1,29 +1,25 @@
-# Imagen base de runtime .NET 8
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+# Etapa 1: construir frontend (Vite)
+FROM node:18 AS vite-build
 WORKDIR /app
-EXPOSE 8080
-ENV ASPNETCORE_URLS=http://+:8080
+COPY api.client/package*.json ./
+RUN npm install
+COPY api.client/ .
+RUN npm run build
 
-# Imagen para build
+# Etapa 2: construir backend .NET
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-
-# Copiar el archivo del proyecto y restaurar dependencias
-COPY ["API.Server.csproj", "."]
-RUN dotnet restore "API.Server.csproj"
-
-# Copiar todo el código y compilar
+COPY ["API/API.Server/API.Server.csproj", "API/API.Server/"]
+RUN dotnet restore "API/API.Server/API.Server.csproj"
 COPY . .
+WORKDIR "/src/API/API.Server"
 RUN dotnet publish "API.Server.csproj" -c Release -o /app/publish
 
-# Imagen final
-FROM base AS final
+# Etapa 3: Imagen final
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
-
-# Copiamos el publishado
 COPY --from=build /app/publish .
-
-# Copiamos la carpeta init con el script SQL
-COPY ["init/", "./init/"]
-
+# Copiar el build de Vite (dist) al wwwroot de la API
+COPY --from=vite-build /app/dist ./wwwroot
+EXPOSE 8080
 ENTRYPOINT ["dotnet", "API.Server.dll"]

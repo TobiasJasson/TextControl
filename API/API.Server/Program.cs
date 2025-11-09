@@ -1,58 +1,35 @@
-using Microsoft.OpenApi.Models;
-
 var builder = WebApplication.CreateBuilder(args);
-
-// --------------------------
-// CONFIGURACIÓN DE SERVICIOS
-// --------------------------
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "TextControl API", Version = "v1" });
-});
+builder.Services.AddSwaggerGen();
 
-// Política de CORS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowFrontend",
-        policy => policy
-            .AllowAnyOrigin()   // En Railway usaremos dominio público
-            .AllowAnyMethod()
-            .AllowAnyHeader());
+    options.AddPolicy("AllowVite",
+        policy => policy.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
 });
 
 var app = builder.Build();
 
-// --------------------------
-// CONFIGURACIÓN DEL PIPELINE
-// --------------------------
+app.UseCors("AllowVite");
 
-app.UseCors("AllowFrontend");
-
-// Forzar HTTPS en Railway
-app.UseHttpsRedirection();
-
-// Habilitar archivos estáticos (React build)
-app.UseDefaultFiles();
-app.UseStaticFiles();
-
-// Rutas API
-app.MapControllers();
-
-// Swagger sólo en desarrollo
+// Swagger solo en desarrollo
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-// Si no encuentra una ruta, devuelve el index.html de React
-app.MapFallbackToFile("/index.html");
+// Sirve los archivos del frontend (Vite)
+app.UseDefaultFiles();
+app.UseStaticFiles();
 
-// Railway escucha en el puerto asignado automáticamente
-var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-app.Urls.Add($"http://0.0.0.0:{port}");
+app.MapControllers();
+
+// Si no encuentra una ruta de la API, sirve el index.html (Vite SPA)
+app.MapFallbackToFile("/index.html");
 
 app.Run();
