@@ -1,47 +1,58 @@
-var builder = WebApplication.CreateBuilder(args); 
+using Microsoft.OpenApi.Models;
 
-// Add services to the container.
+var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers(); 
+// --------------------------
+// CONFIGURACIÓN DE SERVICIOS
+// --------------------------
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "TextControl API", Version = "v1" });
+});
 
-builder.Services.AddSwaggerGen(); 
-
-builder.Services.AddCors(options => 
-{ 
-    options.AddPolicy("AllowReact", 
-        policy => policy.WithOrigins("http://localhost:5500") 
-                        .AllowAnyMethod() 
-                        .AllowAnyHeader()); 
-}); 
+// Política de CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy => policy
+            .AllowAnyOrigin()   // En Railway usaremos dominio público
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
 
 var app = builder.Build();
-app.UseCors("AllowReact");
 
-app.UseRouting();
+// --------------------------
+// CONFIGURACIÓN DEL PIPELINE
+// --------------------------
 
-//app.UseEndpoints(endpoints => { 
-app.MapControllers(); 
-//}); 
+app.UseCors("AllowFrontend");
 
-app.UseDefaultFiles(); 
-app.UseStaticFiles(); 
+// Forzar HTTPS en Railway
+app.UseHttpsRedirection();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment()) 
-{ 
-    app.UseSwagger(); 
-    app.UseSwaggerUI(); 
-} 
+// Habilitar archivos estáticos (React build)
+app.UseDefaultFiles();
+app.UseStaticFiles();
 
-app.UseHttpsRedirection(); 
+// Rutas API
+app.MapControllers();
 
+// Swagger sólo en desarrollo
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
+// Si no encuentra una ruta, devuelve el index.html de React
+app.MapFallbackToFile("/index.html");
 
-
-app.MapFallbackToFile("/index.html"); 
+// Railway escucha en el puerto asignado automáticamente
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+app.Urls.Add($"http://0.0.0.0:{port}");
 
 app.Run();

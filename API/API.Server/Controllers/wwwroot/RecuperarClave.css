@@ -1,0 +1,83 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #f5f6fa;
+    padding: 20px;
+}
+    
+
+.card {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+    .card h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+    .input-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #555;
+    }
+
+    .input-group input {
+        width: 100%;
+        padding: 10px 10px 10px 10px; /* espacio para icono del ojo */
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+.eye-icon {
+    position: absolute;
+    top: 70%;
+    right: 5px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #555;
+    font-size: 18px;
+}
+
+.btn-confirm {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+    .btn-confirm:hover {
+        background-color: #0056b3;
+    }
+
+.mensaje {
+    margin-top: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+    .mensaje.error {
+        color: red;
+    }
+
+    .mensaje.exito {
+        color: blue;
+    }
+
