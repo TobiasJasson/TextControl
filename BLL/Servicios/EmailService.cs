@@ -1,12 +1,8 @@
 ﻿using DomainModel;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BLL.Servicios
 {
@@ -15,17 +11,23 @@ namespace BLL.Servicios
         private readonly string fromEmail = ConfigurationManager.AppSettings["EmailSistema"];
         private readonly string fromPassword = ConfigurationManager.AppSettings["PasswordEmailSistema"];
 
+        // URL base del servidor Railway (puede venir de variable de entorno o configuración)
+        private readonly string baseUrl = Environment.GetEnvironmentVariable("RAILWAY_API_URL")
+                                          ?? "https://textcontrol-production.up.railway.app";
+
         public void EnviarRecuperacionClave(Empleados empleado, string token, string nameUser)
         {
             var fromAddress = new MailAddress(fromEmail, "TextControl System");
             var toAddress = new MailAddress(empleado.Gmail, empleado.Nombre + " " + empleado.Apellido);
 
             string subject = "Recuperación de contraseña TextControl";
+            string recoveryUrl = $"{baseUrl}/cambiarClave?usuario={nameUser}&token={token}";
+
             string body = $"Hola {empleado.Nombre} {empleado.Apellido},\n\n" +
-                          "Si has seleccionado la opción recuperar la clave en el sistema TextControl, " +
-                          $"por favor realiza click en el siguiente link para ingresar tu nueva clave:\n" +
-                          $"http://localhost:5500/cambiarClave?usuario={nameUser}&token={token}\n\n" +
-                          "Si no lo has solicitado, por favor ignore este mensaje.";
+                          "Si has solicitado recuperar tu clave en el sistema TextControl, " +
+                          $"por favor haz clic en el siguiente enlace para restablecer tu contraseña:\n\n" +
+                          $"{recoveryUrl}\n\n" +
+                          "Si no lo has solicitado, por favor ignora este mensaje.";
 
             var smtp = new SmtpClient
             {
@@ -45,6 +47,8 @@ namespace BLL.Servicios
             {
                 smtp.Send(message);
             }
+
+            Console.WriteLine($"📧 Email de recuperación enviado a {empleado.Gmail} con link: {recoveryUrl}");
         }
     }
 }

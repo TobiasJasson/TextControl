@@ -1,33 +1,36 @@
 ﻿using DAL.ScriptsSQL;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 namespace UI
 {
     internal static class Program
     {
-        /// <summary>
-        /// Punto de entrada principal para la aplicación.
-        /// </summary>
         [STAThread]
         static void Main()
         {
-            string connStr = "Server=tcp:yamanote.proxy.rlwy.net,58677;Database=SeguridadTexControl;User ID=sa;Password=Qn~KcDQCsGcl6UCOCtGq3ATncJUrAk2k;TrustServerCertificate=True;Encrypt=False;";
-            using (var conn = new SqlConnection(connStr))
+            string connStr = ConfigurationManager.ConnectionStrings["SeguridadTextControlDb"].ConnectionString;
+
+            try
             {
-                conn.Open();
-                Console.WriteLine("✅ Conexión exitosa desde C#!");
+                using (var conn = new SqlConnection(connStr))
+                {
+                    conn.Open();
+                    Console.WriteLine("✅ Conexión local exitosa.");
+                }
             }
-            DatabaseInitializer.Initialize();
-            Console.WriteLine("Base de datos lista.");
+            catch (Exception ex)
+            {
+                Console.WriteLine("❌ Error local: " + ex.Message);
+            }
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Login());
-
         }
     }
 }
