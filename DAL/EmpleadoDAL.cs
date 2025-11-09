@@ -10,7 +10,7 @@ namespace DAL
 {
     public class EmpleadoDAL
     {
-        private readonly Conexion _conexion = new Conexion();
+        private readonly ConexionTextControl _conexion = new ConexionTextControl();
 
         public Empleados GetById(int id)
         {

@@ -8,11 +8,11 @@ using System.Configuration;
 
 namespace DAL
 {
-    public class Conexion
+    public class ConexionTextControl
     {
         private readonly string _connectionString;
 
-        public Conexion()
+        public ConexionTextControl()
         {
             // Lee la cadena de conexión del App.config (ejecutable)
             //_connectionString = ConfigurationManager.ConnectionStrings["TextControlDb"].ConnectionString;

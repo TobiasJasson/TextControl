@@ -56,11 +56,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConexionLogin.cs" />
     <Compile Include="EmpleadoDAL.cs" />
     <Compile Include="Repository\IUsuarioRepository.cs" />
     <Compile Include="ScriptsSQL\DatabaseInitializer.cs" />
     <Compile Include="Repository\UsuarioRepository.cs" />
-    <Compile Include="Conexion.cs" />
+    <Compile Include="ConexionTextControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -74,6 +75,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ScriptsSQL\SeguridadTextControlDB.sql" />
     <Content Include="ScriptsSQL\TextControlDB.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -23,7 +23,7 @@ namespace BLL
             _repo = repo;
         }
 
-        public UsuarioService() : this(new UsuarioRepository())
+        public UsuarioService() : this(new UsuarioRepositorySeguridad())
         {
         }
 
@@ -39,10 +39,10 @@ namespace BLL
             return _repo.GetByName(userName);
         }
 
-        public void SaveRecoveryToken(string username, string token, DateTime expiry)
-        {
-            _repo.SaveRecoveryToken(username, token, expiry);
-        }
+            public void SaveRecoveryToken(string username, string token, DateTime expiry)
+            {
+                _repo.SaveRecoveryToken(username, token, expiry);
+            }
 
         public static string GenerateToken(int length = 32)
         {

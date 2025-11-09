@@ -11,105 +11,57 @@ namespace DAL.ScriptsSQL
 {
     public static class DatabaseInitializer
     {
-        private static string _databaseName = "TextControl";
-
-        // posibles instancias a probar
-        private static readonly string[] PossibleServers = new[]
+        private static readonly string[] PossibleServers =
         {
             @"(localdb)\MSSQLLocalDB",
             @"localhost\SQLEXPRESS",
             @"localhost"
         };
 
+        private static string _dbNegocio = "TextControl";
+        private static string _dbSeguridad = "SeguridadTexControl";
+
         public static void Initialize()
         {
-            // obtener cadena de conexión base de App.config
-            string baseConnection = ConfigurationManager.ConnectionStrings["TextControlDb"].ConnectionString;
+            InitializeDatabase("TextControlDb", _dbNegocio, "TextControlDB.sql");
+            InitializeDatabase("SeguridadTextControlDb", _dbSeguridad, "SeguridadTextControlDB.sql");
+        }
 
-            // encontrar un servidor válido
+        private static void InitializeDatabase(string connectionName, string dbName, string scriptFile)
+        {
+            string baseConnection = ConfigurationManager.ConnectionStrings[connectionName].ConnectionString;
             string workingServer = GetWorkingServer(baseConnection);
 
-            // construir connectionString hacia master
             var builder = new SqlConnectionStringBuilder(baseConnection)
             {
                 DataSource = workingServer,
                 InitialCatalog = "master"
             };
-            string masterConnectionString = builder.ConnectionString;
 
-            // verificar si la base existe
-            if (!DatabaseExists(masterConnectionString, _databaseName))
+            string masterConn = builder.ConnectionString;
+
+            if (!DatabaseExists(masterConn, dbName))
             {
-                // leer script SQL
-                string pathScript = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ScriptsSQL", "TextControlDB.sql");
-                if (!File.Exists(pathScript))
-                    throw new FileNotFoundException("No se encontró el archivo SQL para inicializar la base de datos.", pathScript);
+                string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ScriptsSQL", scriptFile);
+                if (!File.Exists(path))
+                    throw new FileNotFoundException($"No se encontró el script {scriptFile}", path);
 
-                string script = File.ReadAllText(pathScript);
-
-                using (SqlConnection conn = new SqlConnection(masterConnectionString))
-                {
-                    conn.Open();
-
-                    // separar script por líneas
-                    var lines = script.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
-                    StringBuilder sbCommand = new StringBuilder();
-
-                    foreach (var line in lines)
-                    {
-                        // si es un GO (en mayúsculas y solo GO en la línea), ejecutar el bloque actual
-                        if (line.Trim().Equals("GO", StringComparison.OrdinalIgnoreCase))
-                        {
-                            ExecuteSqlBlock(conn, sbCommand);
-                            sbCommand.Clear();
-                        }
-                        else
-                        {
-                            sbCommand.AppendLine(line);
-                        }
-                    }
-
-                    // ejecutar cualquier bloque restante
-                    if (sbCommand.Length > 0)
-                    {
-                        ExecuteSqlBlock(conn, sbCommand);
-                    }
-                }
-
-                Console.WriteLine($"Base de datos '{_databaseName}' creada correctamente.");
+                string script = File.ReadAllText(path);
+                ExecuteSqlScript(masterConn, script, dbName);
+                Console.WriteLine($"✔ Base de datos '{dbName}' creada correctamente.");
             }
             else
             {
-                Console.WriteLine($"Base de datos '{_databaseName}' ya existe. Conexión realizada sin ejecutar scripts.");
+                Console.WriteLine($"ℹ Base de datos '{dbName}' ya existe, se omite creación.");
             }
         }
 
-        private static void ExecuteSqlBlock(SqlConnection conn, StringBuilder sbCommand)
+        private static bool DatabaseExists(string masterConn, string dbName)
         {
-            if (sbCommand.Length == 0) return;
-
-            // obtener nivel de compatibilidad
-            using (SqlCommand cmdLevel = new SqlCommand("SELECT compatibility_level FROM sys.databases WHERE name='master'", conn))
-            {
-                object result = cmdLevel.ExecuteScalar();
-                int level = (result != null && result != DBNull.Value) ? Convert.ToInt32(result) : 150; // fallback a 150 si algo falla
-
-                // reemplazar COMPATIBILITY_LEVEL = 160
-                string commandText = sbCommand.ToString().Replace("COMPATIBILITY_LEVEL = 160", $"COMPATIBILITY_LEVEL = {level}");
-
-                using (SqlCommand cmd = new SqlCommand(commandText, conn))
-                {
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
-
-        private static bool DatabaseExists(string masterConnectionString, string databaseName)
-        {
-            using (var conn = new SqlConnection(masterConnectionString))
+            using (var conn = new SqlConnection(masterConn))
             {
                 conn.Open();
-                using (var cmd = new SqlCommand($"SELECT db_id('{databaseName}')", conn))
+                using (var cmd = new SqlCommand($"SELECT db_id('{dbName}')", conn))
                 {
                     var result = cmd.ExecuteScalar();
                     return result != DBNull.Value && result != null;
@@ -142,17 +94,63 @@ namespace DAL.ScriptsSQL
                 }
             }
 
-            throw new Exception("No se encontró ninguna instancia válida de SQL Server en esta máquina.");
+            throw new Exception("❌ No se encontró ninguna instancia válida de SQL Server.");
+        }
+
+        private static void ExecuteSqlScript(string masterConn, string script, string dbName)
+        {
+            using (var conn = new SqlConnection(masterConn))
+            {
+                conn.Open();
+
+                var lines = script.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+                StringBuilder sb = new StringBuilder();
+
+                foreach (var line in lines)
+                {
+                    if (line.Trim().Equals("GO", StringComparison.OrdinalIgnoreCase))
+                    {
+                        ExecuteBlock(conn, sb, dbName);
+                        sb.Clear();
+                    }
+                    else sb.AppendLine(line);
+                }
+
+                if (sb.Length > 0)
+                    ExecuteBlock(conn, sb, dbName);
+            }
+        }
+
+        private static void ExecuteBlock(SqlConnection conn, StringBuilder sb, string dbName)
+        {
+            if (sb.Length == 0) return;
+
+            using (SqlCommand cmd = new SqlCommand(sb.ToString(), conn))
+            {
+                cmd.ExecuteNonQuery();
+            }
         }
 
         public static string GetConnectionString()
         {
             string baseConnection = ConfigurationManager.ConnectionStrings["TextControlDb"].ConnectionString;
-            string workingServer = GetWorkingServer(baseConnection); // probar servidores
+            string workingServer = GetWorkingServer(baseConnection);
             var builder = new SqlConnectionStringBuilder(baseConnection)
             {
                 DataSource = workingServer,
-                InitialCatalog = _databaseName
+                InitialCatalog = _dbNegocio
+            };
+            return builder.ConnectionString;
+        }
+
+        public static string GetConnectionStringSeguridad()
+        {
+            string baseConnection = ConfigurationManager.ConnectionStrings["SeguridadTextControlDb"].ConnectionString;
+            string workingServer = GetWorkingServer(baseConnection);
+            var builder = new SqlConnectionStringBuilder(baseConnection)
+            {
+                DataSource = workingServer,
+                InitialCatalog = _dbSeguridad
             };
             return builder.ConnectionString;
         }

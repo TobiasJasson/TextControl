@@ -112,13 +112,15 @@ namespace UI
             {
                 var empleadoService = new EmpleadoService();
                 var empleado = empleadoService.GetEmpleadoById(user.IdEmpleado);
+
                 SessionManager.Instance.SetUsuario(user);
                 SessionManager.Instance.SetEmpleado(empleado);
 
                 this.Hide();
-                FormWelcome welcome = new FormWelcome();
-                welcome.ShowDialog();
-                welcome.Hide();
+                using (FormWelcome welcome = new FormWelcome())
+                {
+                    welcome.ShowDialog();
+                }
 
                 try
                 {

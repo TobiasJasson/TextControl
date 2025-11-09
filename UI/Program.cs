@@ -1,9 +1,10 @@
-﻿using System;
+﻿using DAL.ScriptsSQL;
+using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DAL.ScriptsSQL;
 
 namespace UI
 {
@@ -15,6 +16,12 @@ namespace UI
         [STAThread]
         static void Main()
         {
+            string connStr = "Server=tcp:yamanote.proxy.rlwy.net,58677;Database=SeguridadTexControl;User ID=sa;Password=Qn~KcDQCsGcl6UCOCtGq3ATncJUrAk2k;TrustServerCertificate=True;Encrypt=False;";
+            using (var conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+                Console.WriteLine("✅ Conexión exitosa desde C#!");
+            }
             DatabaseInitializer.Initialize();
             Console.WriteLine("Base de datos lista.");
             Application.EnableVisualStyles();

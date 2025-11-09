@@ -8,13 +8,13 @@ using Services.DomainModel;
 
 namespace DAL.Repository
 {
-    public class UsuarioRepository : IUsuarioRepository
+    public class UsuarioRepositorySeguridad : IUsuarioRepository
     {
-        private readonly Conexion _conexion;
+        private readonly ConexionLogin _conexion;
 
-        public UsuarioRepository()
+        public UsuarioRepositorySeguridad()
         {
-            _conexion = new Conexion();
+            _conexion = new ConexionLogin();
         }
 
         public Usuario GetByUserAndPassword(string username, string passwordBase64)
@@ -22,9 +22,11 @@ namespace DAL.Repository
             using (var conn = _conexion.GetConnection())
             {
                 conn.Open();
-                var query = @"SELECT TOP 1 * FROM Usuario 
-                              WHERE UserName_Usuario = @username 
-                              AND Password_Usuario = @password";
+                var query = @"SELECT TOP 1 * 
+                              FROM Usuario 
+                              WHERE UserName = @username 
+                              AND PasswordHash = @password 
+                              AND Activo = 1";
 
                 using (var cmd = new SqlCommand(query, conn))
                 {
@@ -38,10 +40,11 @@ namespace DAL.Repository
                             return new Usuario
                             {
                                 IdUsuario = reader.GetInt32(reader.GetOrdinal("ID_Usuario")),
-                                UserName = reader.GetString(reader.GetOrdinal("UserName_Usuario")),
-                                Password = reader.GetString(reader.GetOrdinal("Password_Usuario")),
-                                EmailRecuperacion = reader.GetString(reader.GetOrdinal("EmailRecuperacion_Usuario")),
-                                IdEmpleado = reader.GetInt32(reader.GetOrdinal("ID_Empleado")),
+                                UserName = reader.GetString(reader.GetOrdinal("UserName")),
+                                Password = reader.GetString(reader.GetOrdinal("PasswordHash")),
+                                EmailRecuperacion = reader.GetString(reader.GetOrdinal("Email")),
+                                IdEmpleado = reader.IsDBNull(reader.GetOrdinal("ID_Empleado")) ? 0 : reader.GetInt32(reader.GetOrdinal("ID_Empleado")),
+                                Activo = reader.GetBoolean(reader.GetOrdinal("Activo")),
                             };
                         }
                     }
@@ -55,7 +58,7 @@ namespace DAL.Repository
             using (var conn = _conexion.GetConnection())
             {
                 conn.Open();
-                var query = @"SELECT TOP 1 * FROM Usuario WHERE UserName_Usuario = @userName";
+                var query = @"SELECT TOP 1 * FROM Usuario WHERE UserName = @userName";
 
                 using (var cmd = new SqlCommand(query, conn))
                 {
@@ -66,9 +69,11 @@ namespace DAL.Repository
                         {
                             return new Usuario
                             {
-                                UserName = reader.GetString(reader.GetOrdinal("UserName_Usuario")),
-                                EmailRecuperacion = reader.GetString(reader.GetOrdinal("EmailRecuperacion_Usuario")),
-                                IdEmpleado = reader.GetInt32(reader.GetOrdinal("ID_Empleado")),
+                                IdUsuario = reader.GetInt32(reader.GetOrdinal("ID_Usuario")),
+                                UserName = reader.GetString(reader.GetOrdinal("UserName")),
+                                EmailRecuperacion = reader.GetString(reader.GetOrdinal("Email")),
+                                IdEmpleado = reader.IsDBNull(reader.GetOrdinal("ID_Empleado")) ? 0 : reader.GetInt32(reader.GetOrdinal("ID_Empleado")),
+                                Activo = reader.GetBoolean(reader.GetOrdinal("Activo"))
                             };
                         }
                     }
@@ -83,14 +88,69 @@ namespace DAL.Repository
             {
                 conn.Open();
                 var query = @"UPDATE Usuario 
-                              SET Password_Usuario = @password 
-                              WHERE UserName_Usuario = @username";
+                              SET PasswordHash = @password 
+                              WHERE UserName = @username";
 
                 using (var cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@password", nuevaClaveBase64);
                     cmd.Parameters.AddWithValue("@username", username);
                     return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+        public Usuario GetByUserNameAndToken(string username, string token)
+        {
+            using (var conn = _conexion.GetConnection())
+            {
+                conn.Open();
+                var query = @"
+            SELECT TOP 1 *
+            FROM Usuario
+            WHERE UserName = @username
+              AND RecoveryToken = @token
+              AND Activo = 1";
+
+                using (var cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@username", username);
+                    cmd.Parameters.AddWithValue("@token", token);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new Usuario
+                            {
+                                IdUsuario = reader.GetInt32(reader.GetOrdinal("ID_Usuario")),
+                                UserName = reader.GetString(reader.GetOrdinal("UserName")),
+                                EmailRecuperacion = reader.GetString(reader.GetOrdinal("Email")),
+                                Password = reader.GetString(reader.GetOrdinal("PasswordHash")),
+                                IdEmpleado = reader.IsDBNull(reader.GetOrdinal("ID_Empleado")) ? 0 : reader.GetInt32(reader.GetOrdinal("ID_Empleado")),
+                                Activo = reader.GetBoolean(reader.GetOrdinal("Activo")),
+                                RecoveryToken = reader.IsDBNull(reader.GetOrdinal("RecoveryToken")) ? null : reader.GetString(reader.GetOrdinal("RecoveryToken")),
+                                RecoveryTokenExpiry = reader.IsDBNull(reader.GetOrdinal("RecoveryTokenExpiry")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("RecoveryTokenExpiry"))
+                            };
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        public void InvalidateRecoveryToken(string username)
+        {
+            using (var conn = _conexion.GetConnection())
+            {
+                conn.Open();
+                var query = @"UPDATE Usuario 
+                      SET RecoveryToken = NULL, RecoveryTokenExpiry = NULL 
+                      WHERE UserName = @username";
+
+                using (var cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@username", username);
+                    cmd.ExecuteNonQuery();
                 }
             }
         }
@@ -102,7 +162,7 @@ namespace DAL.Repository
                 conn.Open();
                 var query = @"UPDATE Usuario 
                               SET RecoveryToken = @token, RecoveryTokenExpiry = @expiry 
-                              WHERE UserName_Usuario = @username";
+                              WHERE UserName = @username";
 
                 using (var cmd = new SqlCommand(query, conn))
                 {
