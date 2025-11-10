@@ -40,7 +40,7 @@ const RecuperarClave = () => {
         }
 
         try {
-            const res = await fetch('https://textcontrol-production.up.railway.app/api/RecuperarClave/cambiarClave', {
+            const res = await fetch('https://localhost:7022/api/RecuperarClave/cambiarClave', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

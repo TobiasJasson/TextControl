@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -22,11 +23,30 @@ namespace BLL.Servicios
 
             string subject = "Recuperación de contraseña TextControl";
             string body = $"Hola {empleado.Nombre} {empleado.Apellido},\n\n" +
-                          "Si has seleccionado la opción recuperar la clave en el sistema TextControl, " +
-                          $"por favor realiza click en el siguiente link para ingresar tu nueva clave:\n" +
+                          "Si has solicitado recuperar tu clave, hacé click en el siguiente enlace:\n" +
                           $"http://localhost:5500/cambiarClave?usuario={nameUser}&token={token}\n\n" +
-                          "Si no lo has solicitado, por favor ignore este mensaje.";
+                          "Este enlace expirará en 20 minutos.";
 
+            // ✅ Guardamos token y hora en la DB
+            string connectionString = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=SeguridadTexControl;Integrated Security=True;TrustServerCertificate=True";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                string update = @"UPDATE Usuario 
+                          SET RecoveryToken = @token, RecoveryTokenExpiry = GETDATE()
+                          WHERE UserName = @userName";
+
+                using (SqlCommand cmd = new SqlCommand(update, conn))
+                {
+                    cmd.Parameters.AddWithValue("@token", token);
+                    cmd.Parameters.AddWithValue("@userName", nameUser);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            // 📧 Enviar mail
             var smtp = new SmtpClient
             {
                 Host = "smtp.gmail.com",

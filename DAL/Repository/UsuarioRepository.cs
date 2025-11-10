@@ -74,6 +74,7 @@ namespace DAL.Repository
                                 EmailRecuperacion = reader.GetString(reader.GetOrdinal("Email")),
                                 IdEmpleado = reader.IsDBNull(reader.GetOrdinal("ID_Empleado")) ? 0 : reader.GetInt32(reader.GetOrdinal("ID_Empleado")),
                                 Activo = reader.GetBoolean(reader.GetOrdinal("Activo"))
+                                
                             };
                         }
                     }

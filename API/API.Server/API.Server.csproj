@@ -10,6 +10,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\assets\index-CfQBUfTx.js" />
+    <Content Remove="wwwroot\assets\index-CKYFrYMY.js" />
+    <Content Remove="wwwroot\assets\index-C_Qvy-6o.css" />
+    <Content Remove="wwwroot\IconNav.png" />
+    <Content Remove="wwwroot\index.html" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy">
       <Version>8.*-*</Version>
     </PackageReference>
@@ -22,6 +30,14 @@
     <ProjectReference Include="..\api.client\api.client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\assets\index-CfQBUfTx.js" />
+    <None Include="wwwroot\assets\index-CKYFrYMY.js" />
+    <None Include="wwwroot\assets\index-C_Qvy-6o.css" />
+    <None Include="wwwroot\IconNav.png" />
+    <None Include="wwwroot\index.html" />
   </ItemGroup>
 
 </Project>

@@ -9,23 +9,31 @@ namespace API.Server.Controllers
     [Route("api/[controller]")]
     public class RecuperarClaveController : ControllerBase
     {
-        [HttpPost]
-        [Route("cambiarClave")]
+        // ✅ Corrige el nombre de la base de datos
+        private readonly string connectionString =
+            @"Data Source=localhost\SQLEXPRESS;Initial Catalog=SeguridadTexControl;Integrated Security=True;Trust Server Certificate=True";
+
+        [HttpPost("cambiarClave")]
         public IActionResult CambiarClave([FromBody] CambiarClaveRequest request)
         {
-            string connectionString = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=TextControl;Integrated Security=True;TrustServerCertificate=True";
+            if (string.IsNullOrEmpty(request.UserName) || string.IsNullOrEmpty(request.Token))
+                return BadRequest("Datos incompletos.");
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
 
-                string query = @"SELECT ID_Usuario FROM Usuario 
-                                 WHERE UserName_Usuario = @username 
-                                   AND RecoveryToken = @token 
-                                   AND RecoveryTokenExpiry > GETDATE()";
+                // ✅ Verifica token y que no haya expirado (20 min)
+                string checkQuery = @"
+                    SELECT ID_Usuario 
+                    FROM Usuario 
+                    WHERE UserName = @username 
+                      AND RecoveryToken = @token 
+                      AND DATEADD(MINUTE, 20, RecoveryTokenExpiry) > GETDATE()";
 
                 int? userId = null;
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+
+                using (SqlCommand cmd = new SqlCommand(checkQuery, conn))
                 {
                     cmd.Parameters.AddWithValue("@username", request.UserName);
                     cmd.Parameters.AddWithValue("@token", request.Token);
@@ -35,15 +43,20 @@ namespace API.Server.Controllers
                 }
 
                 if (userId == null)
-                    return BadRequest("Token inválido o expirado para este usuario.");
+                    return BadRequest("El token es inválido o ha expirado.");
 
+                // ✅ Encripta nueva contraseña (Base64)
                 string passBase64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(request.NuevaClave));
 
-                string update = @"UPDATE Usuario 
-                                  SET Password_Usuario = @pass, RecoveryToken = NULL, RecoveryTokenExpiry = NULL
-                                  WHERE ID_Usuario = @id";
+                // ✅ Actualiza la clave y limpia el token
+                string updateQuery = @"
+                    UPDATE Usuario 
+                    SET PasswordHash = @pass, 
+                        RecoveryToken = NULL, 
+                        RecoveryTokenExpiry = NULL
+                    WHERE ID_Usuario = @id";
 
-                using (SqlCommand cmd = new SqlCommand(update, conn))
+                using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
                 {
                     cmd.Parameters.AddWithValue("@pass", passBase64);
                     cmd.Parameters.AddWithValue("@id", userId.Value);
