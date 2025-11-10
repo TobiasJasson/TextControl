@@ -154,7 +154,7 @@ namespace UI
 
             panelContenido.Controls.Clear();
 
-                bool oscuro = ThemeManager.ModoOscuro;
+            bool oscuro = ThemeManager.ModoOscuro;
             // Mostrar un mensaje o loader temporal
             Label lblCargando = new Label()
             {
@@ -183,9 +183,37 @@ namespace UI
             formConfig.Show();
         }
 
-        private void BtnStock_Click(object sender, EventArgs e)
+        private async void BtnStock_Click(object sender, EventArgs e)
         {
             lblTitle.Text = LanguageManager.Traducir("SideMenu_Stock");
+
+            panelContenido.Controls.Clear();
+
+            bool oscuro = ThemeManager.ModoOscuro;
+            Label lblCargando = new Label()
+            {
+                Text = "Cargando ...",
+                ForeColor = Color.Gray,
+                BackColor = (oscuro == true) ? Color.Black : Color.White,
+                Dock = DockStyle.Fill,
+                TextAlign = ContentAlignment.MiddleCenter
+            };
+            panelContenido.Controls.Add(lblCargando);
+            panelContenido.Refresh();
+
+            await Task.Run(() =>
+            {
+                System.Threading.Thread.Sleep(500);
+            });
+
+            FormStock formStock = new FormStock();
+            formStock.TopLevel = false;
+            formStock.FormBorderStyle = FormBorderStyle.None;
+            formStock.Dock = DockStyle.Fill;
+
+            panelContenido.Controls.Clear();
+            panelContenido.Controls.Add(formStock);
+            formStock.Show();
         }
 
         private void BtnReporte_Click(object sender, EventArgs e)

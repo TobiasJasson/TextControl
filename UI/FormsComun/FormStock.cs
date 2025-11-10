@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Services.EmpleadosForms
+namespace UI.FormsComun
 {
-    public partial class HomeEmpleado : Form
+    public partial class FormStock : Form
     {
-        public HomeEmpleado()
+        public FormStock()
         {
             InitializeComponent();
         }
