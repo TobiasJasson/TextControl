@@ -97,7 +97,7 @@ namespace UI
             else if (rol == 2)//Empleado
             {
                 Btn_Usuarios.Visible = false;
-                BtnReporte.Visible = true;
+                BtnReporte.Visible = false;
             }
 
             LanguageManager.CargarUltimoIdioma();
@@ -158,7 +158,7 @@ namespace UI
             // Mostrar un mensaje o loader temporal
             Label lblCargando = new Label()
             {
-                Text = "Cargando configuración...",
+                Text = "Cargando ...",
                 ForeColor = Color.Gray,
                 BackColor = (oscuro == true) ?Color.Black :Color.White,
                 Dock = DockStyle.Fill,
@@ -259,6 +259,9 @@ namespace UI
             }
         }
 
-        
+        private void lblTitle_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -58,9 +58,9 @@
             this.Panel_Title.Controls.Add(this.Btn_Cerrar);
             this.Panel_Title.Controls.Add(this.lblTitle);
             this.Panel_Title.Location = new System.Drawing.Point(1, 1);
-            this.Panel_Title.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Panel_Title.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Panel_Title.Name = "Panel_Title";
-            this.Panel_Title.Size = new System.Drawing.Size(986, 52);
+            this.Panel_Title.Size = new System.Drawing.Size(1315, 64);
             this.Panel_Title.TabIndex = 2;
             this.Panel_Title.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel_Title_Paint);
             this.Panel_Title.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel_MouseDown);
@@ -74,10 +74,10 @@
             this.Btn_MenuDesplegable.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.Btn_MenuDesplegable.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_MenuDesplegable.ForeColor = System.Drawing.Color.Silver;
-            this.Btn_MenuDesplegable.Location = new System.Drawing.Point(8, 6);
-            this.Btn_MenuDesplegable.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Btn_MenuDesplegable.Location = new System.Drawing.Point(11, 7);
+            this.Btn_MenuDesplegable.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Btn_MenuDesplegable.Name = "Btn_MenuDesplegable";
-            this.Btn_MenuDesplegable.Size = new System.Drawing.Size(44, 41);
+            this.Btn_MenuDesplegable.Size = new System.Drawing.Size(59, 50);
             this.Btn_MenuDesplegable.TabIndex = 17;
             this.Btn_MenuDesplegable.UseVisualStyleBackColor = true;
             this.Btn_MenuDesplegable.Click += new System.EventHandler(this.Btn_MenuDesplegable_Click);
@@ -91,10 +91,10 @@
             this.BtnMaximize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnMaximize.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnMaximize.ForeColor = System.Drawing.Color.Silver;
-            this.BtnMaximize.Location = new System.Drawing.Point(914, 6);
-            this.BtnMaximize.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BtnMaximize.Location = new System.Drawing.Point(1219, 7);
+            this.BtnMaximize.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BtnMaximize.Name = "BtnMaximize";
-            this.BtnMaximize.Size = new System.Drawing.Size(28, 35);
+            this.BtnMaximize.Size = new System.Drawing.Size(37, 43);
             this.BtnMaximize.TabIndex = 12;
             this.BtnMaximize.Text = "⬜ ";
             this.BtnMaximize.UseVisualStyleBackColor = true;
@@ -109,10 +109,10 @@
             this.Btn_Minimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_Minimize.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_Minimize.ForeColor = System.Drawing.Color.Silver;
-            this.Btn_Minimize.Location = new System.Drawing.Point(882, 6);
-            this.Btn_Minimize.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Btn_Minimize.Location = new System.Drawing.Point(1176, 7);
+            this.Btn_Minimize.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Btn_Minimize.Name = "Btn_Minimize";
-            this.Btn_Minimize.Size = new System.Drawing.Size(28, 35);
+            this.Btn_Minimize.Size = new System.Drawing.Size(37, 43);
             this.Btn_Minimize.TabIndex = 11;
             this.Btn_Minimize.Text = "-";
             this.Btn_Minimize.UseVisualStyleBackColor = true;
@@ -127,10 +127,10 @@
             this.Btn_Cerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_Cerrar.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_Cerrar.ForeColor = System.Drawing.Color.Silver;
-            this.Btn_Cerrar.Location = new System.Drawing.Point(950, 6);
-            this.Btn_Cerrar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Btn_Cerrar.Location = new System.Drawing.Point(1267, 7);
+            this.Btn_Cerrar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Btn_Cerrar.Name = "Btn_Cerrar";
-            this.Btn_Cerrar.Size = new System.Drawing.Size(28, 35);
+            this.Btn_Cerrar.Size = new System.Drawing.Size(37, 43);
             this.Btn_Cerrar.TabIndex = 10;
             this.Btn_Cerrar.Text = "X";
             this.Btn_Cerrar.UseVisualStyleBackColor = true;
@@ -141,12 +141,12 @@
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Century Gothic", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.ForeColor = System.Drawing.Color.Silver;
-            this.lblTitle.Location = new System.Drawing.Point(104, 6);
-            this.lblTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTitle.Location = new System.Drawing.Point(139, 7);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(208, 33);
+            this.lblTitle.Size = new System.Drawing.Size(255, 40);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Menu Principal";
+            this.lblTitle.Click += new System.EventHandler(this.lblTitle_Click);
             // 
             // panel_Menu
             // 
@@ -159,10 +159,10 @@
             this.panel_Menu.Controls.Add(this.BtnConfig);
             this.panel_Menu.Controls.Add(this.Btn_LogOut);
             this.panel_Menu.Controls.Add(this.BtnCambiarIdioma);
-            this.panel_Menu.Location = new System.Drawing.Point(1, 51);
-            this.panel_Menu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel_Menu.Location = new System.Drawing.Point(1, 63);
+            this.panel_Menu.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel_Menu.Name = "panel_Menu";
-            this.panel_Menu.Size = new System.Drawing.Size(211, 548);
+            this.panel_Menu.Size = new System.Drawing.Size(281, 674);
             this.panel_Menu.TabIndex = 5;
             this.panel_Menu.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Menu_Paint);
             // 
@@ -173,10 +173,10 @@
             this.Btn_Venta.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.Btn_Venta.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_Venta.ForeColor = System.Drawing.Color.Silver;
-            this.Btn_Venta.Location = new System.Drawing.Point(8, 15);
-            this.Btn_Venta.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Btn_Venta.Location = new System.Drawing.Point(11, 18);
+            this.Btn_Venta.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Btn_Venta.Name = "Btn_Venta";
-            this.Btn_Venta.Size = new System.Drawing.Size(199, 48);
+            this.Btn_Venta.Size = new System.Drawing.Size(265, 59);
             this.Btn_Venta.TabIndex = 17;
             this.Btn_Venta.Text = "Nuevo Pedido";
             this.Btn_Venta.UseVisualStyleBackColor = true;
@@ -189,10 +189,10 @@
             this.Btn_Usuarios.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.Btn_Usuarios.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_Usuarios.ForeColor = System.Drawing.Color.Silver;
-            this.Btn_Usuarios.Location = new System.Drawing.Point(8, 68);
-            this.Btn_Usuarios.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Btn_Usuarios.Location = new System.Drawing.Point(11, 84);
+            this.Btn_Usuarios.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Btn_Usuarios.Name = "Btn_Usuarios";
-            this.Btn_Usuarios.Size = new System.Drawing.Size(199, 48);
+            this.Btn_Usuarios.Size = new System.Drawing.Size(265, 59);
             this.Btn_Usuarios.TabIndex = 12;
             this.Btn_Usuarios.Text = "Usuario";
             this.Btn_Usuarios.UseVisualStyleBackColor = true;
@@ -205,10 +205,10 @@
             this.BtnReporte.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnReporte.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnReporte.ForeColor = System.Drawing.Color.Silver;
-            this.BtnReporte.Location = new System.Drawing.Point(8, 126);
-            this.BtnReporte.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BtnReporte.Location = new System.Drawing.Point(11, 155);
+            this.BtnReporte.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BtnReporte.Name = "BtnReporte";
-            this.BtnReporte.Size = new System.Drawing.Size(199, 52);
+            this.BtnReporte.Size = new System.Drawing.Size(265, 64);
             this.BtnReporte.TabIndex = 13;
             this.BtnReporte.Text = "Reporte";
             this.BtnReporte.UseVisualStyleBackColor = true;
@@ -221,10 +221,10 @@
             this.BtnStock.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnStock.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnStock.ForeColor = System.Drawing.Color.Silver;
-            this.BtnStock.Location = new System.Drawing.Point(8, 187);
-            this.BtnStock.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BtnStock.Location = new System.Drawing.Point(11, 230);
+            this.BtnStock.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BtnStock.Name = "BtnStock";
-            this.BtnStock.Size = new System.Drawing.Size(199, 48);
+            this.BtnStock.Size = new System.Drawing.Size(265, 59);
             this.BtnStock.TabIndex = 14;
             this.BtnStock.Text = "Stock";
             this.BtnStock.UseVisualStyleBackColor = true;
@@ -237,10 +237,10 @@
             this.BtnConfig.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnConfig.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnConfig.ForeColor = System.Drawing.Color.Silver;
-            this.BtnConfig.Location = new System.Drawing.Point(8, 251);
-            this.BtnConfig.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BtnConfig.Location = new System.Drawing.Point(11, 309);
+            this.BtnConfig.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BtnConfig.Name = "BtnConfig";
-            this.BtnConfig.Size = new System.Drawing.Size(199, 56);
+            this.BtnConfig.Size = new System.Drawing.Size(265, 69);
             this.BtnConfig.TabIndex = 15;
             this.BtnConfig.Text = "Configuraciones";
             this.BtnConfig.UseVisualStyleBackColor = true;
@@ -254,10 +254,10 @@
             this.Btn_LogOut.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.Btn_LogOut.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_LogOut.ForeColor = System.Drawing.Color.Silver;
-            this.Btn_LogOut.Location = new System.Drawing.Point(8, 473);
-            this.Btn_LogOut.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Btn_LogOut.Location = new System.Drawing.Point(11, 582);
+            this.Btn_LogOut.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Btn_LogOut.Name = "Btn_LogOut";
-            this.Btn_LogOut.Size = new System.Drawing.Size(102, 33);
+            this.Btn_LogOut.Size = new System.Drawing.Size(136, 41);
             this.Btn_LogOut.TabIndex = 16;
             this.Btn_LogOut.Text = "Salir";
             this.Btn_LogOut.UseVisualStyleBackColor = true;
@@ -272,10 +272,10 @@
             this.BtnCambiarIdioma.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(118)))), ((int)(((byte)(126)))));
             this.BtnCambiarIdioma.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnCambiarIdioma.ForeColor = System.Drawing.Color.LightGray;
-            this.BtnCambiarIdioma.Location = new System.Drawing.Point(142, 473);
-            this.BtnCambiarIdioma.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BtnCambiarIdioma.Location = new System.Drawing.Point(189, 582);
+            this.BtnCambiarIdioma.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BtnCambiarIdioma.Name = "BtnCambiarIdioma";
-            this.BtnCambiarIdioma.Size = new System.Drawing.Size(57, 32);
+            this.BtnCambiarIdioma.Size = new System.Drawing.Size(76, 39);
             this.BtnCambiarIdioma.TabIndex = 11;
             this.BtnCambiarIdioma.Text = "ES-AR";
             this.BtnCambiarIdioma.UseVisualStyleBackColor = false;
@@ -290,24 +290,24 @@
             // 
             // panelContenido
             // 
-            this.panelContenido.Location = new System.Drawing.Point(212, 53);
-            this.panelContenido.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelContenido.Location = new System.Drawing.Point(283, 65);
+            this.panelContenido.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelContenido.Name = "panelContenido";
-            this.panelContenido.Size = new System.Drawing.Size(774, 546);
+            this.panelContenido.Size = new System.Drawing.Size(1032, 672);
             this.panelContenido.TabIndex = 6;
             this.panelContenido.Paint += new System.Windows.Forms.PaintEventHandler(this.panelContenido_Paint);
             // 
             // MainScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(986, 600);
+            this.ClientSize = new System.Drawing.Size(1315, 738);
             this.Controls.Add(this.panelContenido);
             this.Controls.Add(this.panel_Menu);
             this.Controls.Add(this.Panel_Title);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainScreen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MainScreen";

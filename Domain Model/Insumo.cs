@@ -8,13 +8,17 @@ namespace Domain_Model
 {
     public class Insumo
     {
-        public int IdInsumo { get; set; }
-        public int IdTipoInsumo { get; set; }
-        public string DescripcionInsumo { get; set; }
-        public string ColorInsumo { get; set; }
-        public string DiseñoInsumo { get; set; }
-        public int CantidadPorUnidad { get; set; }
+        public int ID_Insumo { get; set; }
+        public string TipoInsumo { get; set; }
+        public string Nombre { get; set; }
+        public string Color { get; set; }
+        public string Diseno { get; set; }
+        public double? CantidadPorUnidad { get; set; }
         public int StockActual { get; set; }
         public int StockMinimo { get; set; }
+        public int CantidadMovimiento { get; set; }
+        public DateTime? UltimaSalida { get; set; }
+        public string TipoMovimiento { get; set; }
+        public double PrecioUnitario { get; set; }
     }
 }

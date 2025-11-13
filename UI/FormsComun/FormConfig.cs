@@ -15,8 +15,6 @@ namespace UI.FormsComun
 {
     public partial class FormConfig : Form
     {
-        //private readonly UsuarioService _usuarioService = new UsuarioService();
-        //private readonly EmpleadoService _empleadoService = new EmpleadoService();
         private UsuarioService _usuarioService;
         private EmpleadoService _empleadoService;
 
@@ -48,9 +46,9 @@ namespace UI.FormsComun
 
             await InicializarAsync();
 
-            //bool oscuro = ThemeManager.ModoOscuro;
-            //Switch_modoOscuro.Checked = oscuro;
-            //ThemeManager.ApplyTheme(this, oscuro);
+            bool oscuro = ThemeManager.ModoOscuro;
+            Switch_modoOscuro.Checked = oscuro;
+            ThemeManager.ApplyTheme(this, oscuro);
 
             //LanguageManager.CargarUltimoIdioma();
             //ActualizarTraducciones();

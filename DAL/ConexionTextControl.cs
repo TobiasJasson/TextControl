@@ -14,14 +14,32 @@ namespace DAL
 
         public ConexionTextControl()
         {
-            // Lee la cadena de conexión del App.config (ejecutable)
-            //_connectionString = ConfigurationManager.ConnectionStrings["TextControlDb"].ConnectionString;
-            _connectionString = DAL.ScriptsSQL.DatabaseInitializer.GetConnectionString();
-        }
+             _connectionString = ConfigurationManager.ConnectionStrings["TextControlDb"].ConnectionString;
 
+            //_connectionString = DAL.ScriptsSQL.DatabaseInitializer.GetConnectionString();
+        }
         public SqlConnection GetConnection()
         {
-            return new SqlConnection(_connectionString);
+            var conn = new SqlConnection(_connectionString);
+            conn.Open();
+            return conn;
+        }
+
+        public bool ProbarConexion()
+        {
+            try
+            {
+                using (var conn = new SqlConnection(_connectionString))
+                {
+                    conn.Open();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error de conexión: " + ex.Message);
+                return false;
+            }
         }
     }
 }

@@ -16,7 +16,7 @@ namespace DAL
         {
             using (var conn = _conexion.GetConnection())
             {
-                conn.Open();
+                //conn.Open();
                 var query = "SELECT TOP 1 * FROM Empleado WHERE Id_empleado = @id";
                 using (var cmd = new SqlCommand(query, conn))
                 {

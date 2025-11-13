@@ -59,6 +59,7 @@
     <Compile Include="EmpleadoService.cs" />
     <Compile Include="Interfaces\IUsuarioService.cs" />
     <Compile Include="Servicios\EmailService.cs" />
+    <Compile Include="Servicios\InsumoService.cs" />
     <Compile Include="Servicios\PasswordHelper.cs" />
     <Compile Include="SessionManager.cs" />
     <Compile Include="UsuarioService.cs" />

@@ -54,5 +54,14 @@
   "BtnCambiarClave": "Change Password",
   "Lbl_titleCambioMail": "Change Email",
   "Txt_NuevoMail": "New Email",
-  "Btn_NuevoMail": "Change Email"
+  "Btn_NuevoMail": "Change Email",
+
+  //Stock
+  "Stock_Tipo": "Type",
+  "Stock_Nombre": "Name",
+  "Stock_Color": "Color",
+  "Stock_StockActual": "Current Stock",
+  "Stock_StockMinimo": "Minimum Stock",
+  "Stock_UltimaSalida": "Last Output",
+  "Stock_PrecioUnitario": "Unit Price"
 }
