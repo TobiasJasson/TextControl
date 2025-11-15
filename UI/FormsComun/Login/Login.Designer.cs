@@ -112,7 +112,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(214, 269);
             this.panel1.TabIndex = 4;
-            this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
+            this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Panel1_MouseDown);
             // 
             // pictureBox1
             // 
@@ -239,7 +239,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TextControl";
             this.Load += new System.EventHandler(this.Login_Load);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Panel1_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);

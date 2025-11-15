@@ -145,9 +145,12 @@
     <Reference Include="RJCodeAdvance.RJControls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\RJCodeAdvance.RJControls.1.0.0\lib\net45\RJCodeAdvance.RJControls.dll</HintPath>
     </Reference>
+    <Reference Include="ServiceStack.Text, Version=6.0.0.0, Culture=neutral, PublicKeyToken=02c12cbda47e6587, processorArchitecture=MSIL">
+      <HintPath>..\packages\ServiceStack.Text.8.10.0\lib\net472\ServiceStack.Text.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Buffers, Version=4.0.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Buffers.4.6.0\lib\net462\System.Buffers.dll</HintPath>
+    <Reference Include="System.Buffers, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.6.1\lib\net462\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
@@ -158,15 +161,15 @@
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=8.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.8.0.1\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
-    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    <Reference Include="System.Memory, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.6.3\lib\net462\System.Memory.dll</HintPath>
     </Reference>
     <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    <Reference Include="System.Numerics.Vectors, Version=4.1.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.6.1\lib\net462\System.Numerics.Vectors.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.1.0\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.1.2\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.0.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
@@ -200,63 +203,91 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdminForms\HomeAdmin.cs">
+    <Compile Include="FormsComun\Config\FormConfig.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AdminForms\HomeAdmin.Designer.cs">
-      <DependentUpon>HomeAdmin.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormsComun\FormConfig.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormsComun\FormConfig.Designer.cs">
+    <Compile Include="FormsComun\Config\FormConfig.Designer.cs">
       <DependentUpon>FormConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormsComun\FormStock.cs">
+    <Compile Include="FormsComun\NuevoPedidos\FormNuevoPedido.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormsComun\FormStock.Designer.cs">
+    <Compile Include="FormsComun\NuevoPedidos\FormNuevoPedido.Designer.cs">
+      <DependentUpon>FormNuevoPedido.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsComun\OrdenesPedidos\FormDetallesPedidos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsComun\OrdenesPedidos\FormDetallesPedidos.Designer.cs">
+      <DependentUpon>FormDetallesPedidos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsComun\OrdenesPedidos\FormOrdenesPedidos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsComun\OrdenesPedidos\FormOrdenesPedidos.Designer.cs">
+      <DependentUpon>FormOrdenesPedidos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsComun\Stock\FormAgregarStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsComun\Stock\FormAgregarStock.Designer.cs">
+      <DependentUpon>FormAgregarStock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsComun\Stock\FormStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsComun\Stock\FormStock.Designer.cs">
       <DependentUpon>FormStock.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormWelcome.cs">
+    <Compile Include="FormsComun\Login\FormWelcome.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormWelcome.Designer.cs">
+    <Compile Include="FormsComun\Login\FormWelcome.Designer.cs">
       <DependentUpon>FormWelcome.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LocalWidget\BaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LocalWidget\BaseForm.Designer.cs">
+      <DependentUpon>BaseForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LocalWidget\CustomMessageBox.cs" />
     <Compile Include="LocalWidget\ExcelExporter.cs" />
-    <Compile Include="Login.cs">
+    <Compile Include="FormsComun\Login\Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login.Designer.cs">
+    <Compile Include="FormsComun\Login\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainScreen.cs">
+    <Compile Include="FormsComun\MainScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainScreen.Designer.cs">
+    <Compile Include="FormsComun\MainScreen.Designer.cs">
       <DependentUpon>MainScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="LocalWidget\Navigator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AdminForms\HomeAdmin.resx">
-      <DependentUpon>HomeAdmin.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormsComun\FormConfig.resx">
+    <EmbeddedResource Include="FormsComun\Config\FormConfig.resx">
       <DependentUpon>FormConfig.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormsComun\FormStock.resx">
+    <EmbeddedResource Include="FormsComun\Stock\FormAgregarStock.resx">
+      <DependentUpon>FormAgregarStock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsComun\Stock\FormStock.resx">
       <DependentUpon>FormStock.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormWelcome.resx">
+    <EmbeddedResource Include="FormsComun\Login\FormWelcome.resx">
       <DependentUpon>FormWelcome.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login.resx">
+    <EmbeddedResource Include="FormsComun\Login\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainScreen.resx">
+    <EmbeddedResource Include="FormsComun\MainScreen.resx">
       <DependentUpon>MainScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LocalWidget\BaseForm.resx">
+      <DependentUpon>BaseForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -306,5 +337,6 @@
   <ItemGroup>
     <None Include="Resources\Icon_MenuDesplegable.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

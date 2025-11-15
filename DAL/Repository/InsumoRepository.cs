@@ -1,6 +1,7 @@
 ﻿using Domain_Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -24,14 +25,36 @@ namespace DAL.Repository
             using (SqlConnection con = _conexion.GetConnection())
             {
                 string query = @"
-                    SELECT i.ID_Insumo, ti.Descripcion AS TipoInsumo, i.Nombre, i.Color, i.Diseno, 
-                           i.CantidadPorUnidad, i.StockActual, i.StockMinimo, 
-                           m.Cantidad AS CantidadMovimiento, m.Fecha, tm.Descripcion AS TipoMovimiento
-                    FROM Insumo i
-                    INNER JOIN Movimiento_Stock m ON i.ID_Insumo = m.ID_Insumo
-                    INNER JOIN Tipo_Movimiento tm ON m.ID_TipoMovimiento = tm.ID_TipoMovimiento
-                    INNER JOIN Tipo_Insumo ti ON i.ID_TipoInsumo = ti.ID_TipoInsumo
-                    WHERE tm.Descripcion = 'Salida'";
+                SELECT 
+                    i.ID_Insumo,
+                    ti.Descripcion AS TipoInsumo,
+                    i.Nombre,
+                    c.ID_Color,
+                    c.Descripcion_Color AS ColorDescripcion,
+                    i.CantidadPorUnidad,
+                    i.StockActual,
+                    i.StockMinimo,
+                    m.Cantidad AS CantidadMovimiento,
+                    m.Fecha AS UltimaSalida,
+                    tm.Descripcion AS TipoMovimiento,
+                    i.PrecioUnitario
+                FROM Insumo i
+                LEFT JOIN Color c ON i.ID_Color = c.ID_Color
+                LEFT JOIN (
+                    SELECT 
+                        ID_Insumo,
+                        Cantidad,
+                        Fecha,
+                        ID_TipoMovimiento
+                    FROM Movimiento_Stock
+                    WHERE ID_TipoMovimiento = (
+                        SELECT TOP 1 ID_TipoMovimiento 
+                        FROM Tipo_Movimiento 
+                        WHERE Descripcion = 'Salida'
+                    )
+                ) m ON i.ID_Insumo = m.ID_Insumo
+                LEFT JOIN Tipo_Movimiento tm ON m.ID_TipoMovimiento = tm.ID_TipoMovimiento
+                INNER JOIN Tipo_Insumo ti ON i.ID_TipoInsumo = ti.ID_TipoInsumo";
 
                 using (SqlCommand cmd = new SqlCommand(query, con))
                 using (SqlDataReader dr = cmd.ExecuteReader())
@@ -43,15 +66,15 @@ namespace DAL.Repository
                             ID_Insumo = dr.GetInt32(0),
                             TipoInsumo = dr.IsDBNull(1) ? null : dr.GetString(1),
                             Nombre = dr.IsDBNull(2) ? null : dr.GetString(2),
-                            Color = dr.IsDBNull(3) ? null : dr.GetString(3),
-                            Diseno = dr.IsDBNull(4) ? null : dr.GetString(4),
+                            ID_Color = dr.IsDBNull(3) ? (int?)null : dr.GetInt32(3),
+                            ColorNombre = dr.IsDBNull(4) ? null : dr.GetString(4),
                             CantidadPorUnidad = dr.IsDBNull(5) ? (double?)null : Convert.ToDouble(dr[5]),
                             StockActual = dr.GetInt32(6),
                             StockMinimo = dr.GetInt32(7),
-                            CantidadMovimiento = dr.GetInt32(8),
+                            CantidadMovimiento = dr.IsDBNull(8) ? 0 : dr.GetInt32(8),
                             UltimaSalida = dr.IsDBNull(9) ? (DateTime?)null : dr.GetDateTime(9),
                             TipoMovimiento = dr.IsDBNull(10) ? null : dr.GetString(10),
-                            PrecioUnitario = CalcularPrecioEstimado(dr.IsDBNull(2) ? null : dr.GetString(2))
+                            PrecioUnitario = dr.IsDBNull(11) ? 0 : Convert.ToDouble(dr[11])
                         });
                     }
                 }
@@ -70,11 +93,11 @@ namespace DAL.Repository
                 string query = @"
                     UPDATE Insumo SET 
                         Nombre = @Nombre,
-                        Color = @Color,
-                        Diseno = @Diseno,
+                        ID_Color = @Color,
                         CantidadPorUnidad = @CantidadPorUnidad,
                         StockActual = @StockActual,
                         StockMinimo = @StockMinimo,
+                        PrecioUnitario = @PrecioUnitario,
                         ID_TipoInsumo = (
                             SELECT TOP 1 ID_TipoInsumo 
                             FROM Tipo_Insumo 
@@ -84,29 +107,71 @@ namespace DAL.Repository
 
                 using (SqlCommand cmd = new SqlCommand(query, con))
                 {
-                    cmd.Parameters.AddWithValue("@Nombre", insumo.Nombre ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@Color", insumo.Color ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@Diseno", insumo.Diseno ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@CantidadPorUnidad", insumo.CantidadPorUnidad ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@StockActual", insumo.StockActual);
-                    cmd.Parameters.AddWithValue("@StockMinimo", insumo.StockMinimo);
-                    cmd.Parameters.AddWithValue("@TipoInsumo", insumo.TipoInsumo ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@ID_Insumo", insumo.ID_Insumo);
+                    cmd.Parameters.Add("@Nombre", SqlDbType.VarChar, 100).Value =
+                        string.IsNullOrWhiteSpace(insumo.Nombre) ? (object)DBNull.Value : insumo.Nombre;
+
+                    cmd.Parameters.Add("@Color", SqlDbType.Int).Value =
+                        insumo.ID_Color.HasValue ? (object)insumo.ID_Color.Value : DBNull.Value;
+
+                    cmd.Parameters.Add("@CantidadPorUnidad", SqlDbType.Float).Value =
+                        insumo.CantidadPorUnidad.HasValue ? (object)insumo.CantidadPorUnidad.Value : DBNull.Value;
+
+                    cmd.Parameters.Add("@StockActual", SqlDbType.Int).Value = insumo.StockActual;
+                    cmd.Parameters.Add("@StockMinimo", SqlDbType.Int).Value = insumo.StockMinimo;
+                    cmd.Parameters.Add("@PrecioUnitario", SqlDbType.Float).Value = insumo.PrecioUnitario;
+
+                    cmd.Parameters.Add("@TipoInsumo", SqlDbType.VarChar, 50).Value =
+                        string.IsNullOrWhiteSpace(insumo.TipoInsumo) ? (object)DBNull.Value : insumo.TipoInsumo;
+
+                    cmd.Parameters.Add("@ID_Insumo", SqlDbType.Int).Value = insumo.ID_Insumo;
+
                     cmd.ExecuteNonQuery();
                 }
             }
         }
 
-        private double CalcularPrecioEstimado(string nombre)
+        public void EliminarInsumo(int idInsumo)
         {
-            if (string.IsNullOrEmpty(nombre)) return 0;
-            string lower = nombre.ToLower();
+            using (SqlConnection con = _conexion.GetConnection())
+            {
+                string queryMovimientos = "DELETE FROM Movimiento_Stock WHERE ID_Insumo = @ID_Insumo";
+                using (SqlCommand cmdMov = new SqlCommand(queryMovimientos, con))
+                {
+                    cmdMov.Parameters.Add("@ID_Insumo", SqlDbType.Int).Value = idInsumo;
+                    cmdMov.ExecuteNonQuery();
+                }
 
-            if (lower.Contains("hilo")) return 250;
-            if (lower.Contains("botón")) return 500;
-            if (lower.Contains("tela")) return 1500;
-            if (lower.Contains("cuero")) return 2500;
-            return 100;
+                string queryInsumo = "DELETE FROM Insumo WHERE ID_Insumo = @ID_Insumo";
+                using (SqlCommand cmdIns = new SqlCommand(queryInsumo, con))
+                {
+                    cmdIns.Parameters.Add("@ID_Insumo", SqlDbType.Int).Value = idInsumo;
+                    cmdIns.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public int CrearInsumo(InsumoInsert insumo)
+        {
+            using (var con = _conexion.GetConnection())
+            {
+                string query = @"
+                    INSERT INTO Insumo
+                    (ID_TipoInsumo, Nombre, ID_Color, CantidadPorUnidad, StockActual, StockMinimo, PrecioUnitario)
+                    OUTPUT INSERTED.ID_Insumo
+                    VALUES (@tipo, @nombre, @color, @cpu, @actual, @min, @precio)";
+
+                SqlCommand cmd = new SqlCommand(query, con);
+
+                cmd.Parameters.AddWithValue("@tipo", insumo.ID_TipoInsumo);
+                cmd.Parameters.AddWithValue("@nombre", insumo.Nombre);
+                cmd.Parameters.AddWithValue("@color", insumo.ID_Color.HasValue ? (object)insumo.ID_Color.Value : DBNull.Value);
+                cmd.Parameters.AddWithValue("@cpu", insumo.CantidadPorUnidad);
+                cmd.Parameters.AddWithValue("@actual", insumo.StockActual);
+                cmd.Parameters.AddWithValue("@min", insumo.StockMinimo);
+                cmd.Parameters.AddWithValue("@precio", insumo.PrecioUnitario);
+
+                return (int)cmd.ExecuteScalar();
+            }
         }
     }
 }

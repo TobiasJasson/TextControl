@@ -66,6 +66,7 @@ namespace UI.FormsComun
                 _empleadoService = new EmpleadoService();
             });
 
+
             // Luego seguís con el resto sin bloquear
             bool oscuro = ThemeManager.ModoOscuro;
             Switch_modoOscuro.Checked = oscuro;
@@ -121,11 +122,12 @@ namespace UI.FormsComun
             base.OnFormClosed(e);
         }
 
+
         private void Switch_modoOscuro_CheckedChanged(object sender, EventArgs e)
         {
-            bool oscuro = Switch_modoOscuro.Checked;
-            ThemeManager.SaveTheme(oscuro);
-            ThemeManager.ApplyTheme(this, oscuro);
+            bool nuevoEstado = Switch_modoOscuro.Checked;
+            ThemeManager.SaveTheme(nuevoEstado);
+            ThemeManager.ApplyTheme(this, nuevoEstado);
         }
 
         private void Btn_NuevoMail_Click(object sender, EventArgs e)

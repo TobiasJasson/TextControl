@@ -17,10 +17,10 @@
   ///WELCOME
   "Welcome_Bienvenido": "Bienvenido",
 
-  //Dashboard
+  ///Dashboard
   "Dashboard_Titulo": "Menu Principal",
 
-  //SideMenu
+  ///SideMenu
   "SideMenu_Usuario": "Usuario",
   "SideMenu_Reporte": "Reporte",
   "SideMenu_Stock": "Stock",
@@ -30,10 +30,16 @@
   "SideMenu_UsuarioLogOut": "Cerrar Sesión",
   "SideMenu_BoxLogOut": "¿Qué desea hacer?",
 
-  //Message Box
+  ///Message Box
   "Btn_CerrarSesion": "Cerrar Sesion",
   "Btn_Salir": "Salir",
   "Btn_Cancel": "Cancelar",
+  "ExporCorrectamente": "Archivo exportado correctamente.",
+  "Msg_SeleccionEditar": "Seleccione un producto para poder editar.",
+  "Msg_SeleccionEliminar": "Seleccione un producto para darlo de baja.",
+  "Msg_EditadoCorrectamente": "Producto actualizado correctamente.",
+  "Msg_ConfirmarEliminar": "¿Desea eliminar este producto?",
+  "Msg_EliminadoCorrectamente": "Producto eliminado correctamente.",
 
   "Config_MensajeClaveVacia": "Debe ingresar una nueva contraseña.",
   "Config_MensajeClavesNoCoinciden": "Las contraseñas no coinciden.",
@@ -44,7 +50,7 @@
   "Config_MensajeMailCambiado": "El correo electrónico se actualizó correctamente",
   "Config_MensajeErrorMail": "Ocurrió un error al intentar actualizar el correo electrónico.",
 
-  //Configuraciones
+  ///Configuraciones
   "Lbl_ModoOscuro": "Modo Oscuro",
   "Lbl_titleCambiarClave": "Cambiar Contraseña",
   "TxtNuevaClave": "Contraseña Nueva",
@@ -54,12 +60,32 @@
   "Txt_NuevoMail": "Nuevo Email",
   "Btn_NuevoMail": "Cambiar Email",
 
-  //Stock
+  ///Stock
   "Stock_Tipo": "Tipo",
   "Stock_Nombre": "Nombre",
   "Stock_Color": "Color",
   "Stock_StockActual": "Stock Actual",
   "Stock_StockMinimo": "Stock Mínimo",
   "Stock_UltimaSalida": "Última Salida",
-  "Stock_PrecioUnitario": "Precio Unitario"
+  "Stock_PrecioUnitario": "Precio Unitario",
+  "Boton_Editar": "Editar",
+  "Boton_Agregar": "Agregar",
+  "Boton_Eliminar": "Eliminar",
+  "Boton_Exportar": "Exportar",
+  "Boton_Actualizar": "Actualizar",
+  "Mensaje_Atencion": "Atención",
+  "Mensaje_Exito": "Éxito",
+  "Mensaje_Confirmacion": "Confirmación",
+  ///Agregar Stock
+  "Title_AgregarStock": "Nuevo Stock",
+  "Lbl_titleTipoStock": "Tipo Stock",
+  "Lbl_NombreInsumo": "Nombre Insumo",
+  "Lbl_ColorInsumo": "Color Insumo",
+  "Lbl_StockMinimo": "Stock Minimo",
+  "Lbl_StockActual": "Stock Actual",
+  "Lbl_CantidadUnidad": "Cantidad por unidad",
+  "Lbl_PrecioUnitario": "Precio Unitario",
+  "Btn_Aceptar": "Aceptar",
+  "Msg_StockCreado": "Stock creado correctamente."
+
 }

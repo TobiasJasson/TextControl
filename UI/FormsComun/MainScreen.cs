@@ -20,8 +20,10 @@ namespace UI
     {
         public MainScreen()
         {
+            ThemeManager.LoadTheme();
             InitializeComponent();
         }
+
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
 
@@ -155,7 +157,6 @@ namespace UI
             panelContenido.Controls.Clear();
 
             bool oscuro = ThemeManager.ModoOscuro;
-            // Mostrar un mensaje o loader temporal
             Label lblCargando = new Label()
             {
                 Text = "Cargando ...",
@@ -172,7 +173,6 @@ namespace UI
                 System.Threading.Thread.Sleep(500);
             });
 
-            // Ahora crear el form ya en el hilo UI
             FormConfig formConfig = new FormConfig();
             formConfig.TopLevel = false;
             formConfig.FormBorderStyle = FormBorderStyle.None;
@@ -180,6 +180,7 @@ namespace UI
 
             panelContenido.Controls.Clear();
             panelContenido.Controls.Add(formConfig);
+            ThemeManager.ApplyTheme(formConfig, ThemeManager.ModoOscuro);
             formConfig.Show();
         }
 
@@ -213,6 +214,7 @@ namespace UI
 
             panelContenido.Controls.Clear();
             panelContenido.Controls.Add(formStock);
+            ThemeManager.ApplyTheme(formStock, ThemeManager.ModoOscuro);
             formStock.Show();
         }
 

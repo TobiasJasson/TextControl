@@ -1,9 +1,10 @@
-﻿using System;
+﻿using DAL.ScriptsSQL;
+using Services.Conifguraciones;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DAL.ScriptsSQL;
 
 namespace UI
 {
@@ -19,6 +20,7 @@ namespace UI
             Console.WriteLine("Base de datos lista.");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            ThemeManager.LoadTheme();
             Application.Run(new Login());
 
         }

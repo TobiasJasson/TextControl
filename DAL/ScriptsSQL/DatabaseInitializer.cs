@@ -43,7 +43,7 @@ namespace DAL.ScriptsSQL
             if (!DatabaseExists(masterConn, dbName))
             {
                 string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ScriptsSQL", scriptFile);
-                if (!File.Exists(path))
+                if (!File.Exists(path)) 
                     throw new FileNotFoundException($"No se encontró el script {scriptFile}", path);
 
                 string script = File.ReadAllText(path);

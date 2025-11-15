@@ -32,6 +32,8 @@
             this.Btn_Exportar = new System.Windows.Forms.Button();
             this.Btn_Editar = new System.Windows.Forms.Button();
             this.Txt_Buscador = new System.Windows.Forms.TextBox();
+            this.Btn_Agregar = new System.Windows.Forms.Button();
+            this.Btn_Eliminar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DataGrid_Stock)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,7 +50,7 @@
             // 
             // Btn_Exportar
             // 
-            this.Btn_Exportar.Location = new System.Drawing.Point(644, 45);
+            this.Btn_Exportar.Location = new System.Drawing.Point(662, 45);
             this.Btn_Exportar.Name = "Btn_Exportar";
             this.Btn_Exportar.Size = new System.Drawing.Size(126, 30);
             this.Btn_Exportar.TabIndex = 1;
@@ -58,7 +60,7 @@
             // 
             // Btn_Editar
             // 
-            this.Btn_Editar.Location = new System.Drawing.Point(440, 45);
+            this.Btn_Editar.Location = new System.Drawing.Point(263, 45);
             this.Btn_Editar.Name = "Btn_Editar";
             this.Btn_Editar.Size = new System.Drawing.Size(126, 30);
             this.Btn_Editar.TabIndex = 2;
@@ -68,17 +70,39 @@
             // 
             // Txt_Buscador
             // 
-            this.Txt_Buscador.Location = new System.Drawing.Point(29, 53);
+            this.Txt_Buscador.Location = new System.Drawing.Point(3, 49);
             this.Txt_Buscador.Name = "Txt_Buscador";
             this.Txt_Buscador.Size = new System.Drawing.Size(242, 22);
             this.Txt_Buscador.TabIndex = 3;
             this.Txt_Buscador.TextChanged += new System.EventHandler(this.Txt_Buscador_TextChanged);
+            // 
+            // Btn_Agregar
+            // 
+            this.Btn_Agregar.Location = new System.Drawing.Point(395, 45);
+            this.Btn_Agregar.Name = "Btn_Agregar";
+            this.Btn_Agregar.Size = new System.Drawing.Size(126, 30);
+            this.Btn_Agregar.TabIndex = 4;
+            this.Btn_Agregar.Text = "Agregar";
+            this.Btn_Agregar.UseVisualStyleBackColor = true;
+            this.Btn_Agregar.Click += new System.EventHandler(this.Btn_Agregar_Click);
+            // 
+            // Btn_Eliminar
+            // 
+            this.Btn_Eliminar.Location = new System.Drawing.Point(527, 45);
+            this.Btn_Eliminar.Name = "Btn_Eliminar";
+            this.Btn_Eliminar.Size = new System.Drawing.Size(126, 30);
+            this.Btn_Eliminar.TabIndex = 5;
+            this.Btn_Eliminar.Text = "Eliminar";
+            this.Btn_Eliminar.UseVisualStyleBackColor = true;
+            this.Btn_Eliminar.Click += new System.EventHandler(this.Btn_Eliminar_Click);
             // 
             // FormStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.Btn_Eliminar);
+            this.Controls.Add(this.Btn_Agregar);
             this.Controls.Add(this.Txt_Buscador);
             this.Controls.Add(this.Btn_Editar);
             this.Controls.Add(this.Btn_Exportar);
@@ -100,5 +124,7 @@
         private System.Windows.Forms.Button Btn_Exportar;
         private System.Windows.Forms.Button Btn_Editar;
         private System.Windows.Forms.TextBox Txt_Buscador;
+        private System.Windows.Forms.Button Btn_Agregar;
+        private System.Windows.Forms.Button Btn_Eliminar;
     }
 }

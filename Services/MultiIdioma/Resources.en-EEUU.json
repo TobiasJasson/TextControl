@@ -17,11 +17,11 @@
   ///WELCOME
   "Welcome_Bienvenido": "Welcome",
 
-  //Dashboard
+  ///Dashboard
   "Dashboard_Titulo": "Main Menu",
 
 
-  //SideMenu
+  ///SideMenu
   "SideMenu_Usuario": "User",
   "SideMenu_Reporte": "Report",
   "SideMenu_Stock": "Stock",
@@ -32,10 +32,16 @@
   "SideMenu_BoxLogOut": "What would you like to do?",
 
 
-  //Message Box
+  ///Message Box
   "Btn_CerrarSesion": "log out",
   "Btn_Salir": "Exit",
   "Btn_Cancel": "Cancel",
+  "ExporCorrectamente": "File exported successfully.",
+  "Msg_SeleccionEditar": "Select a product to edit.",
+  "Msg_SeleccionEliminar": "Select a product to remove.",
+  "Msg_EditadoCorrectamente": "Product successfully updated.",
+  "Msg_ConfirmarEliminar": "Do you want to delete this product?",
+  "Msg_EliminadoCorrectamente": "Product deleted successfully.",
 
   "Config_MensajeClaveVacia": "You must enter a new password.",
   "Config_MensajeClavesNoCoinciden": "Passwords do not match.",
@@ -46,7 +52,7 @@
   "Config_MensajeMailCambiado": "Email updated successfully",
   "Config_MensajeErrorMail": "An error occurred while updating the email address.",
 
-  //Configuraciones
+  ///Configuraciones
   "Lbl_ModoOscuro": "Dark Mode",
   "Lbl_titleCambiarClave": "Change Password",
   "TxtNuevaClave": "New Password",
@@ -56,12 +62,31 @@
   "Txt_NuevoMail": "New Email",
   "Btn_NuevoMail": "Change Email",
 
-  //Stock
+  ///Stock
   "Stock_Tipo": "Type",
   "Stock_Nombre": "Name",
   "Stock_Color": "Color",
   "Stock_StockActual": "Current Stock",
   "Stock_StockMinimo": "Minimum Stock",
   "Stock_UltimaSalida": "Last Output",
-  "Stock_PrecioUnitario": "Unit Price"
+  "Stock_PrecioUnitario": "Unit Price",
+  "Boton_Editar": "Edit",
+  "Boton_Actualizar": "Update",
+  "Boton_Agregar": "Add",
+  "Boton_Eliminar": "Delete",
+  "Boton_Exportar": "Export",
+  "Mensaje_Atencion": "Warning",
+  "Mensaje_Exito": "Success",
+  "Mensaje_Confirmacion": "Confirmation",
+  ///Agregar Stock
+  "Title_AgregarStock": "New Stock",
+  "Lbl_titleTipoStock": "Stock Type",
+  "Lbl_NombreInsumo": "Input Name",
+  "Lbl_ColorInsumo": "Input Color",
+  "Lbl_StockMinimo": "Minimum Stock",
+  "Lbl_StockActual": "Actual Stock",
+  "Lbl_CantidadUnidad": "Quantity per Unit",
+  "Lbl_PrecioUnitario": "Unit Price",
+  "Btn_Aceptar": "Accept",
+  "Msg_StockCreado": "Stock created successfully."
 }

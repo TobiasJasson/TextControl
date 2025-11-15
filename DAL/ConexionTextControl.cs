@@ -16,7 +16,6 @@ namespace DAL
         {
              _connectionString = ConfigurationManager.ConnectionStrings["TextControlDb"].ConnectionString;
 
-            //_connectionString = DAL.ScriptsSQL.DatabaseInitializer.GetConnectionString();
         }
         public SqlConnection GetConnection()
         {

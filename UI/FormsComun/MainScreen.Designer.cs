@@ -323,14 +323,14 @@
         #endregion
 
         private System.Windows.Forms.Panel Panel_Title;
-        private System.Windows.Forms.Label lblTitle;
+        public System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Panel panel_Menu;
         private System.Windows.Forms.Button Btn_Minimize;
         private System.Windows.Forms.Button Btn_Cerrar;
         private System.Windows.Forms.Button BtnMaximize;
         private System.Windows.Forms.Button Btn_MenuDesplegable;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panelContenido;
+        public System.Windows.Forms.Panel panelContenido;
         public System.Windows.Forms.Button Btn_Usuarios;
         public System.Windows.Forms.Button BtnCambiarIdioma;
         public System.Windows.Forms.Button BtnReporte;

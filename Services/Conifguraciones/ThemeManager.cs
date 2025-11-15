@@ -36,7 +36,7 @@ namespace Services.Conifguraciones
             }
             catch
             {
-                _modoOscuro = false; // valor por defecto
+                _modoOscuro = false;
             }
         }
 
