@@ -89,7 +89,7 @@
   <ItemGroup>
     <Compile Include="Cliente.cs" />
     <Compile Include="ColorModel.cs" />
-    <Compile Include="Empleados.cs" />
+    <Compile Include="Empleado.cs" />
     <Compile Include="Insumo.cs" />
     <Compile Include="Movimiento.cs" />
     <Compile Include="NotifyStock.cs" />

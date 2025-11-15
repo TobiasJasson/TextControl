@@ -14,7 +14,7 @@ namespace BLL
         private static SessionManager _instance;
 
         public Usuario UsuarioActual { get; private set; }
-        public Empleados EmpleadoActual { get; private set; }
+        public Empleado EmpleadoActual { get; private set; }
 
         private SessionManager() { }
 
@@ -32,6 +32,6 @@ namespace BLL
         public void SetUsuario(Usuario usuario) => UsuarioActual = usuario;
 
         // Corrige el typo: SetEmpleado en lugar de SetEmpeleado
-        public void SetEmpleado(Empleados empleado) => EmpleadoActual = empleado;
+        public void SetEmpleado(Empleado empleado) => EmpleadoActual = empleado;
     }
 }

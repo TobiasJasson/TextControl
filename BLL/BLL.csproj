@@ -95,7 +95,7 @@
     <Compile Include="Servicios\PasswordHelper.cs" />
     <Compile Include="Servicios\TipoInsumoService.cs" />
     <Compile Include="SessionManager.cs" />
-    <Compile Include="UsuarioService.cs" />
+    <Compile Include="Servicios\UsuarioService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

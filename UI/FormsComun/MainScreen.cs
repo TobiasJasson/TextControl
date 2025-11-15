@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UI.FormsComun;
+using UI.FormsComun.Admin;
 using UI.LocalWidget;
 
 namespace UI
@@ -223,9 +224,37 @@ namespace UI
             lblTitle.Text = LanguageManager.Traducir("SideMenu_Reporte");  
         }
 
-        private void Btn_Usuarios_Click(object sender, EventArgs e)
+        private async void Btn_Usuarios_Click(object sender, EventArgs e)
         {
             lblTitle.Text = LanguageManager.Traducir("SideMenu_Usuario");
+            panelContenido.Controls.Clear();
+
+            bool oscuro = ThemeManager.ModoOscuro;
+            Label lblCargando = new Label()
+            {
+                Text = "Cargando ...",
+                ForeColor = Color.Gray,
+                BackColor = (oscuro == true) ? Color.Black : Color.White,
+                Dock = DockStyle.Fill,
+                TextAlign = ContentAlignment.MiddleCenter
+            };
+            panelContenido.Controls.Add(lblCargando);
+            panelContenido.Refresh();
+
+            await Task.Run(() =>
+            {
+                System.Threading.Thread.Sleep(500);
+            });
+
+            FormControlEmpleado formEmpleado = new FormControlEmpleado();
+            formEmpleado.TopLevel = false;
+            formEmpleado.FormBorderStyle = FormBorderStyle.None;
+            formEmpleado.Dock = DockStyle.Fill;
+
+            panelContenido.Controls.Clear();
+            panelContenido.Controls.Add(formEmpleado);
+            ThemeManager.ApplyTheme(formEmpleado, ThemeManager.ModoOscuro);
+            formEmpleado.Show();
         }
 
         private void Btn_Venta_Click(object sender, EventArgs e)

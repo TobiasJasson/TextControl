@@ -1,4 +1,5 @@
 ﻿using DomainModel;
+using OfficeOpenXml.FormulaParsing.LexicalAnalysis;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -16,37 +17,37 @@ namespace BLL.Servicios
         private readonly string fromEmail = ConfigurationManager.AppSettings["EmailSistema"];
         private readonly string fromPassword = ConfigurationManager.AppSettings["PasswordEmailSistema"];
 
-        public void EnviarRecuperacionClave(Empleados empleado, string token, string nameUser)
+        public void EnviarBienvenida(Empleado empleado, string userName, int idEmpleado, string token)
         {
-            var fromAddress = new MailAddress(fromEmail, "TextControl System");
-            var toAddress = new MailAddress(empleado.Gmail, empleado.Nombre + " " + empleado.Apellido);
+            string subject = "Bienvenido a TextControl";
+            string body = $"Usted ha sido incluido en el equipo de TextControl.\n" +
+                          $"Use el siguiente link para crear su clave:\n" +
+                          $"http://localhost:5500/cambiarClave?id={idEmpleado}&token={token}\n\n" +
+                          $"Su usuario será: {userName}";
 
+            GuardarToken(userName, token);
+
+            EnviarCorreo(empleado.Gmail, empleado.Nombre, empleado.Apellido, subject, body);
+        }
+
+        public void EnviarRecuperacionClave(Empleado empleado, string token, string userName)
+        {
             string subject = "Recuperación de contraseña TextControl";
             string body = $"Hola {empleado.Nombre} {empleado.Apellido},\n\n" +
-                          "Si has solicitado recuperar tu clave, hacé click en el siguiente enlace:\n" +
-                          $"http://localhost:5500/cambiarClave?usuario={nameUser}&token={token}\n\n" +
+                          "Si has solicitado recuperar tu clave, haz click en el siguiente enlace:\n" +
+                          $"http://localhost:5500/cambiarClave?usuario={userName}&token={token}\n\n" +
                           "Este enlace expirará en 20 minutos.";
 
-            // ✅ Guardamos token y hora en la DB
-            string connectionString = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=SeguridadTexControl;Integrated Security=True;TrustServerCertificate=True";
+            GuardarToken(userName, token);
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                conn.Open();
+            EnviarCorreo(empleado.Gmail, empleado.Nombre, empleado.Apellido, subject, body);
+        }
 
-                string update = @"UPDATE Usuario 
-                          SET RecoveryToken = @token, RecoveryTokenExpiry = GETDATE()
-                          WHERE UserName = @userName";
+        private void EnviarCorreo(string emailDestino, string nombre, string apellido, string subject, string body)
+        {
+            var fromAddress = new MailAddress(fromEmail, "TextControl System");
+            var toAddress = new MailAddress(emailDestino, $"{nombre} {apellido}");
 
-                using (SqlCommand cmd = new SqlCommand(update, conn))
-                {
-                    cmd.Parameters.AddWithValue("@token", token);
-                    cmd.Parameters.AddWithValue("@userName", nameUser);
-                    cmd.ExecuteNonQuery();
-                }
-            }
-
-            // 📧 Enviar mail
             var smtp = new SmtpClient
             {
                 Host = "smtp.gmail.com",
@@ -66,5 +67,26 @@ namespace BLL.Servicios
                 smtp.Send(message);
             }
         }
+
+        private void GuardarToken(string userName, string token)
+        {
+            string connectionString = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=SeguridadTexControl;Integrated Security=True;TrustServerCertificate=True";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string update = @"UPDATE Usuario 
+                                  SET RecoveryToken = @token, RecoveryTokenExpiry = DATEADD(MINUTE, 20, GETDATE())
+                                  WHERE UserName = @userName";
+
+                using (SqlCommand cmd = new SqlCommand(update, conn))
+                {
+                    cmd.Parameters.AddWithValue("@token", token);
+                    cmd.Parameters.AddWithValue("@userName", userName);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
     }
 }

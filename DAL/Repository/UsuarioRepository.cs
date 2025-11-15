@@ -1,176 +1,147 @@
-﻿using System;
+﻿using DomainModel;
+using Services.DomainModel;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Services.DomainModel;
 
 namespace DAL.Repository
 {
-    public class UsuarioRepositorySeguridad : IUsuarioRepository
+    public class UsuarioRepository
     {
         private readonly ConexionLogin _conexion;
 
-        public UsuarioRepositorySeguridad()
+        public UsuarioRepository()
         {
             _conexion = new ConexionLogin();
         }
 
-        public Usuario GetByUserAndPassword(string username, string passwordBase64)
+        public DataTable ObtenerUsuarios()
         {
-            using (var conn = _conexion.GetConnection())
+            using (var con = _conexion.GetConnection())
             {
-                conn.Open();
-                var query = @"SELECT TOP 1 * 
-                              FROM Usuario 
-                              WHERE UserName = @username 
-                              AND PasswordHash = @password 
-                              AND Activo = 1";
+                con.Open();
+                var query = "SELECT * FROM vw_UsuariosPermisosCompleta";
 
-                using (var cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@username", username);
-                    cmd.Parameters.AddWithValue("@password", passwordBase64);
+                SqlDataAdapter da = new SqlDataAdapter(query, con);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
 
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            return new Usuario
-                            {
-                                IdUsuario = reader.GetInt32(reader.GetOrdinal("ID_Usuario")),
-                                UserName = reader.GetString(reader.GetOrdinal("UserName")),
-                                Password = reader.GetString(reader.GetOrdinal("PasswordHash")),
-                                EmailRecuperacion = reader.GetString(reader.GetOrdinal("Email")),
-                                IdEmpleado = reader.IsDBNull(reader.GetOrdinal("ID_Empleado")) ? 0 : reader.GetInt32(reader.GetOrdinal("ID_Empleado")),
-                                Activo = reader.GetBoolean(reader.GetOrdinal("Activo")),
-                            };
-                        }
-                    }
-                }
-            }
-            return null;
-        }
-
-        public Usuario GetByName(string userName)
-        {
-            using (var conn = _conexion.GetConnection())
-            {
-                conn.Open();
-                var query = @"SELECT TOP 1 * FROM Usuario WHERE UserName = @userName";
-
-                using (var cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@userName", userName);
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            return new Usuario
-                            {
-                                IdUsuario = reader.GetInt32(reader.GetOrdinal("ID_Usuario")),
-                                UserName = reader.GetString(reader.GetOrdinal("UserName")),
-                                EmailRecuperacion = reader.GetString(reader.GetOrdinal("Email")),
-                                IdEmpleado = reader.IsDBNull(reader.GetOrdinal("ID_Empleado")) ? 0 : reader.GetInt32(reader.GetOrdinal("ID_Empleado")),
-                                Activo = reader.GetBoolean(reader.GetOrdinal("Activo"))
-                                
-                            };
-                        }
-                    }
-                }
-            }
-            return null;
-        }
-
-        public bool ActualizarClave(string username, string nuevaClaveBase64)
-        {
-            using (var conn = _conexion.GetConnection())
-            {
-                conn.Open();
-                var query = @"UPDATE Usuario 
-                              SET PasswordHash = @password 
-                              WHERE UserName = @username";
-
-                using (var cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@password", nuevaClaveBase64);
-                    cmd.Parameters.AddWithValue("@username", username);
-                    return cmd.ExecuteNonQuery() > 0;
-                }
+                return dt;
             }
         }
-        public Usuario GetByUserNameAndToken(string username, string token)
+
+        public int CrearEmpleadoYUsuario(Empleado emp, Usuario usu, int idRol)
         {
-            using (var conn = _conexion.GetConnection())
+            using (var con = _conexion.GetConnection())
             {
-                conn.Open();
-                var query = @"
-            SELECT TOP 1 *
-            FROM Usuario
-            WHERE UserName = @username
-              AND RecoveryToken = @token
-              AND Activo = 1";
+                con.Open();
 
-                using (var cmd = new SqlCommand(query, conn))
+                SqlTransaction tx = con.BeginTransaction();
+                try
                 {
-                    cmd.Parameters.AddWithValue("@username", username);
-                    cmd.Parameters.AddWithValue("@token", token);
+                    string q1 = @"INSERT INTO Empleado (Nombre, Apellido, DNI, NumeroContacto, Email)
+                                  VALUES (@n, @a, @dni, @num, @mail);
+                                  SELECT SCOPE_IDENTITY();";
 
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            return new Usuario
-                            {
-                                IdUsuario = reader.GetInt32(reader.GetOrdinal("ID_Usuario")),
-                                UserName = reader.GetString(reader.GetOrdinal("UserName")),
-                                EmailRecuperacion = reader.GetString(reader.GetOrdinal("Email")),
-                                Password = reader.GetString(reader.GetOrdinal("PasswordHash")),
-                                IdEmpleado = reader.IsDBNull(reader.GetOrdinal("ID_Empleado")) ? 0 : reader.GetInt32(reader.GetOrdinal("ID_Empleado")),
-                                Activo = reader.GetBoolean(reader.GetOrdinal("Activo")),
-                                RecoveryToken = reader.IsDBNull(reader.GetOrdinal("RecoveryToken")) ? null : reader.GetString(reader.GetOrdinal("RecoveryToken")),
-                                RecoveryTokenExpiry = reader.IsDBNull(reader.GetOrdinal("RecoveryTokenExpiry")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("RecoveryTokenExpiry"))
-                            };
-                        }
-                    }
+                    var c1 = new SqlCommand(q1, con, tx);
+                    c1.Parameters.AddWithValue("@n", emp.Nombre);
+                    c1.Parameters.AddWithValue("@a", emp.Apellido);
+                    c1.Parameters.AddWithValue("@dni", emp.DNI);
+                    c1.Parameters.AddWithValue("@num", emp.Contacto);
+                    c1.Parameters.AddWithValue("@mail", emp.Gmail);
+
+                    int idEmpleado = Convert.ToInt32(c1.ExecuteScalar());
+
+                    string q2 = @"INSERT INTO Usuario (UserName, PasswordHash, Email, ID_Empleado, Activo)
+                                  VALUES (@u, @p, @e, @idEmp, @ac);
+                                  SELECT SCOPE_IDENTITY();";
+
+                    var c2 = new SqlCommand(q2, con, tx);
+                    c2.Parameters.AddWithValue("@u", usu.UserName);
+                    c2.Parameters.AddWithValue("@p", usu.Password);
+                    c2.Parameters.AddWithValue("@e", usu.EmailRecuperacion);
+                    c2.Parameters.AddWithValue("@idEmp", idEmpleado);
+                    c2.Parameters.AddWithValue("@ac", usu.Activo);
+
+                    int idUsuario = Convert.ToInt32(c2.ExecuteScalar());
+
+                    string q3 = @"INSERT INTO UsuarioFamilia (ID_Usuario, ID_Familia)
+                                  VALUES (@u, @f)";
+
+                    var c3 = new SqlCommand(q3, con, tx);
+                    c3.Parameters.AddWithValue("@u", idUsuario);
+                    c3.Parameters.AddWithValue("@f", idRol);
+                    c3.ExecuteNonQuery();
+
+                    tx.Commit();
+                    return idUsuario;
                 }
-            }
-            return null;
-        }
-
-        public void InvalidateRecoveryToken(string username)
-        {
-            using (var conn = _conexion.GetConnection())
-            {
-                conn.Open();
-                var query = @"UPDATE Usuario 
-                      SET RecoveryToken = NULL, RecoveryTokenExpiry = NULL 
-                      WHERE UserName = @username";
-
-                using (var cmd = new SqlCommand(query, conn))
+                catch
                 {
-                    cmd.Parameters.AddWithValue("@username", username);
-                    cmd.ExecuteNonQuery();
+                    tx.Rollback();
+                    throw;
                 }
             }
         }
 
-        public void SaveRecoveryToken(string username, string token, DateTime expiry)
+        public bool EliminarUsuario(int idUsuario)
         {
-            using (var conn = _conexion.GetConnection())
+            using (var con = _conexion.GetConnection())
             {
-                conn.Open();
-                var query = @"UPDATE Usuario 
-                              SET RecoveryToken = @token, RecoveryTokenExpiry = @expiry 
-                              WHERE UserName = @username";
+                con.Open();
 
-                using (var cmd = new SqlCommand(query, conn))
+                string q = "DELETE FROM Usuario WHERE ID_Usuario = @id";
+
+                var cmd = new SqlCommand(q, con);
+                cmd.Parameters.AddWithValue("@id", idUsuario);
+
+                return cmd.ExecuteNonQuery() > 0;
+            }
+        }
+
+        public void ActualizarEmpleadoYUsuario(Empleado emp, Usuario usu)
+        {
+            using (var con = _conexion.GetConnection())
+            {
+                con.Open();
+
+                SqlTransaction tx = con.BeginTransaction();
+                try
                 {
-                    cmd.Parameters.AddWithValue("@token", token);
-                    cmd.Parameters.AddWithValue("@expiry", expiry);
-                    cmd.Parameters.AddWithValue("@username", username);
-                    cmd.ExecuteNonQuery();
+                    string q1 = @"UPDATE Empleado
+                                  SET Nombre=@n, Apellido=@a, DNI=@dni,
+                                      NumeroContacto=@num, Email=@mail
+                                  WHERE ID_Empleado=@id";
+
+                    var c1 = new SqlCommand(q1, con, tx);
+                    c1.Parameters.AddWithValue("@n", emp.Nombre);
+                    c1.Parameters.AddWithValue("@a", emp.Apellido);
+                    c1.Parameters.AddWithValue("@dni", emp.DNI);
+                    c1.Parameters.AddWithValue("@num", emp.Contacto);
+                    c1.Parameters.AddWithValue("@mail", emp.Gmail);
+                    c1.Parameters.AddWithValue("@id", emp.IdEmpleado);
+                    c1.ExecuteNonQuery();
+
+                    string q2 = @"UPDATE Usuario
+                                  SET Email=@mailUsu, Activo=@ac
+                                  WHERE ID_Usuario=@idUsu";
+
+                    var c2 = new SqlCommand(q2, con, tx);
+                    c2.Parameters.AddWithValue("@mailUsu", usu.EmailRecuperacion);
+                    c2.Parameters.AddWithValue("@ac", usu.Activo);
+                    c2.Parameters.AddWithValue("@idUsu", usu.IdUsuario);
+                    c2.ExecuteNonQuery();
+
+                    tx.Commit();
+                }
+                catch
+                {
+                    tx.Rollback();
+                    throw;
                 }
             }
         }

@@ -12,7 +12,7 @@ namespace DAL
     {
         private readonly ConexionTextControl _conexion = new ConexionTextControl();
 
-        public Empleados GetById(int id)
+        public Empleado GetById(int id)
         {
             using (var conn = _conexion.GetConnection())
             {
@@ -25,7 +25,7 @@ namespace DAL
                     {
                         if (reader.Read())
                         {
-                            return new Empleados
+                            return new Empleado
                             {
                                 IdEmpleado = (int)reader["ID_Empleado"],
                                 Nombre = reader["Nombre_Empleado"].ToString(),

@@ -203,6 +203,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormsComun\Admin\FormControlEmpleado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsComun\Admin\FormControlEmpleado.Designer.cs">
+      <DependentUpon>FormControlEmpleado.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormsComun\Config\FormConfig.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -268,6 +274,9 @@
     <Compile Include="LocalWidget\Navigator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormsComun\Admin\FormControlEmpleado.resx">
+      <DependentUpon>FormControlEmpleado.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormsComun\Config\FormConfig.resx">
       <DependentUpon>FormConfig.cs</DependentUpon>
     </EmbeddedResource>

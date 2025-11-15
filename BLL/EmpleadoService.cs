@@ -12,7 +12,7 @@ namespace BLL
     {
         private readonly EmpleadoDAL _empleadoDAO = new EmpleadoDAL();
 
-        public Empleados GetEmpleadoById(int id)
+        public Empleado GetEmpleadoById(int id)
         {
             return _empleadoDAO.GetById(id);
         }
