@@ -10,13 +10,13 @@ namespace DAL
 {
     public class EmpleadoDAL
     {
-        private readonly ConexionTextControl _conexion = new ConexionTextControl();
+        private readonly ConexionLogin _conexion = new ConexionLogin();
 
         public Empleado GetById(int id)
         {
             using (var conn = _conexion.GetConnection())
             {
-                //conn.Open();
+                conn.Open();
                 var query = "SELECT TOP 1 * FROM Empleado WHERE Id_empleado = @id";
                 using (var cmd = new SqlCommand(query, conn))
                 {
@@ -28,11 +28,11 @@ namespace DAL
                             return new Empleado
                             {
                                 IdEmpleado = (int)reader["ID_Empleado"],
-                                Nombre = reader["Nombre_Empleado"].ToString(),
-                                Apellido = reader["Apellido_Empleado"].ToString(),
-                                Gmail = reader["Gmail_Empleado"].ToString(),
-                                DNI = reader["DNI_Empleado"].ToString(),
-                                Contacto = reader["Contacto_Empleado"].ToString(),
+                                Nombre = reader["Nombre"].ToString(),
+                                Apellido = reader["Apellido"].ToString(),
+                                Gmail = reader["Email"].ToString(),
+                                DNI = reader["DNI"].ToString(),
+                                Contacto = reader["NumeroContacto"].ToString(),
                                 IdRol = (int)reader["ID_Rol"],
                             };
                         }

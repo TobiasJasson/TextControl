@@ -22,7 +22,7 @@ namespace BLL.Servicios
             string subject = "Bienvenido a TextControl";
             string body = $"Usted ha sido incluido en el equipo de TextControl.\n" +
                           $"Use el siguiente link para crear su clave:\n" +
-                          $"http://localhost:5500/cambiarClave?id={idEmpleado}&token={token}\n\n" +
+                          $"http://localhost:5500/cambiarClave?usuario={userName}&token={token}\n\n" +
                           $"Su usuario será: {userName}";
 
             GuardarToken(userName, token);

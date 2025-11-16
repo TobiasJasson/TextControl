@@ -51,7 +51,7 @@ namespace UI.FormsComun.Stock
             TraducirUI();
             AplicarTema();
                 CBX_TipoInsumo.TextUpdate += CBX_TipoInsumo_TextUpdate;
-                CargarColores();
+            CargarColores();
                 CargarTiposInsumo();
                 CBX_TipoInsumo.DropDownStyle = ComboBoxStyle.DropDown;
 
@@ -154,7 +154,10 @@ namespace UI.FormsComun.Stock
                               .Select(t => new TipoInsumo { Descripcion = t })
                               .ToList();
 
-            lista.Insert(0, new TipoInsumo { ID_TipoInsumo = 0, Descripcion = "" });
+            lista.Insert(0, new TipoInsumo { 
+                ID_TipoInsumo = 0, 
+                Descripcion = texto
+            });
 
             int pos = CBX_TipoInsumo.SelectionStart;
 
@@ -165,21 +168,37 @@ namespace UI.FormsComun.Stock
             CBX_TipoInsumo.EndUpdate();
 
             CBX_TipoInsumo.DroppedDown = true;
+            CBX_TipoInsumo.Text = texto;
             CBX_TipoInsumo.SelectionStart = pos;
+            CBX_TipoInsumo.SelectionLength = 0;
         }
 
         private void CBX_TipoInsumo_SelectedIndexChanged(object sender, EventArgs e)
-            {
-                if (CBX_TipoInsumo.Text.Length < 2)
-                    return;
+        {
+                //if(CBX_TipoInsumo.Focused == false)
+                //return;
 
-                var lista = _tipoService.BuscarCoincidencias(CBX_TipoInsumo.Text);
+                //string texto = CBX_TipoInsumo.Text.Trim();
 
-                CBX_TipoInsumo.Items.Clear();
-                CBX_TipoInsumo.Items.AddRange(lista.ToArray());
-                CBX_TipoInsumo.DroppedDown = true;
-                CBX_TipoInsumo.SelectionStart = CBX_TipoInsumo.Text.Length;
-            }
+                //var lista = string.IsNullOrWhiteSpace(texto)
+                //    ? _tipoService.ObtenerTodos()
+                //    : _tipoService.BuscarCoincidencias(texto)
+                //                 .Select(t => new TipoInsumo { ID_TipoInsumo = 0, Descripcion = t })
+                //                 .ToList();
+
+                //lista.Insert(0, new TipoInsumo { ID_TipoInsumo = 0, Descripcion = "" });
+
+                //int pos = CBX_TipoInsumo.SelectionStart;
+
+                //CBX_TipoInsumo.BeginUpdate();
+                //CBX_TipoInsumo.DataSource = lista;
+                //CBX_TipoInsumo.DisplayMember = "Descripcion";
+                //CBX_TipoInsumo.ValueMember = "ID_TipoInsumo";
+                //CBX_TipoInsumo.EndUpdate();
+
+                //CBX_TipoInsumo.DroppedDown = true;
+                //CBX_TipoInsumo.SelectionStart = pos;
+        }
 
             private void Txt_NombreInsumo_TextChanged(object sender, EventArgs e)
             {
@@ -250,12 +269,47 @@ namespace UI.FormsComun.Stock
                         $"{LanguageManager.Traducir("Lbl_titleTipoStock")} {CBX_TipoInsumo.Text} {LanguageManager.Traducir("Mensaje_Exito").ToLower()}",
                         LanguageManager.Traducir("Mensaje_Exito"));
 
-                Close();
+                MainScreen mainScreen = Navigator.GetMain(this);
+                if (mainScreen == null) { Close(); return; }
+
+                FormStock form = new FormStock()
+                {
+                    TopLevel = false,
+                    FormBorderStyle = FormBorderStyle.None,
+                    Dock = DockStyle.Fill
+                };
+
+                mainScreen.lblTitle.Text = LanguageManager.Traducir("SideMenu_Stock");
+
+                mainScreen.panelContenido.Controls.Clear();
+                mainScreen.panelContenido.Controls.Add(form);
+
+                ThemeManager.ApplyTheme(form, ThemeManager.ModoOscuro);
+
+                form.Show();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MainScreen mainScreen = Navigator.GetMain(this);
+                if (mainScreen == null) { Close(); return; }
+
+                FormStock form = new FormStock()
+                {
+                    TopLevel = false,
+                    FormBorderStyle = FormBorderStyle.None,
+                    Dock = DockStyle.Fill
+                };
+
+                mainScreen.lblTitle.Text = LanguageManager.Traducir("SideMenu_Stock");
+
+                mainScreen.panelContenido.Controls.Clear();
+                mainScreen.panelContenido.Controls.Add(form);
+
+                ThemeManager.ApplyTheme(form, ThemeManager.ModoOscuro);
+
+                form.Show();
             }
 
         }

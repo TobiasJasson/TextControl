@@ -88,5 +88,26 @@
   "Lbl_CantidadUnidad": "Quantity per Unit",
   "Lbl_PrecioUnitario": "Unit Price",
   "Btn_Aceptar": "Accept",
-  "Msg_StockCreado": "Stock created successfully."
+  "Msg_StockCreado": "Stock created successfully.",
+  ///Control Empleado
+  "Msg_EmpleadoCreado": "Employee created successfully. An email has been sent to set the password.",
+  "Msg_EmpleadoEditadoCorrectamente": "Employee updated successfully.",
+  "Lbl_NombreEmpleado": "First Name",
+  "Lbl_ApellidoEmpleado": "Last Name",
+  "Lbl_DniEmpleado": "ID Number",
+  "Lbl_Email": "Gmail",
+  "Lbl_NumeroEmpleado": "Contact Number",
+  "Lbl_RolEmpleado": "Role",
+  "Lbl_Activo": "Active",
+  "Lbl_Inactivo": "Inactive",
+  "Col_Nombre": "First Name",
+  "Col_Apellido": "Last Name",
+  "Col_Email": "Email",
+  "Col_Contacto": "Contact Number",
+  "Col_Rol": "Role",
+  "Col_DNI": "ID Number",
+  "Col_UsuarioActivo": "Status",
+  "Msg_ErrorGuardando": "An error occurred while saving: {0}",
+  "Msg_CamposRequeridos": "Please complete the following required fields:\n\n{0}"
+
 }

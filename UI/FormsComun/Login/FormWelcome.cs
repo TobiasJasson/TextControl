@@ -49,7 +49,12 @@ namespace UI
             LanguageManager.CargarUltimoIdioma();
 
             var empleadoActual = SessionManager.Instance.EmpleadoActual;
-            lbl_Username.Text = empleadoActual.Nombre + " " + empleadoActual.Apellido;
+
+            if (empleadoActual != null)
+                lbl_Username.Text = empleadoActual.Nombre + " " + empleadoActual.Apellido;
+            else
+                lbl_Username.Text = "Usuario";
+
             this.Opacity = 0.0;
             circularProgressBar1.Value = 0;
             circularProgressBar1.Minimum = 0;

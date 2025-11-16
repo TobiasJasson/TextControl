@@ -31,7 +31,6 @@ namespace BLL
 
         public void SetUsuario(Usuario usuario) => UsuarioActual = usuario;
 
-        // Corrige el typo: SetEmpleado en lugar de SetEmpeleado
         public void SetEmpleado(Empleado empleado) => EmpleadoActual = empleado;
     }
 }

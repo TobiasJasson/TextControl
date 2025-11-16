@@ -86,6 +86,25 @@
   "Lbl_CantidadUnidad": "Cantidad por unidad",
   "Lbl_PrecioUnitario": "Precio Unitario",
   "Btn_Aceptar": "Aceptar",
-  "Msg_StockCreado": "Stock creado correctamente."
-
+  "Msg_StockCreado": "Stock creado correctamente.",
+  ///Control Empleado
+  "Msg_EmpleadoCreado": "Empleado creado correctamente. Se ha enviado un correo para configurar la contraseña.",
+  "Msg_EmpleadoEditadoCorrectamente": "Empleado actualizado correctamente",
+  "Lbl_NombreEmpleado": "Nombre",
+  "Lbl_ApellidoEmpleado": "Apellido",
+  "Lbl_DniEmpleado": "DNI",
+  "Lbl_Email": "Gmail",
+  "Lbl_NumeroEmpleado": "Numero Contacto",
+  "Lbl_RolEmpleado": "Rol",
+  "Lbl_Activo": "Activo",
+  "Lbl_Inactivo": "Inactivo",
+  "Col_Nombre": "Nombre",
+  "Col_Apellido": "Apellido",
+  "Col_Email": "Email",
+  "Col_Contacto": "Número Contacto",
+  "Col_Rol": "Rol",
+  "Col_DNI": "DNI",
+  "Col_UsuarioActivo": "Estado",
+  "Msg_ErrorGuardando": "Ocurrió un error al guardar: {0}",
+  "Msg_CamposRequeridos": "Por favor complete los siguientes campos obligatorios:\n\n{0}"
 }

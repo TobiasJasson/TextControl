@@ -76,5 +76,30 @@ namespace BLL.Servicios
         {
             _repo2.EliminarUsuario(idUsuario);
         }
+
+        public void ActualizarEmpleado(int idUsuario, Empleado emp, int idRol, bool activo, Usuario usuario)
+        {
+            var dt = _repo2.ObtenerUsuarios();
+            var row = dt.AsEnumerable().FirstOrDefault(r =>
+                r.Field<int>("ID_Usuario") == idUsuario);
+
+            if (row == null)
+            {
+                _repo2.CrearEmpleadoYUsuario(emp, usuario, idRol);
+                return;
+            }
+
+            int idEmpleado = row.Field<int>("ID_Empleado");
+            emp.IdEmpleado = idEmpleado;
+
+            var usu = new Usuario
+            {
+                IdUsuario = idUsuario,
+                EmailRecuperacion = emp.Gmail,
+                Activo = activo
+            };
+
+            _repo2.ActualizarEmpleadoYUsuario(emp, usu, idRol);
+        }
     }
 }

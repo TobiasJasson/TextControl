@@ -104,36 +104,41 @@ namespace UI
 
         private void Btn_Ingresar_Click(object sender, EventArgs e)
         {
-            var service = new UsuarioService();
-            var user = service.Login(TxtNameUser.Text, TxtPassword.Text);
+            var usuarioService = new UsuarioService();
+            var user = usuarioService.Login(TxtNameUser.Text, TxtPassword.Text);
 
-            if (user != null)
-            {
-                var empleadoService = new EmpleadoService();
-                var empleado = empleadoService.GetEmpleadoById(user.IdEmpleado);
-
-                SessionManager.Instance.SetUsuario(user);
-                SessionManager.Instance.SetEmpleado(empleado);
-
-                this.Hide();
-                using (FormWelcome welcome = new FormWelcome())
-                {
-                    welcome.ShowDialog();
-                }
-
-                try
-                {
-                    MainScreen mainScreen = new MainScreen();
-                    mainScreen.Show();
-                }
-                catch
-                {
-                    MessageBox.Show(LanguageManager.Traducir("Login_MensajeUsuarioSinRol"));
-                }
-            }
-            else
+            if (user == null)
             {
                 MessageBox.Show(LanguageManager.Traducir("Login_MensajeErrorCredenciales"));
+                return;
+            }
+
+            var empleadoService = new EmpleadoService();
+            var empleado = empleadoService.GetEmpleadoById(user.IdEmpleado);
+
+            if (empleado == null)
+            {
+                MessageBox.Show(LanguageManager.Traducir("Login_MensajeUsuarioSinRol"));
+                return;
+            }
+
+            SessionManager.Instance.SetUsuario(user);
+            SessionManager.Instance.SetEmpleado(empleado);
+
+            this.Hide();
+            using (FormWelcome welcome = new FormWelcome())
+            {
+                welcome.ShowDialog();
+            }
+
+            try
+            {
+                MainScreen mainScreen = new MainScreen();
+                mainScreen.Show();
+            }
+            catch
+            {
+                MessageBox.Show(LanguageManager.Traducir("Login_MensajeUsuarioSinRol"));
             }
         }
 
