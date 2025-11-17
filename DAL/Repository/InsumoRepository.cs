@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace DAL.Repository
 {
@@ -64,7 +65,8 @@ namespace DAL.Repository
                         lista.Add(new Insumo
                         {
                             ID_Insumo = dr.GetInt32(0),
-                            TipoInsumo = dr.IsDBNull(1) ? null : dr.GetString(1),
+                            ID_TipoInsumo = dr.GetInt32(1), // el ID
+                            TipoInsumoDescripcion = dr.IsDBNull(2) ? null : dr.GetString(2),
                             Nombre = dr.IsDBNull(2) ? null : dr.GetString(2),
                             ID_Color = dr.IsDBNull(3) ? (int?)null : dr.GetInt32(3),
                             ColorNombre = dr.IsDBNull(4) ? null : dr.GetString(4),
@@ -121,7 +123,7 @@ namespace DAL.Repository
                     cmd.Parameters.Add("@PrecioUnitario", SqlDbType.Float).Value = insumo.PrecioUnitario;
 
                     cmd.Parameters.Add("@TipoInsumo", SqlDbType.VarChar, 50).Value =
-                        string.IsNullOrWhiteSpace(insumo.TipoInsumo) ? (object)DBNull.Value : insumo.TipoInsumo;
+                        string.IsNullOrWhiteSpace(insumo.TipoInsumoDescripcion) ? (object)DBNull.Value : insumo.TipoInsumoDescripcion;
 
                     cmd.Parameters.Add("@ID_Insumo", SqlDbType.Int).Value = insumo.ID_Insumo;
 
@@ -195,6 +197,30 @@ namespace DAL.Repository
             {
                 return null;
             }
+        }
+
+        public List<Talle> ObtenerTalles()
+        {
+            var lista = new List<Talle>();
+
+            using (var con = _conexion.GetConnection())
+            {
+                string query = "SELECT ID_Talles, Detalles_Talles FROM Talles ORDER BY Detalles_Talles";
+                using (var cmd = new SqlCommand(query, con))
+                using (var dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        lista.Add(new Talle
+                        {
+                            ID_Talle = dr.GetInt32(0),
+                            Detalle = dr.IsDBNull(1) ? null : dr.GetString(1)
+                        });
+                    }
+                }
+            }
+
+            return lista;
         }
     }
 }

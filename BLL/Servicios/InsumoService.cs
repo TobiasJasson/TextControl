@@ -14,10 +14,27 @@ namespace BLL.Servicios
 
         public List<Insumo> ObtenerStock() => _repo.ObtenerTodos();
 
+        public List<Talle> GetAllTalles()
+        {
+            return _repo.ObtenerTalles();
+        }
+
+
+        public double GetPrecio(int idInsumo)
+        {
+            var insumo = _repo.ObtenerTodos().FirstOrDefault(i => i.ID_Insumo == idInsumo);
+            return insumo?.PrecioUnitario ?? 0;
+        }
+
 
         public int CrearInsumo(InsumoInsert insumo)
         {
             return _repo.CrearInsumo(insumo);
+        }
+
+        public List<Insumo> GetAll()
+        {
+            return ObtenerStock();
         }
 
         public List<Insumo> Buscar(string texto)
@@ -28,7 +45,7 @@ namespace BLL.Servicios
             return lista.FindAll(i =>
                 (i.Nombre?.ToLower().Contains(texto) ?? false) ||
                 (i.ColorNombre?.ToLower().Contains(texto) ?? false) ||
-                (i.TipoInsumo?.ToLower().Contains(texto) ?? false)
+                (i.TipoInsumoDescripcion?.ToLower().Contains(texto) ?? false)
             );
         }
 

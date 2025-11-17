@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using UI.FormsComun;
 using UI.FormsComun.Admin;
+using UI.FormsComun.NuevoPedidos;
 using UI.FormsComun.OrdenesPedidos;
 using UI.LocalWidget;
 
@@ -41,7 +42,7 @@ namespace UI
         }
         private void ApplyTranslations()
         {
-            lblTitle.Text = LanguageManager.Traducir("Dashboard_Titulo");
+            lblTitle.Text = LanguageManager.Traducir("SideMenu_Venta");
             BtnCambiarIdioma.Text = LanguageManager.Traducir("Login_BotonIdioma");
             Btn_Usuarios.Text = LanguageManager.Traducir("SideMenu_Usuario");
             BtnReporte.Text = LanguageManager.Traducir("SideMenu_Reporte");
@@ -90,19 +91,13 @@ namespace UI
                 this.WindowState = FormWindowState.Maximized;
         }
 
-        private void MainScreen_Load(object sender, EventArgs e)
+        private async void MainScreen_Load(object sender, EventArgs e)
         {
             Panel_Title.Dock = DockStyle.Top;
             panel_Menu.Dock = DockStyle.Left;
             panelContenido.Dock = DockStyle.Fill;
 
             panel_Menu.Width = 0;
-            //Btn_Usuarios.Visible = false;
-            //BtnReporte.Visible = false;
-            //BtnStock.Visible = false;
-            //BtnConfig.Visible = false;
-            //Btn_LogOut.Visible = false;
-            //BtnCambiarIdioma.Visible = false;
             menuExpandido = false;
 
             Btn_Cerrar.Location = new Point(Panel_Title.Width - Btn_Cerrar.Width - 5, 5);
@@ -127,14 +122,39 @@ namespace UI
             }
 
             LanguageManager.CargarUltimoIdioma();
-            lblTitle.Text = LanguageManager.Traducir("Dashboard_Titulo");
-            BtnCambiarIdioma.Text = LanguageManager.Traducir("Login_BotonIdioma");
-            Btn_Usuarios.Text = LanguageManager.Traducir("SideMenu_Usuario");
-            BtnReporte.Text = LanguageManager.Traducir("SideMenu_Reporte");
-            BtnStock.Text = LanguageManager.Traducir("SideMenu_Stock");
-            Btn_Venta.Text = LanguageManager.Traducir("SideMenu_Venta");
-            BtnConfig.Text = LanguageManager.Traducir("SideMenu_Configuraciones");
-            Btn_LogOut.Text = LanguageManager.Traducir("SideMenu_Salir");
+            ApplyTranslations();
+            await MostrarFormNuevoPedido();
+        }
+
+        private async Task MostrarFormNuevoPedido()
+        {
+            pantallaActual = "Venta";
+            lblTitle.Text = LanguageManager.Traducir("SideMenu_Venta");
+            panelContenido.Controls.Clear();
+
+            bool oscuro = ThemeManager.ModoOscuro;
+            Label lblCargando = new Label()
+            {
+                Text = "Cargando ...",
+                ForeColor = Color.Gray,
+                BackColor = oscuro ? Color.Black : Color.White,
+                Dock = DockStyle.Fill,
+                TextAlign = ContentAlignment.MiddleCenter
+            };
+            panelContenido.Controls.Add(lblCargando);
+            panelContenido.Refresh();
+
+            await Task.Run(() => System.Threading.Thread.Sleep(500));
+
+            FormNuevoPedido formNuevoPedido = new FormNuevoPedido();
+            formNuevoPedido.TopLevel = false;
+            formNuevoPedido.FormBorderStyle = FormBorderStyle.None;
+            formNuevoPedido.Dock = DockStyle.Fill;
+
+            panelContenido.Controls.Clear();
+            panelContenido.Controls.Add(formNuevoPedido);
+            ThemeManager.ApplyTheme(formNuevoPedido, ThemeManager.ModoOscuro);
+            formNuevoPedido.Show();
         }
 
         private void Panel_Title_Paint(object sender, PaintEventArgs e)
@@ -308,10 +328,9 @@ namespace UI
             formEmpleado.Show();
         }
 
-        private void Btn_Venta_Click(object sender, EventArgs e)
+        private async void Btn_Venta_Click(object sender, EventArgs e)
         {
-            pantallaActual = "Venta";
-            lblTitle.Text = LanguageManager.Traducir("SideMenu_Venta");
+            await MostrarFormNuevoPedido();
         }
 
         private void Btn_LogOut_Click(object sender, EventArgs e)

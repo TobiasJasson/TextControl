@@ -8,9 +8,9 @@ namespace Domain_Model
 {
     public class Cliente
     {
-        public int IdCliente { get; set; }
-        public string NombreCliente { get; set; }
-        public string ContactCliente { get; set; }
-        public string GmailCliente { get; set; }
+        public int ID_Cliente { get; set; }
+        public string Nombre_Cliente { get; set; }
+        public string Contacto_Cliente { get; set; }
+        public string Email_Cliente { get; set; }
     }
 }

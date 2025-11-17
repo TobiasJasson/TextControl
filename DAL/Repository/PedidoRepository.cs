@@ -1,4 +1,5 @@
-﻿using Services.DomainModel;
+﻿using Domain_Model;
+using Services.DomainModel;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -112,6 +113,56 @@ namespace DAL.Repository
                     ? 0
                     : Convert.ToDouble(dr["Personalizacion_Precio"])
             };
+        }
+
+        public void GuardarPedido(Pedido pedido, List<DetallePedido> detalles, float adelanto)
+        {
+            using (var con = _conexion.GetConnection())
+            using (var tran = con.BeginTransaction())
+            {
+                try
+                {
+                    // Insert Pedido
+                    string insertPedido = @"
+                        INSERT INTO Pedido
+                        (FechaPedido, FechaEntrega, PrecioTotal, SaldoPendiente, PagoAdelantado, IdCliente, IdEmpleado)
+                        OUTPUT INSERTED.IdPedido
+                        VALUES (@fechaPedido, @fechaEntrega, @precioTotal, @saldoPendiente, @pagoAdelantado, @idCliente, @idEmpleado)";
+                    SqlCommand cmdPedido = new SqlCommand(insertPedido, con, tran);
+                    cmdPedido.Parameters.AddWithValue("@fechaPedido", pedido.FechaPedido);
+                    cmdPedido.Parameters.AddWithValue("@fechaEntrega", pedido.FechaEtrega);
+                    cmdPedido.Parameters.AddWithValue("@precioTotal", pedido.PrecioTotal);
+                    cmdPedido.Parameters.AddWithValue("@saldoPendiente", pedido.SaldoPendiente);
+                    cmdPedido.Parameters.AddWithValue("@pagoAdelantado", pedido.PagoAdelantado);
+                    cmdPedido.Parameters.AddWithValue("@idCliente", pedido.IdCliente);
+                    cmdPedido.Parameters.AddWithValue("@idEmpleado", pedido.IdEmpleado);
+                    int idPedido = (int)cmdPedido.ExecuteScalar();
+
+                    // Insert detalles
+                    foreach (var det in detalles)
+                    {
+                        string insertDetalle = @"
+                            INSERT INTO DetallePedido
+                            (IdPedido, IdTela, Color_Detalle, Talle_Detalle, Cantidad_Detalle, PrecioUnitario)
+                            VALUES (@idPedido, @idTela, @color, @talle, @cantidad, @precio)";
+                        SqlCommand cmdDetalle = new SqlCommand(insertDetalle, con, tran);
+                        cmdDetalle.Parameters.AddWithValue("@idPedido", idPedido);
+                        cmdDetalle.Parameters.AddWithValue("@idTela", det.IdTela);
+                        cmdDetalle.Parameters.AddWithValue("@color", det.Color_Detalle ?? "");
+                        cmdDetalle.Parameters.AddWithValue("@talle", det.Talle_Detalle ?? "");
+                        cmdDetalle.Parameters.AddWithValue("@cantidad", det.Cantidad_Detalle);
+                        cmdDetalle.Parameters.AddWithValue("@precio", det.PrecioUnitario);
+                        cmdDetalle.ExecuteNonQuery();
+                    }
+
+                    tran.Commit();
+                }
+                catch
+                {
+                    tran.Rollback();
+                    throw;
+                }
+            }
         }
     }
 }

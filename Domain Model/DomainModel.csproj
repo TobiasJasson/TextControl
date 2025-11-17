@@ -97,6 +97,7 @@
     <Compile Include="Pedido.cs" />
     <Compile Include="Prioridad.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Talle.cs" />
     <Compile Include="TipoInsumo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -171,7 +171,7 @@ namespace UI.FormsComun
 
                 insumo.Nombre = fila.Cells["Nombre"].Value?.ToString() ?? "";
 
-                insumo.TipoInsumo = fila.Cells["TipoInsumo"].Value?.ToString() ?? "";
+                insumo.TipoInsumoDescripcion = fila.Cells["TipoInsumo"].Value?.ToString() ?? "";
 
                 if (int.TryParse(fila.Cells["Color"].Value?.ToString(), out int idColor))
                     insumo.ID_Color = fila.Cells["Color"].Value != null
@@ -275,7 +275,7 @@ namespace UI.FormsComun
             {
                 int rowIndex = DataGrid_Stock.Rows.Add(
                     ins.ID_Insumo,
-                    ins.TipoInsumo,
+                    ins.TipoInsumoDescripcion,
                     ins.Nombre,
                     ins.ID_Color,
                     ins.StockActual,

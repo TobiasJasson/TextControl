@@ -89,6 +89,7 @@
   <ItemGroup>
     <Compile Include="ConexionLogin.cs" />
     <Compile Include="EmpleadoDAL.cs" />
+    <Compile Include="Repository\ClienteRepository.cs" />
     <Compile Include="Repository\ColorRepository.cs" />
     <Compile Include="Repository\InsumoRepository.cs" />
     <Compile Include="Repository\IUsuarioRepository.cs" />

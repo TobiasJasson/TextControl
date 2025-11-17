@@ -89,6 +89,8 @@
   <ItemGroup>
     <Compile Include="EmpleadoService.cs" />
     <Compile Include="Interfaces\IUsuarioService.cs" />
+    <Compile Include="Servicios\AuthService.cs" />
+    <Compile Include="Servicios\ClienteService.cs" />
     <Compile Include="Servicios\ColorService.cs" />
     <Compile Include="Servicios\EmailService.cs" />
     <Compile Include="Servicios\InsumoService.cs" />

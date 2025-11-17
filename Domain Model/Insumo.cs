@@ -9,7 +9,8 @@ namespace Domain_Model
     public class Insumo
     {
         public int ID_Insumo { get; set; }
-        public string TipoInsumo { get; set; }
+        public int ID_TipoInsumo { get; set; }
+        public string TipoInsumoDescripcion { get; set; }
         public string Nombre { get; set; }
         public int? ID_Color { get; set; }
         public string ColorNombre { get; set; }
