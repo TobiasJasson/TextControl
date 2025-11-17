@@ -92,6 +92,7 @@
     <Compile Include="Repository\ColorRepository.cs" />
     <Compile Include="Repository\InsumoRepository.cs" />
     <Compile Include="Repository\IUsuarioRepository.cs" />
+    <Compile Include="Repository\PedidoRepository.cs" />
     <Compile Include="Repository\TipoInsumoRepository.cs" />
     <Compile Include="Repository\UsuarioRepository.cs" />
     <Compile Include="ScriptsSQL\DatabaseInitializer.cs" />

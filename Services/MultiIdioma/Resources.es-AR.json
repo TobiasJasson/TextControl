@@ -6,19 +6,19 @@
   "Login_MostrarContraseña": "Mostrar contraseña",
   "Login_BotonIngresar": "INGRESAR",
   "Login_OlvidoClave": "¿Ha olvidado su clave?",
-  "Login_MensajeUsuarioRequerido": "Tiene que escribir el Usuario primero",
-  "Login_MensajeUsuarioNoEncontrado": "Usuario no encontrado",
+  "Login_MensajeUsuarioRequerido": "Tiene que escribir el usuario primero.",
+  "Login_MensajeUsuarioNoEncontrado": "Usuario no encontrado.",
   "Login_MensajeMailEnviado": "Ya se ha enviado el mail de recuperación a su Gmail: ",
   "Login_MensajeErrorEnvioMail": "Error al enviar el mail: ",
-  "Login_MensajeErrorCredenciales": "Usuario o contraseña incorrectos",
+  "Login_MensajeErrorCredenciales": "Usuario o contraseña incorrectos.",
   "Login_BotonIdioma": "EN-US",
-  "Login_MensajeUsuarioSinRol": "Usted no contiene un rol, avise al Administrador",
+  "Login_MensajeUsuarioSinRol": "Usted no contiene un rol, avise al Administrador.",
 
   ///WELCOME
   "Welcome_Bienvenido": "Bienvenido",
 
   ///Dashboard
-  "Dashboard_Titulo": "Menu Principal",
+  "Dashboard_Titulo": "Menú Principal",
 
   ///SideMenu
   "SideMenu_Usuario": "Usuario",
@@ -31,7 +31,7 @@
   "SideMenu_BoxLogOut": "¿Qué desea hacer?",
 
   ///Message Box
-  "Btn_CerrarSesion": "Cerrar Sesion",
+  "Btn_CerrarSesion": "Cerrar sesión",
   "Btn_Salir": "Salir",
   "Btn_Cancel": "Cancelar",
   "ExporCorrectamente": "Archivo exportado correctamente.",
@@ -41,13 +41,14 @@
   "Msg_ConfirmarEliminar": "¿Desea eliminar este producto?",
   "Msg_EliminadoCorrectamente": "Producto eliminado correctamente.",
 
+  ///Cambiar Clave / Mail
   "Config_MensajeClaveVacia": "Debe ingresar una nueva contraseña.",
   "Config_MensajeClavesNoCoinciden": "Las contraseñas no coinciden.",
   "Config_MensajeClaveCambiada": "La contraseña se actualizó correctamente.",
-  "Config_MensajeErrorClave": "Ocurrió un error al intentar actualizar la contraseña",
+  "Config_MensajeErrorClave": "Ocurrió un error al intentar actualizar la contraseña.",
   "Config_MensajeMailVacio": "Debe ingresar un nuevo correo electrónico.",
-  "Config_MensajeMailInvalido": "El formato del correo electrónico no es válido",
-  "Config_MensajeMailCambiado": "El correo electrónico se actualizó correctamente",
+  "Config_MensajeMailInvalido": "El formato del correo electrónico no es válido.",
+  "Config_MensajeMailCambiado": "El correo electrónico se actualizó correctamente.",
   "Config_MensajeErrorMail": "Ocurrió un error al intentar actualizar el correo electrónico.",
 
   ///Configuraciones
@@ -56,7 +57,7 @@
   "TxtNuevaClave": "Contraseña Nueva",
   "TxtConfirmarClave": "Confirmar Contraseña",
   "BtnCambiarClave": "Cambiar Contraseña",
-  "Lbl_titleCambioMail": "Cambiar Mail",
+  "Lbl_titleCambioMail": "Cambiar Email",
   "Txt_NuevoMail": "Nuevo Email",
   "Btn_NuevoMail": "Cambiar Email",
 
@@ -76,25 +77,27 @@
   "Mensaje_Atencion": "Atención",
   "Mensaje_Exito": "Éxito",
   "Mensaje_Confirmacion": "Confirmación",
+
   ///Agregar Stock
   "Title_AgregarStock": "Nuevo Stock",
   "Lbl_titleTipoStock": "Tipo Stock",
   "Lbl_NombreInsumo": "Nombre Insumo",
   "Lbl_ColorInsumo": "Color Insumo",
-  "Lbl_StockMinimo": "Stock Minimo",
+  "Lbl_StockMinimo": "Stock Mínimo",
   "Lbl_StockActual": "Stock Actual",
   "Lbl_CantidadUnidad": "Cantidad por unidad",
   "Lbl_PrecioUnitario": "Precio Unitario",
   "Btn_Aceptar": "Aceptar",
   "Msg_StockCreado": "Stock creado correctamente.",
+
   ///Control Empleado
   "Msg_EmpleadoCreado": "Empleado creado correctamente. Se ha enviado un correo para configurar la contraseña.",
-  "Msg_EmpleadoEditadoCorrectamente": "Empleado actualizado correctamente",
+  "Msg_EmpleadoEditadoCorrectamente": "Empleado actualizado correctamente.",
   "Lbl_NombreEmpleado": "Nombre",
   "Lbl_ApellidoEmpleado": "Apellido",
   "Lbl_DniEmpleado": "DNI",
   "Lbl_Email": "Gmail",
-  "Lbl_NumeroEmpleado": "Numero Contacto",
+  "Lbl_NumeroEmpleado": "Número Contacto",
   "Lbl_RolEmpleado": "Rol",
   "Lbl_Activo": "Activo",
   "Lbl_Inactivo": "Inactivo",
@@ -106,5 +109,27 @@
   "Col_DNI": "DNI",
   "Col_UsuarioActivo": "Estado",
   "Msg_ErrorGuardando": "Ocurrió un error al guardar: {0}",
-  "Msg_CamposRequeridos": "Por favor complete los siguientes campos obligatorios:\n\n{0}"
+  "Msg_CamposRequeridos": "Por favor complete los siguientes campos obligatorios:\n\n{0}",
+
+  ///Órdenes de Pedido
+  "FechaDesde": "Fecha Desde",
+  "FechaHasta": "Fecha Hasta",
+  "EstadoPedido": "Estado Pedido",
+  "Detalle": "Detalle",
+  "Exportar": "Exportar",
+  "LimpiarFiltros": "Limpiar Filtros",
+  "NoHayFiltros": "No hay filtros aplicados.",
+  "Informacion": "Información",
+  "NoHayDatosExportar": "No hay datos para exportar.",
+  "Title_ReporteDetalle": "Reporte Detalle",
+  "Pedido_ID": "ID pedido",
+  "Cliente": "Cliente",
+  "Contacto": "Contacto",
+  "FechaPedido": "Fecha Pedido",
+  "FechaEntrega": "Fecha Entrega",
+  "Empleado": "Empleado",
+  "Total_Precio": "Total Precio",
+  "Pago_Adelanto": "Pago Adelanto",
+  "Total_Pendiente": "Pendiente de pago"
+
 }

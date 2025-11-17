@@ -220,7 +220,7 @@ namespace UI.FormsComun
         private void Btn_Exportar_Click(object sender, EventArgs e)
         {
             var exporter = new ExcelExporter();
-            exporter.ExportarDataGridConColores(DataGrid_Stock);
+            exporter.ExportarStock(DataGrid_Stock);
         }
 
         private void DataGrid_Stock_CellContentClick(object sender, DataGridViewCellEventArgs e) { }

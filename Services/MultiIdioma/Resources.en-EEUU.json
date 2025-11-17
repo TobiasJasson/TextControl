@@ -1,25 +1,24 @@
 ﻿{
   ///LOGIN
   "Login_Titulo": "LOGIN",
-  "Login_Usuario": "Name",
+  "Login_Usuario": "Username",
   "Login_Contraseña": "Password",
   "Login_MostrarContraseña": "Show password",
   "Login_BotonIngresar": "LOGIN",
   "Login_OlvidoClave": "Forgot your password?",
-  "Login_MensajeUsuarioRequerido": "You must enter the Username first",
-  "Login_MensajeMailEnviado": "The recovery email has now been sent to your Gmail: ",
+  "Login_MensajeUsuarioRequerido": "You must enter the username first.",
+  "Login_MensajeUsuarioNoEncontrado": "User not found.",
+  "Login_MensajeMailEnviado": "The recovery email has been sent to your Gmail: ",
   "Login_MensajeErrorEnvioMail": "Error sending email: ",
-  "Login_MensajeUsuarioNoEncontrado": "User not found",
-  "Login_MensajeErrorCredenciales": "Incorrect username or password",
+  "Login_MensajeErrorCredenciales": "Incorrect username or password.",
   "Login_BotonIdioma": "ES-AR",
-  "Login_MensajeUsuarioSinRol": "You don't have a role, please notify the Administrator.",
+  "Login_MensajeUsuarioSinRol": "You do not have a role assigned, please contact the Administrator.",
 
   ///WELCOME
   "Welcome_Bienvenido": "Welcome",
 
   ///Dashboard
   "Dashboard_Titulo": "Main Menu",
-
 
   ///SideMenu
   "SideMenu_Usuario": "User",
@@ -31,28 +30,28 @@
   "SideMenu_UsuarioLogOut": "Log Out",
   "SideMenu_BoxLogOut": "What would you like to do?",
 
-
   ///Message Box
-  "Btn_CerrarSesion": "log out",
+  "Btn_CerrarSesion": "Log Out",
   "Btn_Salir": "Exit",
   "Btn_Cancel": "Cancel",
   "ExporCorrectamente": "File exported successfully.",
   "Msg_SeleccionEditar": "Select a product to edit.",
   "Msg_SeleccionEliminar": "Select a product to remove.",
-  "Msg_EditadoCorrectamente": "Product successfully updated.",
+  "Msg_EditadoCorrectamente": "Product updated successfully.",
   "Msg_ConfirmarEliminar": "Do you want to delete this product?",
   "Msg_EliminadoCorrectamente": "Product deleted successfully.",
 
+  ///Password / Email Settings
   "Config_MensajeClaveVacia": "You must enter a new password.",
   "Config_MensajeClavesNoCoinciden": "Passwords do not match.",
   "Config_MensajeClaveCambiada": "Password updated successfully.",
-  "Config_MensajeErrorClave": "An error occurred while updating the password",
+  "Config_MensajeErrorClave": "An error occurred while updating the password.",
   "Config_MensajeMailVacio": "You must enter a new email address.",
-  "Config_MensajeMailInvalido": "Invalid email address format",
-  "Config_MensajeMailCambiado": "Email updated successfully",
+  "Config_MensajeMailInvalido": "Invalid email format.",
+  "Config_MensajeMailCambiado": "Email updated successfully.",
   "Config_MensajeErrorMail": "An error occurred while updating the email address.",
 
-  ///Configuraciones
+  ///Settings
   "Lbl_ModoOscuro": "Dark Mode",
   "Lbl_titleCambiarClave": "Change Password",
   "TxtNuevaClave": "New Password",
@@ -71,25 +70,27 @@
   "Stock_UltimaSalida": "Last Output",
   "Stock_PrecioUnitario": "Unit Price",
   "Boton_Editar": "Edit",
-  "Boton_Actualizar": "Update",
   "Boton_Agregar": "Add",
   "Boton_Eliminar": "Delete",
   "Boton_Exportar": "Export",
+  "Boton_Actualizar": "Update",
   "Mensaje_Atencion": "Warning",
   "Mensaje_Exito": "Success",
   "Mensaje_Confirmacion": "Confirmation",
-  ///Agregar Stock
+
+  ///Add Stock
   "Title_AgregarStock": "New Stock",
   "Lbl_titleTipoStock": "Stock Type",
   "Lbl_NombreInsumo": "Input Name",
   "Lbl_ColorInsumo": "Input Color",
   "Lbl_StockMinimo": "Minimum Stock",
-  "Lbl_StockActual": "Actual Stock",
+  "Lbl_StockActual": "Current Stock",
   "Lbl_CantidadUnidad": "Quantity per Unit",
   "Lbl_PrecioUnitario": "Unit Price",
   "Btn_Aceptar": "Accept",
   "Msg_StockCreado": "Stock created successfully.",
-  ///Control Empleado
+
+  ///Employee Control
   "Msg_EmpleadoCreado": "Employee created successfully. An email has been sent to set the password.",
   "Msg_EmpleadoEditadoCorrectamente": "Employee updated successfully.",
   "Lbl_NombreEmpleado": "First Name",
@@ -108,6 +109,26 @@
   "Col_DNI": "ID Number",
   "Col_UsuarioActivo": "Status",
   "Msg_ErrorGuardando": "An error occurred while saving: {0}",
-  "Msg_CamposRequeridos": "Please complete the following required fields:\n\n{0}"
+  "Msg_CamposRequeridos": "Please complete the following required fields:\n\n{0}",
 
+  ///Order Management - Filters
+  "FechaDesde": "Date From",
+  "FechaHasta": "Date To",
+  "EstadoPedido": "Order Status",
+  "Detalle": "Details",
+  "Exportar": "Export",
+  "LimpiarFiltros": "Clear Filters",
+  "NoHayFiltros": "There are no filters applied.",
+  "Informacion": "Information",
+  "NoHayDatosExportar": "There is no data to export.",
+
+  "Pedido_ID": "Order ID",
+  "Cliente": "Customer",
+  "Contacto": "Contact",
+  "FechaPedido": "Order Date",
+  "FechaEntrega": "Delivery Date",
+  "Empleado": "Employee",
+  "Total_Precio": "Total Price",
+  "Pago_Adelanto": "Down Payment",
+  "Total_Pendiente": "Amount Due"
 }

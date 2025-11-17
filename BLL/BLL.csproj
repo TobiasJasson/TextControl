@@ -93,6 +93,7 @@
     <Compile Include="Servicios\EmailService.cs" />
     <Compile Include="Servicios\InsumoService.cs" />
     <Compile Include="Servicios\PasswordHelper.cs" />
+    <Compile Include="Servicios\PedidoService.cs" />
     <Compile Include="Servicios\TipoInsumoService.cs" />
     <Compile Include="SessionManager.cs" />
     <Compile Include="Servicios\UsuarioService.cs" />

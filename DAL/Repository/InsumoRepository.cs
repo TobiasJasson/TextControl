@@ -173,5 +173,28 @@ namespace DAL.Repository
                 return (int)cmd.ExecuteScalar();
             }
         }
+
+        public string ObtenerNombrePorIdSiEsTela(int idInsumo)
+        {
+            if (idInsumo <= 0) return null;
+
+            try
+            {
+                using (var con = _conexion.GetConnection())
+                {
+                    string q = "SELECT Nombre FROM Insumo WHERE ID_Insumo = @id";
+                    using (var cmd = new SqlCommand(q, con))
+                    {
+                        cmd.Parameters.AddWithValue("@id", idInsumo);
+                        var r = cmd.ExecuteScalar();
+                        return r == null || r == DBNull.Value ? null : r.ToString();
+                    }
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }

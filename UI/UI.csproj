@@ -280,6 +280,12 @@
     <EmbeddedResource Include="FormsComun\Config\FormConfig.resx">
       <DependentUpon>FormConfig.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormsComun\OrdenesPedidos\FormDetallesPedidos.resx">
+      <DependentUpon>FormDetallesPedidos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsComun\OrdenesPedidos\FormOrdenesPedidos.resx">
+      <DependentUpon>FormOrdenesPedidos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormsComun\Stock\FormAgregarStock.resx">
       <DependentUpon>FormAgregarStock.cs</DependentUpon>
     </EmbeddedResource>

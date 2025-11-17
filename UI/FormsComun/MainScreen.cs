@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using UI.FormsComun;
 using UI.FormsComun.Admin;
+using UI.FormsComun.OrdenesPedidos;
 using UI.LocalWidget;
 
 namespace UI
@@ -219,9 +220,34 @@ namespace UI
             formStock.Show();
         }
 
-        private void BtnReporte_Click(object sender, EventArgs e)
+        private async void BtnReporte_Click(object sender, EventArgs e)
         {
-            lblTitle.Text = LanguageManager.Traducir("SideMenu_Reporte");  
+            lblTitle.Text = LanguageManager.Traducir("SideMenu_Reporte");
+            panelContenido.Controls.Clear();
+
+            bool oscuro = ThemeManager.ModoOscuro;
+            Label lblCargando = new Label()
+            {
+                Text = LanguageManager.Traducir("Cargando"),
+                ForeColor = Color.Gray,
+                BackColor = oscuro ? Color.Black : Color.White,
+                Dock = DockStyle.Fill,
+                TextAlign = ContentAlignment.MiddleCenter
+            };
+            panelContenido.Controls.Add(lblCargando);
+            panelContenido.Refresh();
+
+            await Task.Run(() => { System.Threading.Thread.Sleep(500); });
+
+            FormOrdenesPedidos form = new FormOrdenesPedidos();
+            form.TopLevel = false;
+            form.FormBorderStyle = FormBorderStyle.None;
+            form.Dock = DockStyle.Fill;
+
+            panelContenido.Controls.Clear();
+            panelContenido.Controls.Add(form);
+            ThemeManager.ApplyTheme(form, ThemeManager.ModoOscuro);
+            form.Show();
         }
 
         private async void Btn_Usuarios_Click(object sender, EventArgs e)
