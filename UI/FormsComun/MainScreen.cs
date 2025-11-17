@@ -20,6 +20,7 @@ namespace UI
 {
     public partial class MainScreen : Form
     {
+        string pantallaActual;
         public MainScreen()
         {
             ThemeManager.LoadTheme();
@@ -48,6 +49,27 @@ namespace UI
             BtnConfig.Text = LanguageManager.Traducir("SideMenu_Configuraciones");
             Btn_LogOut.Text = LanguageManager.Traducir("SideMenu_Salir");
             Btn_Venta.Text = LanguageManager.Traducir("SideMenu_Venta");
+            switch (pantallaActual)
+            {
+                case "Usuarios":
+                    lblTitle.Text = LanguageManager.Traducir("SideMenu_Usuario");
+                    break;
+                case "Stock":
+                    lblTitle.Text = LanguageManager.Traducir("SideMenu_Stock");
+                    break;
+                case "Reporte":
+                    lblTitle.Text = LanguageManager.Traducir("SideMenu_Reporte");
+                    break;
+                case "Configuraciones":
+                    lblTitle.Text = LanguageManager.Traducir("SideMenu_Configuraciones");
+                    break;
+                case "Venta":
+                    lblTitle.Text = LanguageManager.Traducir("SideMenu_Venta");
+                    break;
+                default:
+                    lblTitle.Text = LanguageManager.Traducir("Dashboard_Titulo");
+                    break;
+            }
         }
 
         private void Btn_Cerrar_Click(object sender, EventArgs e)
@@ -154,6 +176,7 @@ namespace UI
 
         private async void BtnConfig_Click(object sender, EventArgs e)
         {
+            pantallaActual = "Configuraciones";
             lblTitle.Text = LanguageManager.Traducir("SideMenu_Configuraciones");
 
             panelContenido.Controls.Clear();
@@ -188,6 +211,7 @@ namespace UI
 
         private async void BtnStock_Click(object sender, EventArgs e)
         {
+            pantallaActual = "Stock";
             lblTitle.Text = LanguageManager.Traducir("SideMenu_Stock");
 
             panelContenido.Controls.Clear();
@@ -222,6 +246,7 @@ namespace UI
 
         private async void BtnReporte_Click(object sender, EventArgs e)
         {
+            pantallaActual = "Reporte";
             lblTitle.Text = LanguageManager.Traducir("SideMenu_Reporte");
             panelContenido.Controls.Clear();
 
@@ -252,6 +277,7 @@ namespace UI
 
         private async void Btn_Usuarios_Click(object sender, EventArgs e)
         {
+            pantallaActual = "Usuarios";
             lblTitle.Text = LanguageManager.Traducir("SideMenu_Usuario");
             panelContenido.Controls.Clear();
 
@@ -260,18 +286,14 @@ namespace UI
             {
                 Text = "Cargando ...",
                 ForeColor = Color.Gray,
-                BackColor = (oscuro == true) ? Color.Black : Color.White,
+                BackColor = oscuro ? Color.Black : Color.White,
                 Dock = DockStyle.Fill,
                 TextAlign = ContentAlignment.MiddleCenter
             };
             panelContenido.Controls.Add(lblCargando);
             panelContenido.Refresh();
 
-            await Task.Run(() =>
-            {
-                System.Threading.Thread.Sleep(500);
-            });
-
+            // Carga el form en background
             FormControlEmpleado formEmpleado = new FormControlEmpleado();
             formEmpleado.TopLevel = false;
             formEmpleado.FormBorderStyle = FormBorderStyle.None;
@@ -280,11 +302,15 @@ namespace UI
             panelContenido.Controls.Clear();
             panelContenido.Controls.Add(formEmpleado);
             ThemeManager.ApplyTheme(formEmpleado, ThemeManager.ModoOscuro);
+
+            await Task.Run(() => formEmpleado.CargarGrid());
+
             formEmpleado.Show();
         }
 
         private void Btn_Venta_Click(object sender, EventArgs e)
         {
+            pantallaActual = "Venta";
             lblTitle.Text = LanguageManager.Traducir("SideMenu_Venta");
         }
 

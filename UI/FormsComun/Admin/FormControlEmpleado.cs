@@ -25,6 +25,7 @@ namespace UI.FormsComun.Admin
         public FormControlEmpleado()
         {
             InitializeComponent();
+            _servicio = new UsuarioService();
         }
 
         private void FormControlEmpleado_Load(object sender, EventArgs e)
@@ -41,7 +42,7 @@ namespace UI.FormsComun.Admin
             Cbx_RolEmpleado.SelectedIndex = 0;
         }
 
-        private void CargarGrid()
+        public void CargarGrid()
         {
             var dt = _servicio.ObtenerGrid();
 
@@ -58,22 +59,28 @@ namespace UI.FormsComun.Admin
                 ID_Empleado = (int)u["ID_Empleado"]
             }).ToList();
 
-            dataGridView1.DataSource = tabla;
+            if (dataGridView1.InvokeRequired)
+            {
+                dataGridView1.Invoke(new Action(() =>
+                {
+                    dataGridView1.DataSource = tabla;
+                    FormatearGrid();
+                }));
+            }
+            else
+            {
+                dataGridView1.DataSource = tabla;
+                FormatearGrid();
+            }
+        }
 
+        private void FormatearGrid()
+        {
             if (dataGridView1.Columns["ID_Usuario"] != null)
                 dataGridView1.Columns["ID_Usuario"].Visible = false;
 
             if (dataGridView1.Columns["ID_Empleado"] != null)
                 dataGridView1.Columns["ID_Empleado"].Visible = false;
-
-            dataGridView1.Columns["Nombre"].HeaderText = LanguageManager.Traducir("Col_Nombre");
-            dataGridView1.Columns["Apellido"].HeaderText = LanguageManager.Traducir("Col_Apellido");
-            dataGridView1.Columns["Email"].HeaderText = LanguageManager.Traducir("Col_Email");
-            dataGridView1.Columns["Contacto"].HeaderText = LanguageManager.Traducir("Col_Contacto");
-            dataGridView1.Columns["Rol"].HeaderText = LanguageManager.Traducir("Col_Rol");
-            dataGridView1.Columns["DNI"].HeaderText = LanguageManager.Traducir("Col_DNI");
-            dataGridView1.Columns["UsuarioActivo"].HeaderText = LanguageManager.Traducir("Col_UsuarioActivo");
-
 
             dataGridView1.AutoResizeColumns();
             dataGridView1.ClearSelection();

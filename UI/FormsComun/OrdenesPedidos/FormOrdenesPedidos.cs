@@ -19,16 +19,13 @@ namespace UI.FormsComun.OrdenesPedidos
 {
     public partial class FormOrdenesPedidos : BaseForm
     {
-        private PedidoService _service;
+        private PedidoService _service = new PedidoService();
         private List<PedidoDTO> pedidosOriginal;
-
-        private bool _modoEdicion = false;
-        private int _filaEditando = -1;
+        private int _filaDetalle = -1;
         public FormOrdenesPedidos()
         {
             ThemeManager.LoadTheme();
             InitializeComponent();
-            _service = new PedidoService();
         }
         protected override void TraducirUI()
         {
@@ -72,10 +69,39 @@ namespace UI.FormsComun.OrdenesPedidos
             CargarEstados();
             CargarPedidos();
             TraducirUI();
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.MultiSelect = false;
         }
 
+        private Panel CrearPar(Label lbl, Control ctrl)
+        {
+            return new Panel
+            {
+                AutoSize = true,
+                Margin = new Padding(10),
+                Controls =
+        {
+            new Label {
+                Text = lbl.Text,
+                AutoSize = true,
+                Margin = new Padding(0, 0, 0, 2),
+                ForeColor = lbl.ForeColor
+            },
+            ctrl
+        }
+            };
+        }
+
+        private void AjustarTamanioFuente()
+        {
+            float factor = this.Width / 800f;
+            float nuevoTamaño = 10f * factor;
+
+            dataGridView1.DefaultCellStyle.Font = new Font("Segoe UI", nuevoTamaño);
+            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", nuevoTamaño + 1);
+        }
+        private void FormStock_Resize(object sender, EventArgs e)
+        {
+            AjustarTamanioFuente();
+        }
         private void ConfigurarControles()
         {
             Btn_LimpiarFiltros.Enabled = false;
@@ -134,7 +160,6 @@ namespace UI.FormsComun.OrdenesPedidos
                 .Select(g => new
                 {
                     ID_pedido = g.Key,
-                    IDReal = g.First().ID_pedido,
                     Cliente = g.First().Nombre_Cliente,
                     Contacto = g.First().Contacto_Cliente,
                     FechaPedido = g.First().FechaPedido.ToString("dd/MM/yyyy"), // string
@@ -154,7 +179,6 @@ namespace UI.FormsComun.OrdenesPedidos
 
 
             dataGridView1.DataSource = pedidosAgrupados;
-            dataGridView1.Columns["IDReal"].Visible = false;
             dataGridView1.Columns["Total"].DefaultCellStyle.Format = "C2";
             dataGridView1.Columns["Total"].DefaultCellStyle.FormatProvider =
                 new System.Globalization.CultureInfo("es-AR");
@@ -267,21 +291,46 @@ namespace UI.FormsComun.OrdenesPedidos
 
         }
 
-        private async void Btn_Detalle_Click(object sender, EventArgs e)
+        private void Btn_Detalle_Click(object sender, EventArgs e)
         {
             MainScreen mainScreen = Navigator.GetMain(this);
+            mainScreen.lblTitle.Text = LanguageManager.Traducir("Title_ReporteDetalle");
 
-            if (mainScreen == null)
+            if (dataGridView1.SelectedRows.Count == 0)
             {
-                MessageBox.Show(LanguageManager.Traducir("NoSeContenedor") ?? "No se encontró el contenedor principal.",
-                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(
+                    LanguageManager.Traducir("Msg_SeleccionDetalle"),
+                    LanguageManager.Traducir("Mensaje_Atencion"),
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
                 return;
             }
 
-            mainScreen.lblTitle.Text = LanguageManager.Traducir("Title_ReporteDetalle");
+            _filaDetalle = dataGridView1.SelectedRows[0].Index;
+
+            dataGridView1.ReadOnly = false;
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                row.ReadOnly = row.Index != _filaDetalle;
+            }
+
+            var fila = dataGridView1.Rows[_filaDetalle];
+            int idPedido = Convert.ToInt32(fila.Cells["ID_pedido"].Value);
+
+            var detalles = pedidosOriginal
+                ?.Where(p => p.ID_pedido == idPedido)
+                .ToList() ?? new List<PedidoDTO>();
+
+            var formDetalles = new FormDetallesPedidos(idPedido, detalles)
+            {
+                TopLevel = false,
+                FormBorderStyle = FormBorderStyle.None,
+                Dock = DockStyle.Fill
+            };
 
             bool oscuro = ThemeManager.ModoOscuro;
-
             Label lblCargando = new Label()
             {
                 Text = LanguageManager.Traducir("Cargando") ?? "Cargando...",
@@ -295,88 +344,9 @@ namespace UI.FormsComun.OrdenesPedidos
             mainScreen.panelContenido.Controls.Add(lblCargando);
             mainScreen.panelContenido.Refresh();
 
-            await Task.Delay(300);
-
-            // Obtener la fila seleccionada de forma robusta
-            DataGridViewRow filaSeleccionada = null;
-
-            if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count > 0)
-            {
-                filaSeleccionada = dataGridView1.SelectedRows[0];
-            }
-            else if (dataGridView1.SelectedCells != null && dataGridView1.SelectedCells.Count > 0)
-            {
-                filaSeleccionada = dataGridView1.SelectedCells[0].OwningRow;
-            }
-            else if (dataGridView1.CurrentRow != null)
-            {
-                filaSeleccionada = dataGridView1.CurrentRow;
-            }
-
-            if (filaSeleccionada == null)
-            {
-                MessageBox.Show(LanguageManager.Traducir("SeleccioneFila") ?? "Seleccione una fila.",
-                                LanguageManager.Traducir("Informacion") ?? "Información",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);
-                return;
-            }
-
-            object valId = null;
-            if (dataGridView1.Columns.Contains("IDReal"))
-            {
-                int idxId = dataGridView1.Columns["IDReal"].Index;
-                valId = filaSeleccionada.Cells[idxId].Value;
-            }
-            else
-            {
-                // fallback: buscar la primera celda que parezca un entero
-                foreach (DataGridViewCell c in filaSeleccionada.Cells)
-                {
-                    if (c.Value == null) continue;
-                    if (int.TryParse(c.Value.ToString(), out _))
-                    {
-                        valId = c.Value;
-                        break;
-                    }
-                }
-            }
-
-            if (valId == null || !int.TryParse(valId.ToString(), out int idPedido))
-            {
-                MessageBox.Show(LanguageManager.Traducir("IdInvalido") ?? "No se pudo obtener el ID del pedido seleccionado.",
-                                LanguageManager.Traducir("Mensaje_Atencion") ?? "Atención",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Warning);
-                return;
-            }
-
-            // Obtener detalles desde el listado original (ya cargado)
-            var detalles = pedidosOriginal
-                .Where(p => p.ID_pedido == idPedido)
-                .ToList();
-
-            if (detalles == null || detalles.Count == 0)
-            {
-                MessageBox.Show(LanguageManager.Traducir("NoHayDetalles") ?? "No se encontraron detalles para el pedido seleccionado.",
-                                LanguageManager.Traducir("Informacion") ?? "Información",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);
-                return;
-            }
-
-            var formDetalles = new FormDetallesPedidos(idPedido, detalles)
-            {
-                TopLevel = false,
-                FormBorderStyle = FormBorderStyle.None,
-                Dock = DockStyle.Fill
-            };
-
             mainScreen.panelContenido.Controls.Clear();
             mainScreen.panelContenido.Controls.Add(formDetalles);
-
             ThemeManager.ApplyTheme(formDetalles, ThemeManager.ModoOscuro);
-
             formDetalles.Show();
         }
 

@@ -17,9 +17,6 @@
   ///WELCOME
   "Welcome_Bienvenido": "Bienvenido",
 
-  ///Dashboard
-  "Dashboard_Titulo": "Menú Principal",
-
   ///SideMenu
   "SideMenu_Usuario": "Usuario",
   "SideMenu_Reporte": "Reporte",
@@ -40,6 +37,7 @@
   "Msg_EditadoCorrectamente": "Producto actualizado correctamente.",
   "Msg_ConfirmarEliminar": "¿Desea eliminar este producto?",
   "Msg_EliminadoCorrectamente": "Producto eliminado correctamente.",
+  "Msg_SeleccionDetalle": "Seleccione una Orden para ver el Detalle.",
 
   ///Cambiar Clave / Mail
   "Config_MensajeClaveVacia": "Debe ingresar una nueva contraseña.",
