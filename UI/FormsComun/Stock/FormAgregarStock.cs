@@ -21,7 +21,8 @@ namespace UI.FormsComun.Stock
 
             private TipoInsumoService _tipoService = new TipoInsumoService();
             private InsumoService _insumoService = new InsumoService();
-            public FormAgregarStock()
+            private ColorService _colorService = new ColorService();
+        public FormAgregarStock()
             {
                 ThemeManager.LoadTheme();
                 InitializeComponent();
@@ -249,14 +250,15 @@ namespace UI.FormsComun.Stock
                     throw new Exception("Precio inválido.");
 
                 int idTipo = _tipoService.ObtenerOCrear(CBX_TipoInsumo.Text.Trim());
+                int idColor = string.IsNullOrWhiteSpace(CBX_Color.Text)
+                    ? 0
+                    : _colorService.ObtenerOCrear(CBX_Color.Text.Trim());
 
                 var model = new InsumoInsert
                 {
                     ID_TipoInsumo = idTipo,
                     Nombre = Txt_NombreInsumo.Text.Trim(),
-                    ID_Color = CBX_Color.SelectedValue != null
-                        ? Convert.ToInt32(CBX_Color.SelectedValue)
-                        : (int?)null,
+                    ID_Color = idColor,
                     CantidadPorUnidad = cantidadUnidad,
                     StockActual = stockActual,
                     StockMinimo = stockMinimo,

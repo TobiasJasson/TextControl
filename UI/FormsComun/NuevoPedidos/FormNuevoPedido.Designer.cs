@@ -61,9 +61,10 @@
             // Lbl_Nombre
             // 
             this.Lbl_Nombre.AutoSize = true;
-            this.Lbl_Nombre.Location = new System.Drawing.Point(12, 141);
+            this.Lbl_Nombre.Location = new System.Drawing.Point(9, 115);
+            this.Lbl_Nombre.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Lbl_Nombre.Name = "Lbl_Nombre";
-            this.Lbl_Nombre.Size = new System.Drawing.Size(113, 16);
+            this.Lbl_Nombre.Size = new System.Drawing.Size(90, 13);
             this.Lbl_Nombre.TabIndex = 0;
             this.Lbl_Nombre.Text = "Nombre Producto";
             this.Lbl_Nombre.Click += new System.EventHandler(this.Lbl_Nombre_Click);
@@ -71,27 +72,30 @@
             // Cbx_Nombre
             // 
             this.Cbx_Nombre.FormattingEnabled = true;
-            this.Cbx_Nombre.Location = new System.Drawing.Point(144, 133);
+            this.Cbx_Nombre.Location = new System.Drawing.Point(108, 108);
+            this.Cbx_Nombre.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Cbx_Nombre.Name = "Cbx_Nombre";
-            this.Cbx_Nombre.Size = new System.Drawing.Size(200, 24);
+            this.Cbx_Nombre.Size = new System.Drawing.Size(151, 21);
             this.Cbx_Nombre.TabIndex = 1;
             this.Cbx_Nombre.SelectedIndexChanged += new System.EventHandler(this.Cbx_Nombre_SelectedIndexChanged);
             // 
             // Cbx_TipoProducto
             // 
             this.Cbx_TipoProducto.FormattingEnabled = true;
-            this.Cbx_TipoProducto.Location = new System.Drawing.Point(144, 80);
+            this.Cbx_TipoProducto.Location = new System.Drawing.Point(108, 65);
+            this.Cbx_TipoProducto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Cbx_TipoProducto.Name = "Cbx_TipoProducto";
-            this.Cbx_TipoProducto.Size = new System.Drawing.Size(200, 24);
+            this.Cbx_TipoProducto.Size = new System.Drawing.Size(151, 21);
             this.Cbx_TipoProducto.TabIndex = 3;
             this.Cbx_TipoProducto.SelectedIndexChanged += new System.EventHandler(this.Cbx_TipoProducto_SelectedIndexChanged);
             // 
             // Lbl_TipoInsumo
             // 
             this.Lbl_TipoInsumo.AutoSize = true;
-            this.Lbl_TipoInsumo.Location = new System.Drawing.Point(12, 88);
+            this.Lbl_TipoInsumo.Location = new System.Drawing.Point(9, 72);
+            this.Lbl_TipoInsumo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Lbl_TipoInsumo.Name = "Lbl_TipoInsumo";
-            this.Lbl_TipoInsumo.Size = new System.Drawing.Size(61, 16);
+            this.Lbl_TipoInsumo.Size = new System.Drawing.Size(50, 13);
             this.Lbl_TipoInsumo.TabIndex = 2;
             this.Lbl_TipoInsumo.Text = "Producto";
             this.Lbl_TipoInsumo.Click += new System.EventHandler(this.Lbl_TipoInsumo_Click);
@@ -99,72 +103,80 @@
             // Lbl_Cantidad
             // 
             this.Lbl_Cantidad.AutoSize = true;
-            this.Lbl_Cantidad.Location = new System.Drawing.Point(12, 226);
+            this.Lbl_Cantidad.Location = new System.Drawing.Point(9, 184);
+            this.Lbl_Cantidad.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Lbl_Cantidad.Name = "Lbl_Cantidad";
-            this.Lbl_Cantidad.Size = new System.Drawing.Size(61, 16);
+            this.Lbl_Cantidad.Size = new System.Drawing.Size(49, 13);
             this.Lbl_Cantidad.TabIndex = 4;
             this.Lbl_Cantidad.Text = "Cantidad";
             this.Lbl_Cantidad.Click += new System.EventHandler(this.Lbl_Cantidad_Click);
             // 
             // NuD_Cantidad
             // 
-            this.NuD_Cantidad.Location = new System.Drawing.Point(144, 220);
+            this.NuD_Cantidad.Location = new System.Drawing.Point(108, 179);
+            this.NuD_Cantidad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.NuD_Cantidad.Name = "NuD_Cantidad";
-            this.NuD_Cantidad.Size = new System.Drawing.Size(200, 22);
+            this.NuD_Cantidad.Size = new System.Drawing.Size(150, 20);
             this.NuD_Cantidad.TabIndex = 5;
             this.NuD_Cantidad.ValueChanged += new System.EventHandler(this.NuD_Cantidad_ValueChanged);
             // 
             // Cbx_Talle
             // 
             this.Cbx_Talle.FormattingEnabled = true;
-            this.Cbx_Talle.Location = new System.Drawing.Point(500, 24);
+            this.Cbx_Talle.Location = new System.Drawing.Point(375, 20);
+            this.Cbx_Talle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Cbx_Talle.Name = "Cbx_Talle";
-            this.Cbx_Talle.Size = new System.Drawing.Size(200, 24);
+            this.Cbx_Talle.Size = new System.Drawing.Size(151, 21);
             this.Cbx_Talle.TabIndex = 7;
             this.Cbx_Talle.SelectedIndexChanged += new System.EventHandler(this.Cbx_Talle_SelectedIndexChanged);
             // 
             // Lbl_Talle
             // 
             this.Lbl_Talle.AutoSize = true;
-            this.Lbl_Talle.Location = new System.Drawing.Point(365, 24);
+            this.Lbl_Talle.Location = new System.Drawing.Point(274, 20);
+            this.Lbl_Talle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Lbl_Talle.Name = "Lbl_Talle";
-            this.Lbl_Talle.Size = new System.Drawing.Size(38, 16);
+            this.Lbl_Talle.Size = new System.Drawing.Size(30, 13);
             this.Lbl_Talle.TabIndex = 6;
             this.Lbl_Talle.Text = "Talle";
             this.Lbl_Talle.Click += new System.EventHandler(this.Lbl_Talle_Click);
             // 
             // NumPrecioTotal
             // 
-            this.NumPrecioTotal.Location = new System.Drawing.Point(500, 133);
+            this.NumPrecioTotal.Location = new System.Drawing.Point(375, 108);
+            this.NumPrecioTotal.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.NumPrecioTotal.Name = "NumPrecioTotal";
-            this.NumPrecioTotal.Size = new System.Drawing.Size(200, 22);
+            this.NumPrecioTotal.Size = new System.Drawing.Size(150, 20);
             this.NumPrecioTotal.TabIndex = 9;
             this.NumPrecioTotal.ValueChanged += new System.EventHandler(this.NumPrecioTotal_ValueChanged);
             // 
             // Lbl_PrecioTotal
             // 
             this.Lbl_PrecioTotal.AutoSize = true;
-            this.Lbl_PrecioTotal.Location = new System.Drawing.Point(369, 135);
+            this.Lbl_PrecioTotal.Location = new System.Drawing.Point(277, 110);
+            this.Lbl_PrecioTotal.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Lbl_PrecioTotal.Name = "Lbl_PrecioTotal";
-            this.Lbl_PrecioTotal.Size = new System.Drawing.Size(80, 16);
+            this.Lbl_PrecioTotal.Size = new System.Drawing.Size(64, 13);
             this.Lbl_PrecioTotal.TabIndex = 8;
             this.Lbl_PrecioTotal.Text = "Precio Total";
             this.Lbl_PrecioTotal.Click += new System.EventHandler(this.Lbl_PrecioTotal_Click);
             // 
             // Num_Adelanto
             // 
-            this.Num_Adelanto.Location = new System.Drawing.Point(500, 81);
+            this.Num_Adelanto.Location = new System.Drawing.Point(375, 66);
+            this.Num_Adelanto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Num_Adelanto.Name = "Num_Adelanto";
-            this.Num_Adelanto.Size = new System.Drawing.Size(200, 22);
+            this.Num_Adelanto.Size = new System.Drawing.Size(150, 20);
             this.Num_Adelanto.TabIndex = 11;
             this.Num_Adelanto.ValueChanged += new System.EventHandler(this.Num_Adelanto_ValueChanged);
             // 
             // Lbl_Adelanto
             // 
             this.Lbl_Adelanto.AutoSize = true;
-            this.Lbl_Adelanto.Location = new System.Drawing.Point(369, 83);
+            this.Lbl_Adelanto.Location = new System.Drawing.Point(277, 67);
+            this.Lbl_Adelanto.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Lbl_Adelanto.Name = "Lbl_Adelanto";
-            this.Lbl_Adelanto.Size = new System.Drawing.Size(61, 16);
+            this.Lbl_Adelanto.Size = new System.Drawing.Size(49, 13);
             this.Lbl_Adelanto.TabIndex = 10;
             this.Lbl_Adelanto.Text = "Adelanto";
             this.Lbl_Adelanto.Click += new System.EventHandler(this.Lbl_Adelanto_Click);
@@ -172,19 +184,21 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(15, 266);
+            this.dataGridView1.Location = new System.Drawing.Point(11, 216);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(685, 182);
+            this.dataGridView1.Size = new System.Drawing.Size(514, 148);
             this.dataGridView1.TabIndex = 12;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // Btn_Agregar
             // 
-            this.Btn_Agregar.Location = new System.Drawing.Point(351, 210);
+            this.Btn_Agregar.Location = new System.Drawing.Point(263, 171);
+            this.Btn_Agregar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Btn_Agregar.Name = "Btn_Agregar";
-            this.Btn_Agregar.Size = new System.Drawing.Size(115, 37);
+            this.Btn_Agregar.Size = new System.Drawing.Size(86, 30);
             this.Btn_Agregar.TabIndex = 13;
             this.Btn_Agregar.Text = "Agregar";
             this.Btn_Agregar.UseVisualStyleBackColor = true;
@@ -193,27 +207,30 @@
             // Cbx_Cliente
             // 
             this.Cbx_Cliente.FormattingEnabled = true;
-            this.Cbx_Cliente.Location = new System.Drawing.Point(144, 24);
+            this.Cbx_Cliente.Location = new System.Drawing.Point(108, 20);
+            this.Cbx_Cliente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Cbx_Cliente.Name = "Cbx_Cliente";
-            this.Cbx_Cliente.Size = new System.Drawing.Size(200, 24);
+            this.Cbx_Cliente.Size = new System.Drawing.Size(151, 21);
             this.Cbx_Cliente.TabIndex = 15;
             this.Cbx_Cliente.SelectedIndexChanged += new System.EventHandler(this.Cbx_Cliente_SelectedIndexChanged);
             // 
             // Lbl_Cliente
             // 
             this.Lbl_Cliente.AutoSize = true;
-            this.Lbl_Cliente.Location = new System.Drawing.Point(12, 32);
+            this.Lbl_Cliente.Location = new System.Drawing.Point(9, 26);
+            this.Lbl_Cliente.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Lbl_Cliente.Name = "Lbl_Cliente";
-            this.Lbl_Cliente.Size = new System.Drawing.Size(48, 16);
+            this.Lbl_Cliente.Size = new System.Drawing.Size(39, 13);
             this.Lbl_Cliente.TabIndex = 14;
             this.Lbl_Cliente.Text = "Cliente";
             this.Lbl_Cliente.Click += new System.EventHandler(this.Lbl_Cliente_Click);
             // 
             // Btn_Eliminar
             // 
-            this.Btn_Eliminar.Location = new System.Drawing.Point(472, 210);
+            this.Btn_Eliminar.Location = new System.Drawing.Point(354, 171);
+            this.Btn_Eliminar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Btn_Eliminar.Name = "Btn_Eliminar";
-            this.Btn_Eliminar.Size = new System.Drawing.Size(111, 37);
+            this.Btn_Eliminar.Size = new System.Drawing.Size(83, 30);
             this.Btn_Eliminar.TabIndex = 16;
             this.Btn_Eliminar.Text = "Eliminar";
             this.Btn_Eliminar.UseVisualStyleBackColor = true;
@@ -221,9 +238,10 @@
             // 
             // Btn_Editar
             // 
-            this.Btn_Editar.Location = new System.Drawing.Point(589, 210);
+            this.Btn_Editar.Location = new System.Drawing.Point(442, 171);
+            this.Btn_Editar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Btn_Editar.Name = "Btn_Editar";
-            this.Btn_Editar.Size = new System.Drawing.Size(111, 37);
+            this.Btn_Editar.Size = new System.Drawing.Size(83, 30);
             this.Btn_Editar.TabIndex = 17;
             this.Btn_Editar.Text = "Editar";
             this.Btn_Editar.UseVisualStyleBackColor = true;
@@ -231,9 +249,10 @@
             // 
             // Btn_Cargar
             // 
-            this.Btn_Cargar.Location = new System.Drawing.Point(415, 468);
+            this.Btn_Cargar.Location = new System.Drawing.Point(311, 380);
+            this.Btn_Cargar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Btn_Cargar.Name = "Btn_Cargar";
-            this.Btn_Cargar.Size = new System.Drawing.Size(95, 37);
+            this.Btn_Cargar.Size = new System.Drawing.Size(71, 30);
             this.Btn_Cargar.TabIndex = 18;
             this.Btn_Cargar.Text = "Cargar";
             this.Btn_Cargar.UseVisualStyleBackColor = true;
@@ -241,9 +260,10 @@
             // 
             // Btn_Cancelar
             // 
-            this.Btn_Cancelar.Location = new System.Drawing.Point(589, 468);
+            this.Btn_Cancelar.Location = new System.Drawing.Point(442, 380);
+            this.Btn_Cancelar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Btn_Cancelar.Name = "Btn_Cancelar";
-            this.Btn_Cancelar.Size = new System.Drawing.Size(95, 37);
+            this.Btn_Cancelar.Size = new System.Drawing.Size(71, 30);
             this.Btn_Cancelar.TabIndex = 19;
             this.Btn_Cancelar.Text = "Cancelar";
             this.Btn_Cancelar.UseVisualStyleBackColor = true;
@@ -252,18 +272,20 @@
             // Cbx_Color
             // 
             this.Cbx_Color.FormattingEnabled = true;
-            this.Cbx_Color.Location = new System.Drawing.Point(144, 177);
+            this.Cbx_Color.Location = new System.Drawing.Point(108, 144);
+            this.Cbx_Color.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Cbx_Color.Name = "Cbx_Color";
-            this.Cbx_Color.Size = new System.Drawing.Size(200, 24);
+            this.Cbx_Color.Size = new System.Drawing.Size(151, 21);
             this.Cbx_Color.TabIndex = 21;
             this.Cbx_Color.SelectedIndexChanged += new System.EventHandler(this.Cbx_Color_SelectedIndexChanged);
             // 
             // Lbl_Color
             // 
             this.Lbl_Color.AutoSize = true;
-            this.Lbl_Color.Location = new System.Drawing.Point(12, 185);
+            this.Lbl_Color.Location = new System.Drawing.Point(9, 150);
+            this.Lbl_Color.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Lbl_Color.Name = "Lbl_Color";
-            this.Lbl_Color.Size = new System.Drawing.Size(39, 16);
+            this.Lbl_Color.Size = new System.Drawing.Size(31, 13);
             this.Lbl_Color.TabIndex = 20;
             this.Lbl_Color.Text = "Color";
             this.Lbl_Color.Click += new System.EventHandler(this.Lbl_Color_Click);
@@ -271,9 +293,10 @@
             // Lbl_FaltaPagar
             // 
             this.Lbl_FaltaPagar.AutoSize = true;
-            this.Lbl_FaltaPagar.Location = new System.Drawing.Point(369, 180);
+            this.Lbl_FaltaPagar.Location = new System.Drawing.Point(277, 146);
+            this.Lbl_FaltaPagar.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Lbl_FaltaPagar.Name = "Lbl_FaltaPagar";
-            this.Lbl_FaltaPagar.Size = new System.Drawing.Size(77, 16);
+            this.Lbl_FaltaPagar.Size = new System.Drawing.Size(61, 13);
             this.Lbl_FaltaPagar.TabIndex = 22;
             this.Lbl_FaltaPagar.Text = "Falta Pagar";
             this.Lbl_FaltaPagar.Click += new System.EventHandler(this.Lbl_FaltaPagar_Click);
@@ -281,18 +304,19 @@
             // Lbl_FaltaPagarResult
             // 
             this.Lbl_FaltaPagarResult.AutoSize = true;
-            this.Lbl_FaltaPagarResult.Location = new System.Drawing.Point(506, 185);
+            this.Lbl_FaltaPagarResult.Location = new System.Drawing.Point(380, 150);
+            this.Lbl_FaltaPagarResult.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Lbl_FaltaPagarResult.Name = "Lbl_FaltaPagarResult";
-            this.Lbl_FaltaPagarResult.Size = new System.Drawing.Size(77, 16);
+            this.Lbl_FaltaPagarResult.Size = new System.Drawing.Size(61, 13);
             this.Lbl_FaltaPagarResult.TabIndex = 23;
             this.Lbl_FaltaPagarResult.Text = "Falta Pagar";
             this.Lbl_FaltaPagarResult.Click += new System.EventHandler(this.Lbl_FaltaPagarResult_Click);
             // 
             // FormNuevoPedido
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(762, 517);
+            this.ClientSize = new System.Drawing.Size(572, 420);
             this.Controls.Add(this.Lbl_FaltaPagarResult);
             this.Controls.Add(this.Lbl_FaltaPagar);
             this.Controls.Add(this.Cbx_Color);
@@ -318,6 +342,7 @@
             this.Controls.Add(this.Cbx_Nombre);
             this.Controls.Add(this.Lbl_Nombre);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FormNuevoPedido";
             this.Text = "FormNuevoPedido";
             this.Load += new System.EventHandler(this.FormNuevoPedido_Load);

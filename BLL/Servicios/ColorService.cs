@@ -19,7 +19,14 @@ namespace BLL.Servicios
 
         public int ObtenerOCrear(string descripcion)
         {
-            return _repo.ObtenerOCrear(descripcion);
+            if (string.IsNullOrWhiteSpace(descripcion))
+                return 0; // o null si tu campo es nullable
+
+            var existe = _repo.ObtenerPorDescripcion(descripcion.Trim());
+            if (existe != null)
+                return existe.ID_Color;
+
+            return _repo.CrearColor(descripcion.Trim());
         }
     }
 }

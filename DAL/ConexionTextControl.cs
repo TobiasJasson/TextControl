@@ -12,11 +12,44 @@ namespace DAL
     {
         private readonly string _connectionString;
 
+        private static readonly string[] PossibleServers =
+        {
+            @"(localdb)\MSSQLLocalDB",
+            @"localhost\SQLEXPRESS",
+            @"localhost"
+        };
+
         public ConexionTextControl()
         {
-             _connectionString = ConfigurationManager.ConnectionStrings["TextControlDb"].ConnectionString;
+            // Detecta un servidor disponible
+            string server = DetectAvailableServer();
 
+            // Construye la cadena de conexión dinámicamente
+            _connectionString = $"Server={server};Database=TextControl;Trusted_Connection=True;";
         }
+
+        private string DetectAvailableServer()
+        {
+            foreach (var server in PossibleServers)
+            {
+                try
+                {
+                    using (var conn = new SqlConnection($"Server={server};Database=master;Trusted_Connection=True;"))
+                    {
+                        conn.Open();
+                        Console.WriteLine($"✔ Servidor disponible: {server}");
+                        return server;
+                    }
+                }
+                catch
+                {
+                    Console.WriteLine($"✘ No se pudo conectar a {server}, probando siguiente...");
+                }
+            }
+
+            throw new Exception("❌ No se encontró ninguna instancia válida de SQL Server.");
+        }
+
         public SqlConnection GetConnection()
         {
             var conn = new SqlConnection(_connectionString);

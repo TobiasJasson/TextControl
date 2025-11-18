@@ -27,7 +27,8 @@ namespace DAL.Repository
             {
                 string query = @"
                 SELECT 
-                    i.ID_Insumo,
+                    i.ID_Insumo, 
+                    i.ID_TipoInsumo,
                     ti.Descripcion AS TipoInsumo,
                     i.Nombre,
                     c.ID_Color,
@@ -65,18 +66,18 @@ namespace DAL.Repository
                         lista.Add(new Insumo
                         {
                             ID_Insumo = dr.GetInt32(0),
-                            ID_TipoInsumo = dr.GetInt32(1), // el ID
+                            ID_TipoInsumo = dr.GetInt32(1), // ahora corresponde al ID correcto
                             TipoInsumoDescripcion = dr.IsDBNull(2) ? null : dr.GetString(2),
-                            Nombre = dr.IsDBNull(2) ? null : dr.GetString(2),
-                            ID_Color = dr.IsDBNull(3) ? (int?)null : dr.GetInt32(3),
-                            ColorNombre = dr.IsDBNull(4) ? null : dr.GetString(4),
-                            CantidadPorUnidad = dr.IsDBNull(5) ? (double?)null : Convert.ToDouble(dr[5]),
-                            StockActual = dr.GetInt32(6),
-                            StockMinimo = dr.GetInt32(7),
-                            CantidadMovimiento = dr.IsDBNull(8) ? 0 : dr.GetInt32(8),
-                            UltimaSalida = dr.IsDBNull(9) ? (DateTime?)null : dr.GetDateTime(9),
-                            TipoMovimiento = dr.IsDBNull(10) ? null : dr.GetString(10),
-                            PrecioUnitario = dr.IsDBNull(11) ? 0 : Convert.ToDouble(dr[11])
+                            Nombre = dr.IsDBNull(3) ? null : dr.GetString(3),
+                            ID_Color = dr.IsDBNull(4) ? (int?)null : dr.GetInt32(4),
+                            ColorNombre = dr.IsDBNull(5) ? null : dr.GetString(5),
+                            CantidadPorUnidad = dr.IsDBNull(6) ? (double?)null : Convert.ToDouble(dr[6]),
+                            StockActual = dr.GetInt32(7),
+                            StockMinimo = dr.GetInt32(8),
+                            CantidadMovimiento = dr.IsDBNull(9) ? 0 : dr.GetInt32(9),
+                            UltimaSalida = dr.IsDBNull(10) ? (DateTime?)null : dr.GetDateTime(10),
+                            TipoMovimiento = dr.IsDBNull(11) ? null : dr.GetString(11),
+                            PrecioUnitario = dr.IsDBNull(12) ? 0 : Convert.ToDouble(dr[12])
                         });
                     }
                 }

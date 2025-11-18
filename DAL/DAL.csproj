@@ -112,7 +112,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ScriptsSQL\SeguridadTextControlDB.sql" />
+    <Content Include="ScriptsSQL\SeguridadTextControlDB.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="ScriptsSQL\TextControlDB.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

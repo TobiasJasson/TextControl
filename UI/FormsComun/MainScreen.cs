@@ -128,7 +128,7 @@ namespace UI
 
         private async Task MostrarFormNuevoPedido()
         {
-            pantallaActual = "Venta";
+            pantallaActual = "SideMenu_Venta";
             lblTitle.Text = LanguageManager.Traducir("SideMenu_Venta");
             panelContenido.Controls.Clear();
 
