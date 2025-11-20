@@ -176,29 +176,39 @@ namespace UI.FormsComun.Stock
 
         private void CBX_TipoInsumo_SelectedIndexChanged(object sender, EventArgs e)
         {
-                //if(CBX_TipoInsumo.Focused == false)
-                //return;
+            if (CBX_TipoInsumo.SelectedValue is int tipoId && tipoId > 0)
+            {
+                var insumosFiltrados = _insumoService.ObtenerStock()
+                       .Where(i => i.ID_TipoInsumo == tipoId)
+                       .Select(i => new Insumo
+                       {
+                           ID_Insumo = i.ID_Insumo,
+                           Nombre = i.Nombre
+                       })
+                       .Distinct()
+                       .ToList();
 
-                //string texto = CBX_TipoInsumo.Text.Trim();
+                insumosFiltrados.Insert(0, new Insumo
+                {
+                    ID_Insumo = 0,
+                    Nombre = ""
+                });
 
-                //var lista = string.IsNullOrWhiteSpace(texto)
-                //    ? _tipoService.ObtenerTodos()
-                //    : _tipoService.BuscarCoincidencias(texto)
-                //                 .Select(t => new TipoInsumo { ID_TipoInsumo = 0, Descripcion = t })
-                //                 .ToList();
+                Cbx_NombreInsumo.DataSource = insumosFiltrados;
+                Cbx_NombreInsumo.DisplayMember = "Nombre";
+                Cbx_NombreInsumo.ValueMember = "ID_Insumo";
+                Cbx_NombreInsumo.SelectedIndex = 0;
 
-                //lista.Insert(0, new TipoInsumo { ID_TipoInsumo = 0, Descripcion = "" });
+                Cbx_NombreInsumo.DropDownStyle = ComboBoxStyle.DropDown;
+                Cbx_NombreInsumo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                Cbx_NombreInsumo.AutoCompleteSource = AutoCompleteSource.ListItems;
 
-                //int pos = CBX_TipoInsumo.SelectionStart;
-
-                //CBX_TipoInsumo.BeginUpdate();
-                //CBX_TipoInsumo.DataSource = lista;
-                //CBX_TipoInsumo.DisplayMember = "Descripcion";
-                //CBX_TipoInsumo.ValueMember = "ID_TipoInsumo";
-                //CBX_TipoInsumo.EndUpdate();
-
-                //CBX_TipoInsumo.DroppedDown = true;
-                //CBX_TipoInsumo.SelectionStart = pos;
+                CBX_Color.SelectedIndex = 0;
+            }
+            else
+            {
+                Cbx_NombreInsumo.DataSource = null;
+            }
         }
 
             private void Txt_NombreInsumo_TextChanged(object sender, EventArgs e)
@@ -228,95 +238,81 @@ namespace UI.FormsComun.Stock
 
             private void Btn_Agregar_Click(object sender, EventArgs e)
             {
-            try
-            {
-                if (string.IsNullOrWhiteSpace(CBX_TipoInsumo.Text))
-                    throw new Exception("Debe ingresar un tipo de insumo.");
-
-                if (string.IsNullOrWhiteSpace(Txt_NombreInsumo.Text))
-                    throw new Exception("Debe ingresar un nombre.");
-
-                if (!int.TryParse(Txt_StockActual.Text, out int stockActual))
-                    throw new Exception("Stock actual inválido.");
-
-                if (!int.TryParse(Txt_StockMinimo.Text, out int stockMinimo))
-                    throw new Exception("Stock mínimo inválido.");
-
-                if (!int.TryParse(Txt_CantidadUnidad.Text, out int cantidadUnidad))
-                    throw new Exception("Cantidad por unidad inválida.");
-
-                if (!decimal.TryParse(Txt_PrecioUnitario.Text.Replace(",", "."), NumberStyles.Any,
-                    CultureInfo.InvariantCulture, out decimal precioUnitario))
-                    throw new Exception("Precio inválido.");
-
-                int idTipo = _tipoService.ObtenerOCrear(CBX_TipoInsumo.Text.Trim());
-                int idColor = string.IsNullOrWhiteSpace(CBX_Color.Text)
-                    ? 0
-                    : _colorService.ObtenerOCrear(CBX_Color.Text.Trim());
-
-                var model = new InsumoInsert
+                try
                 {
-                    ID_TipoInsumo = idTipo,
-                    Nombre = Txt_NombreInsumo.Text.Trim(),
-                    ID_Color = idColor,
-                    CantidadPorUnidad = cantidadUnidad,
-                    StockActual = stockActual,
-                    StockMinimo = stockMinimo,
-                    PrecioUnitario = precioUnitario
-                };
+                    if (string.IsNullOrWhiteSpace(CBX_TipoInsumo.Text))
+                        throw new Exception("Debe ingresar un tipo de insumo.");
 
-                int idNuevo = _insumoService.CrearInsumo(model);
+                    if (string.IsNullOrWhiteSpace(Cbx_NombreInsumo.Text))
+                        throw new Exception("Debe ingresar un nombre.");
 
-                MessageBox.Show(
+                    if (!int.TryParse(Txt_StockActual.Text, out int stockActual))
+                        throw new Exception("Stock actual inválido.");
+
+                    if (!int.TryParse(Txt_StockMinimo.Text, out int stockMinimo))
+                        throw new Exception("Stock mínimo inválido.");
+
+                    if (!int.TryParse(Txt_CantidadUnidad.Text, out int cantidadUnidad))
+                        throw new Exception("Cantidad por unidad inválido.");
+
+                    if (!decimal.TryParse(Txt_PrecioUnitario.Text.Replace(",", "."), NumberStyles.Any,
+                        CultureInfo.InvariantCulture, out decimal precioUnitario))
+                        throw new Exception("Precio inválido.");
+
+                    string nombre = Cbx_NombreInsumo.Text.Trim();
+                    int idTipo = _tipoService.ObtenerOCrear(CBX_TipoInsumo.Text.Trim());
+                    int idColor = string.IsNullOrWhiteSpace(CBX_Color.Text)
+                        ? 0
+                        : _colorService.ObtenerOCrear(CBX_Color.Text.Trim());
+
+                    int idInsumo;
+
+                    if (Cbx_NombreInsumo.SelectedValue is int id && id > 0)
+                    {
+                        idInsumo = id;
+                    }
+                    else
+                    {
+                        idInsumo = _insumoService.CrearInsumo(new InsumoInsert
+                        {
+                            ID_TipoInsumo = idTipo,
+                            Nombre = nombre,
+                            ID_Color = idColor,
+                            CantidadPorUnidad = cantidadUnidad,
+                            StockActual = stockActual,
+                            StockMinimo = stockMinimo,
+                            PrecioUnitario = precioUnitario
+                        });
+                    }
+
+                    MessageBox.Show(
                         $"{LanguageManager.Traducir("Lbl_titleTipoStock")} {CBX_TipoInsumo.Text} {LanguageManager.Traducir("Mensaje_Exito").ToLower()}",
                         LanguageManager.Traducir("Mensaje_Exito"));
 
-                MainScreen mainScreen = Navigator.GetMain(this);
-                if (mainScreen == null) { Close(); return; }
+                    MainScreen mainScreen = Navigator.GetMain(this);
+                    if (mainScreen == null) { Close(); return; }
 
-                FormStock form = new FormStock()
+                    FormStock form = new FormStock()
+                    {
+                        TopLevel = false,
+                        FormBorderStyle = FormBorderStyle.None,
+                        Dock = DockStyle.Fill
+                    };
+
+                    mainScreen.lblTitle.Text = LanguageManager.Traducir("SideMenu_Stock");
+
+                    mainScreen.panelContenido.Controls.Clear();
+                    mainScreen.panelContenido.Controls.Add(form);
+                    ThemeManager.ApplyTheme(form, ThemeManager.ModoOscuro);
+                    form.Show();
+                }
+                catch (Exception ex)
                 {
-                    TopLevel = false,
-                    FormBorderStyle = FormBorderStyle.None,
-                    Dock = DockStyle.Fill
-                };
-
-                mainScreen.lblTitle.Text = LanguageManager.Traducir("SideMenu_Stock");
-
-                mainScreen.panelContenido.Controls.Clear();
-                mainScreen.panelContenido.Controls.Add(form);
-
-                ThemeManager.ApplyTheme(form, ThemeManager.ModoOscuro);
-
-                form.Show();
+                    MessageBox.Show(ex.Message, "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                MainScreen mainScreen = Navigator.GetMain(this);
-                if (mainScreen == null) { Close(); return; }
-
-                FormStock form = new FormStock()
-                {
-                    TopLevel = false,
-                    FormBorderStyle = FormBorderStyle.None,
-                    Dock = DockStyle.Fill
-                };
-
-                mainScreen.lblTitle.Text = LanguageManager.Traducir("SideMenu_Stock");
-
-                mainScreen.panelContenido.Controls.Clear();
-                mainScreen.panelContenido.Controls.Add(form);
-
-                ThemeManager.ApplyTheme(form, ThemeManager.ModoOscuro);
-
-                form.Show();
-            }
-
-        }
-
-            private void Btn_Cancelar_Click(object sender, EventArgs e)
+        private void Btn_Cancelar_Click(object sender, EventArgs e)
             {
 
                 MainScreen mainScreen = Navigator.GetMain(this);
@@ -376,6 +372,10 @@ namespace UI.FormsComun.Stock
         private void Lbl_PrecioUnitario_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void Cbx_NombreInsumo_SelectedIndexChanged(object sender, EventArgs e)
+        {
         }
     }
     }

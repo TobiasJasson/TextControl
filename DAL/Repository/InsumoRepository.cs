@@ -223,5 +223,70 @@ namespace DAL.Repository
 
             return lista;
         }
+
+        public List<ColorModel> ObtenerColoresPorInsumo(int idInsumo)
+        {
+            var lista = new List<ColorModel>();
+
+            using (var con = _conexion.GetConnection())
+            {
+                string query = @"
+            SELECT c.ID_Color, c.Descripcion_Color
+            FROM Insumo ic
+            INNER JOIN Color c ON ic.ID_Color = c.ID_Color
+            WHERE ic.ID_Insumo = @idInsumo";
+
+                using (var cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@idInsumo", idInsumo);
+
+                    using (var dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            lista.Add(new ColorModel
+                            {
+                                ID_Color = dr.GetInt32(0),
+                                Descripcion = dr.GetString(1)
+                            });
+                        }
+                    }
+                }
+            }
+
+            return lista;
+        }
+
+        public List<Insumo> ObtenerPorTipo(int idTipo)
+        {
+            var lista = new List<Insumo>();
+
+            using (SqlConnection con = _conexion.GetConnection())
+            {
+                string query = @"
+            SELECT ID_Insumo, Nombre 
+            FROM Insumo 
+            WHERE ID_TipoInsumo = @tipo
+            ORDER BY Nombre";
+
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@tipo", idTipo);
+
+                    using (var dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            lista.Add(new Insumo
+                            {
+                                ID_Insumo = dr.GetInt32(0),
+                                Nombre = dr.GetString(1)
+                            });
+                        }
+                    }
+                }
+            }
+            return lista;
+        }
     }
 }

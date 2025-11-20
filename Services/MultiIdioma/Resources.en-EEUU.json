@@ -18,6 +18,7 @@
   "Welcome_Bienvenido": "Welcome",
 
   ///SideMenu
+  "SideMenu_Cliente": "Customer",
   "SideMenu_Usuario": "User",
   "SideMenu_Reporte": "Report",
   "SideMenu_Stock": "Stock",
@@ -127,5 +128,63 @@
   "Empleado": "Employee",
   "Total_Precio": "Total Price",
   "Pago_Adelanto": "Down Payment",
-  "Total_Pendiente": "Amount Due"
+  "Total_Pendiente": "Amount Due",
+
+  ///Cliente
+  "Cliente_Agregado": "Customer added successfully.",
+  "Cliente_Actualizado": "Customer updated successfully.",
+  "Cliente_Eliminado": "Customer deleted successfully.",
+  "Cliente_Seleccion_Editar": "Select a customer to edit.",
+  "Cliente_Seleccion_Eliminar": "Select a customer to delete.",
+  "Cliente_Confirmar_Eliminar": "Do you want to delete this customer?",
+  "Cliente_Error_Cargar": "Error loading customers: ",
+  "Cliente_Error_Agregar": "Error adding: ",
+  "Cliente_Error_Actualizar": "Error updating: ",
+  "Cliente_Error_Eliminar": "Error deleting: ",
+  "Cliente_Campos_Nombre": "You must enter a name.",
+  "Cliente_Campos_Email": "You must enter an email.",
+
+  ///New Order
+  "NuevoPedido_Titulo": "New Order",
+  "NuevoPedido_Cliente": "Customer",
+  "NuevoPedido_TipoProducto": "Product",
+  "NuevoPedido_NombreProducto": "Product Name",
+  "NuevoPedido_Color": "Color",
+  "NuevoPedido_Talle": "Size",
+  "NuevoPedido_Cantidad": "Quantity",
+  "NuevoPedido_Adelanto": "Deposit",
+  "NuevoPedido_PrecioTotal": "Total Price",
+  "NuevoPedido_FaltaPagar": "Amount Due",
+  "NuevoPedido_FaltaPagarResultPrefix": "",
+
+  "NuevoPedido_BtnAgregar": "Add",
+  "NuevoPedido_BtnEliminar": "Remove",
+  "NuevoPedido_BtnEditar": "Edit",
+  "NuevoPedido_BtnCargar": "Submit",
+  "NuevoPedido_BtnCancelar": "Cancel",
+
+  "NuevoPedido_Col_Insumo": "Item",
+  "NuevoPedido_Col_Color": "Color",
+  "NuevoPedido_Col_Talle": "Size",
+  "NuevoPedido_Col_Cantidad": "Quantity",
+  "NuevoPedido_Col_PrecioUnitario": "Unit Price",
+  "NuevoPedido_Col_Subtotal": "Subtotal",
+  "NuevoPedido_Col_Adelanto": "Deposit",
+  "NuevoPedido_Col_FaltaPagar": "Amount Due",
+
+  "NuevoPedido_Msg_SeleccionarCliente": "You must select a customer.",
+  "NuevoPedido_Msg_SeleccionarProducto": "You must select a product.",
+  "NuevoPedido_Msg_SeleccionarColor": "You must select a color.",
+  "NuevoPedido_Msg_SeleccionarTalle": "You must select a size.",
+  "NuevoPedido_Msg_CantidadMayorCero": "Quantity must be greater than 0.",
+  "NuevoPedido_Msg_PrecioInvalido": "Product price is invalid or not set.",
+  "NuevoPedido_Msg_DetalleAgregado": "Item added successfully.",
+  "NuevoPedido_Msg_SeleccionarDetalleEliminar": "Select an item to remove.",
+  "NuevoPedido_Msg_ConfirmarEliminar": "Do you want to remove this item?",
+  "NuevoPedido_Msg_SeleccionarDetalleEditar": "Select an item to edit.",
+  "NuevoPedido_Msg_AgregarProductoAntesDeCargar": "Add at least one product to submit the order.",
+  "NuevoPedido_Msg_PedidoGuardado": "Order saved successfully.",
+
+  "Mensaje_Error": "Error",
+  "Mensaje_Advertencia": "Warning"
 }

@@ -37,5 +37,54 @@ namespace DAL.Repository
 
             return lista;
         }
+        public void Insertar(Cliente c)
+        {
+            using (var con = _conexion.GetConnection())
+            {
+                string query = @"INSERT INTO Cliente (Nombre_Cliente, Contacto_Cliente, Email_Cliente)
+                                 VALUES (@nombre, @contacto, @email)";
+                using (var cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@nombre", c.Nombre_Cliente);
+                    cmd.Parameters.AddWithValue("@contacto", c.Contacto_Cliente ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@email", c.Email_Cliente ?? (object)DBNull.Value);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void Actualizar(Cliente c)
+        {
+            using (var con = _conexion.GetConnection())
+            {
+                string query = @"UPDATE Cliente
+                                 SET Nombre_Cliente=@nombre,
+                                     Contacto_Cliente=@contacto,
+                                     Email_Cliente=@email
+                                 WHERE ID_Cliente=@id";
+
+                using (var cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@id", c.ID_Cliente);
+                    cmd.Parameters.AddWithValue("@nombre", c.Nombre_Cliente);
+                    cmd.Parameters.AddWithValue("@contacto", c.Contacto_Cliente ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@email", c.Email_Cliente ?? (object)DBNull.Value);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void Eliminar(int idCliente)
+        {
+            using (var con = _conexion.GetConnection())
+            {
+                string query = "DELETE FROM Cliente WHERE ID_Cliente=@id";
+                using (var cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@id", idCliente);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

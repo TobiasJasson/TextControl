@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace DAL.ScriptsSQL
@@ -27,7 +28,7 @@ namespace DAL.ScriptsSQL
             InitializeDatabase(_dbSeguridad, "SeguridadTextControlDB.sql");
         }
 
-        private static void InitializeDatabase(string dbName, string scriptFile)
+        public static void InitializeDatabase(string dbName, string scriptFile)
         {
             string workingServer = DetectAvailableServer();
 
@@ -49,6 +50,11 @@ namespace DAL.ScriptsSQL
             }
         }
 
+        public static void ExecuteSqlScriptOnMaster(string masterConn, string script)
+        {
+            ExecuteSqlScript(masterConn, script, null);
+        }
+
         private static string DetectAvailableServer()
         {
             foreach (var server in PossibleServers)
@@ -58,17 +64,15 @@ namespace DAL.ScriptsSQL
                     using (var conn = new SqlConnection($"Server={server};Database=master;Trusted_Connection=True;"))
                     {
                         conn.Open();
-                        Console.WriteLine($"✔ Servidor disponible: {server}");
                         return server;
                     }
                 }
                 catch
                 {
-                    Console.WriteLine($"✘ No se pudo conectar a {server}, probando siguiente...");
                 }
             }
 
-            throw new Exception("❌ No se encontró ninguna instancia válida de SQL Server.");
+            throw new Exception("No se encontró ninguna instancia válida de SQL Server.");
         }
 
         private static bool DatabaseExists(string masterConn, string dbName)
@@ -84,18 +88,13 @@ namespace DAL.ScriptsSQL
             }
         }
 
-        private static void ExecuteSqlScript(string masterConn, string script, string dbName)
+        public static void ExecuteSqlScript(string masterConn, string script, string targetDbName)
         {
             using (var conn = new SqlConnection(masterConn))
             {
                 conn.Open();
 
-                script = System.Text.RegularExpressions.Regex.Replace(
-                    script,
-                    @"FILENAME\s*=\s*N'[^']+'",
-                    "",
-                    System.Text.RegularExpressions.RegexOptions.IgnoreCase
-                );
+                script = Regex.Replace(script, @"FILENAME\s*=\s*N'[^']+'", "", RegexOptions.IgnoreCase);
                 script = script.Replace(", ,", ",");
 
                 var lines = script.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
@@ -105,7 +104,7 @@ namespace DAL.ScriptsSQL
                 {
                     if (line.Trim().Equals("GO", StringComparison.OrdinalIgnoreCase))
                     {
-                        ExecuteBlock(conn, sb, dbName);
+                        ExecuteBlock(conn, sb.ToString(), targetDbName);
                         sb.Clear();
                     }
                     else
@@ -115,29 +114,60 @@ namespace DAL.ScriptsSQL
                 }
 
                 if (sb.Length > 0)
-                    ExecuteBlock(conn, sb, dbName);
+                    ExecuteBlock(conn, sb.ToString(), targetDbName);
             }
         }
 
-        private static void ExecuteBlock(SqlConnection conn, StringBuilder sb, string dbName)
+        private static void ExecuteBlock(SqlConnection conn, string blockSql, string targetDbName)
         {
-            if (sb.Length == 0) return;
-            using (SqlCommand cmd = new SqlCommand(sb.ToString(), conn))
+            if (string.IsNullOrWhiteSpace(blockSql)) return;
+
+            string sqlToRun = blockSql;
+
+            if (!string.IsNullOrEmpty(targetDbName))
             {
+                var lower = blockSql.ToLowerInvariant();
+                if (!lower.Contains("create database") && !lower.Contains("use ["))
+                {
+                    sqlToRun = $"USE [{targetDbName}]\n{blockSql}";
+                }
+            }
+
+            using (SqlCommand cmd = new SqlCommand(sqlToRun, conn))
+            {
+                cmd.CommandTimeout = 600;
                 cmd.ExecuteNonQuery();
             }
         }
 
-        public static string GetConnectionString()
+        public static string GetConnectionString(string dbName)
         {
-            string server = DetectAvailableServer();
-            return $"Server={server};Database={_dbNegocio};Trusted_Connection=True;";
+            var server = DetectAvailableServer();
+            return $"Server={server};Database={dbName};Trusted_Connection=True;";
         }
 
-        public static string GetConnectionStringSeguridad()
+        public static string GetNegocioConnectionString() => GetConnectionString(_dbNegocio);
+        public static string GetSeguridadConnectionString() => GetConnectionString(_dbSeguridad);
+
+        public static void DropDatabaseIfExists(string dbName)
         {
             string server = DetectAvailableServer();
-            return $"Server={server};Database={_dbSeguridad};Trusted_Connection=True;";
+            string masterConn = $"Server={server};Database=master;Trusted_Connection=True;";
+            using (var conn = new SqlConnection(masterConn))
+            {
+                conn.Open();
+                using (var cmd = new SqlCommand($@"
+                    IF EXISTS (SELECT name FROM sys.databases WHERE name = N'{dbName}')
+                    BEGIN
+                        ALTER DATABASE [{dbName}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+                        DROP DATABASE [{dbName}];
+                    END
+                    ", conn))
+                {
+                    cmd.CommandTimeout = 600;
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
     }
 }

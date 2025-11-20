@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.SqlServer;
 
 namespace UI.FormsComun
 {
@@ -18,6 +19,8 @@ namespace UI.FormsComun
     {
         private UsuarioService _usuarioService;
         private EmpleadoService _empleadoService;
+        private readonly BackupService _backupService = new BackupService();
+
 
         public FormConfig()
         {
@@ -40,6 +43,9 @@ namespace UI.FormsComun
             TxtNuevaClave.Text = LanguageManager.Traducir("TxtNuevaClave");
             TxtConfirmarClave.Text = LanguageManager.Traducir("TxtConfirmarClave");
             Txt_NuevoMail.Text = LanguageManager.Traducir("Txt_NuevoMail");
+            Lbl_NameUser.Text = LanguageManager.Traducir("Lbl_NameUser");
+            Txt_NameUser.Text = LanguageManager.Traducir("Txt_NameUser");
+            Btn_NameUser.Text = LanguageManager.Traducir("BtnCambiarNameUser");
         }
 
         private async void FormConfig_Load(object sender, EventArgs e)
@@ -203,6 +209,105 @@ namespace UI.FormsComun
         }
 
         private void Lbl_titleCambiarClave_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TxtConfirmarClave_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Btn_NameUser_Click(object sender, EventArgs e)
+        {
+            string nameUser = Txt_NameUser.Text.Trim();
+
+            if (string.IsNullOrEmpty(nameUser) || nameUser == LanguageManager.Traducir("Txt_NameUser"))
+            {
+                MessageBox.Show(LanguageManager.Traducir("Config_MensajeNameUserVacio"),
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+
+            int idUser = SessionManager.Instance.UsuarioActual.IdUsuario;
+            bool exito = _usuarioService.CambiarNameUser(nameUser, idUser);
+
+            MessageBox.Show(exito
+                ? LanguageManager.Traducir("Config_MensajeClaveCambiada")
+                : LanguageManager.Traducir("Config_MensajeErrorClave"),
+                "Configuración", MessageBoxButtons.OK,
+                exito ? MessageBoxIcon.Information : MessageBoxIcon.Error);
+
+            if (exito)
+            {
+                SetPlaceholder(Txt_NameUser);
+            }
+        }
+
+        
+
+
+        private void Btn_ImportarBackUP_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _backupService.ImportarBackupUsuario();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error importando: " + ex.Message);
+            }
+        }
+
+        private void Btn_GenerarBackUp_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _backupService.GenerarBackupInterno();
+                MessageBox.Show("Backup interno generado correctamente.", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void Btn_RestaurarBackUp_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var confirm = MessageBox.Show("Esto borrará las bases actuales y las recreará desde los scripts internos. ¿Continuar?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (confirm != DialogResult.Yes) return;
+
+                _backupService.RestaurarDesdeArchivosInternos();
+                MessageBox.Show("Restauración finalizada.", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error restaurando: " + ex.Message);
+            }
+        }
+
+        private void Btn_ExportarBackUp_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _backupService.GenerarBackupInterno();
+                _backupService.ExportarBackupZip();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error exportando: " + ex.Message);
+            }
+        }
+
+        private void Lbl_NameUser_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Txt_NameUser_TextChanged(object sender, EventArgs e)
         {
 
         }

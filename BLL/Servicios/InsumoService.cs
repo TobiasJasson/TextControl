@@ -19,6 +19,16 @@ namespace BLL.Servicios
             return _repo.ObtenerTalles();
         }
 
+        public List<Insumo> ObtenerPorTipo(int tipoId)
+        {
+            return _repo.ObtenerPorTipo(tipoId);
+        }
+
+        public List<ColorModel> ObtenerColoresPorInsumo(int idInsumo)
+        {
+            return _repo.ObtenerColoresPorInsumo(idInsumo);
+        }
+
 
         public double GetPrecio(int idInsumo)
         {

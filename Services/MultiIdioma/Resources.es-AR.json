@@ -18,6 +18,7 @@
   "Welcome_Bienvenido": "Bienvenido",
 
   ///SideMenu
+  "SideMenu_Cliente": "Clientes",
   "SideMenu_Usuario": "Usuario",
   "SideMenu_Reporte": "Reporte",
   "SideMenu_Stock": "Stock",
@@ -58,6 +59,15 @@
   "Lbl_titleCambioMail": "Cambiar Email",
   "Txt_NuevoMail": "Nuevo Email",
   "Btn_NuevoMail": "Cambiar Email",
+  "Lbl_NameUser": "Cambiar nombre de usuario",
+  "Txt_NameUser": "Nuevo nombre de usuario",
+  "BtnCambiarNameUser": "Cambiar usuario",
+
+  ///Mensajes NameUser
+  "Config_MensajeNameUserVacio": "Debe ingresar un nombre de usuario.",
+  "Config_MensajeNameUserCambiado": "El nombre de usuario se actualizó correctamente.",
+  "Config_MensajeErrorNameUser": "Ocurrió un error al actualizar el nombre de usuario.",
+
 
   ///Stock
   "Stock_Tipo": "Tipo",
@@ -128,6 +138,63 @@
   "Empleado": "Empleado",
   "Total_Precio": "Total Precio",
   "Pago_Adelanto": "Pago Adelanto",
-  "Total_Pendiente": "Pendiente de pago"
+  "Total_Pendiente": "Pendiente de pago",
 
+  ///Cliente
+  "Cliente_Agregado": "Cliente agregado correctamente.",
+  "Cliente_Actualizado": "Cliente actualizado correctamente.",
+  "Cliente_Eliminado": "Cliente eliminado correctamente.",
+  "Cliente_Seleccion_Editar": "Seleccione un cliente para editar.",
+  "Cliente_Seleccion_Eliminar": "Seleccione un cliente para eliminar.",
+  "Cliente_Confirmar_Eliminar": "¿Desea eliminar este cliente?",
+  "Cliente_Error_Cargar": "Error al cargar clientes: ",
+  "Cliente_Error_Agregar": "Error al agregar: ",
+  "Cliente_Error_Actualizar": "Error al actualizar: ",
+  "Cliente_Error_Eliminar": "Error al eliminar: ",
+  "Cliente_Campos_Nombre": "Debe ingresar un nombre.",
+  "Cliente_Campos_Email": "Debe ingresar un email.",
+
+  ///Nuevo Pedido
+  "NuevoPedido_Titulo": "Nuevo Pedido",
+  "NuevoPedido_Cliente": "Cliente",
+  "NuevoPedido_TipoProducto": "Producto",
+  "NuevoPedido_NombreProducto": "Nombre Producto",
+  "NuevoPedido_Color": "Color",
+  "NuevoPedido_Talle": "Talle",
+  "NuevoPedido_Cantidad": "Cantidad",
+  "NuevoPedido_Adelanto": "Adelanto",
+  "NuevoPedido_PrecioTotal": "Precio Total",
+  "NuevoPedido_FaltaPagar": "Falta Pagar",
+  "NuevoPedido_FaltaPagarResultPrefix": "",
+
+  "NuevoPedido_BtnAgregar": "Agregar",
+  "NuevoPedido_BtnEliminar": "Eliminar",
+  "NuevoPedido_BtnEditar": "Editar",
+  "NuevoPedido_BtnCargar": "Cargar",
+  "NuevoPedido_BtnCancelar": "Cancelar",
+
+  "NuevoPedido_Col_Insumo": "Insumo",
+  "NuevoPedido_Col_Color": "Color",
+  "NuevoPedido_Col_Talle": "Talle",
+  "NuevoPedido_Col_Cantidad": "Cantidad",
+  "NuevoPedido_Col_PrecioUnitario": "Precio Unitario",
+  "NuevoPedido_Col_Subtotal": "Subtotal",
+  "NuevoPedido_Col_Adelanto": "Adelanto",
+  "NuevoPedido_Col_FaltaPagar": "Falta Pagar",
+
+  "NuevoPedido_Msg_SeleccionarCliente": "Debe seleccionar un cliente.",
+  "NuevoPedido_Msg_SeleccionarProducto": "Debe seleccionar un producto.",
+  "NuevoPedido_Msg_SeleccionarColor": "Debe seleccionar un color.",
+  "NuevoPedido_Msg_SeleccionarTalle": "Debe seleccionar un talle.",
+  "NuevoPedido_Msg_CantidadMayorCero": "La cantidad debe ser mayor a 0.",
+  "NuevoPedido_Msg_PrecioInvalido": "El precio del producto es inválido o no está cargado.",
+  "NuevoPedido_Msg_DetalleAgregado": "Detalle agregado correctamente.",
+  "NuevoPedido_Msg_SeleccionarDetalleEliminar": "Seleccione un detalle para eliminar.",
+  "NuevoPedido_Msg_ConfirmarEliminar": "¿Desea eliminar este detalle?",
+  "NuevoPedido_Msg_SeleccionarDetalleEditar": "Seleccione un detalle para editar.",
+  "NuevoPedido_Msg_AgregarProductoAntesDeCargar": "Debe agregar al menos un producto al pedido.",
+  "NuevoPedido_Msg_PedidoGuardado": "Pedido guardado correctamente.",
+
+  "Mensaje_Error": "Error",
+  "Mensaje_Advertencia": "Atención"
 }

@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using UI.FormsComun;
 using UI.FormsComun.Admin;
+using UI.FormsComun.Clientes;
 using UI.FormsComun.NuevoPedidos;
 using UI.FormsComun.OrdenesPedidos;
 using UI.LocalWidget;
@@ -44,6 +45,7 @@ namespace UI
         {
             lblTitle.Text = LanguageManager.Traducir("SideMenu_Venta");
             BtnCambiarIdioma.Text = LanguageManager.Traducir("Login_BotonIdioma");
+            Btn_Clientes.Text = LanguageManager.Traducir("SideMenu_Cliente");
             Btn_Usuarios.Text = LanguageManager.Traducir("SideMenu_Usuario");
             BtnReporte.Text = LanguageManager.Traducir("SideMenu_Reporte");
             BtnStock.Text = LanguageManager.Traducir("SideMenu_Stock");
@@ -52,6 +54,9 @@ namespace UI
             Btn_Venta.Text = LanguageManager.Traducir("SideMenu_Venta");
             switch (pantallaActual)
             {
+                case "Clientes":
+                    lblTitle.Text = LanguageManager.Traducir("SideMenu_Cliente");
+                    break;
                 case "Usuarios":
                     lblTitle.Text = LanguageManager.Traducir("SideMenu_Usuario");
                     break;
@@ -109,26 +114,31 @@ namespace UI
             Btn_Minimize.Anchor = AnchorStyles.Top | AnchorStyles.Right;
 
             int rol = SessionManager.Instance.EmpleadoActual.IdRol;
-
-            if (rol == 1)//Admin
-            {
-                Btn_Usuarios.Visible = true;
-                BtnReporte.Visible = true;
-            }
-            else if (rol == 2)//Empleado
-            {
-                Btn_Usuarios.Visible = false;
-                BtnReporte.Visible = false;
-            }
+            AjustarMenuSegunRol(rol);
 
             LanguageManager.CargarUltimoIdioma();
             ApplyTranslations();
             await MostrarFormNuevoPedido();
         }
 
+        private void AjustarMenuSegunRol(int rol)
+        {
+            if (rol == 1)
+            {
+                Btn_Usuarios.Visible = true;
+                BtnReporte.Visible = true;
+            }
+            else 
+            {
+                Btn_Usuarios.Visible = false;
+                BtnReporte.Visible = false;
+            }
+
+        }
+
         private async Task MostrarFormNuevoPedido()
         {
-            pantallaActual = "SideMenu_Venta";
+            pantallaActual = "Venta";
             lblTitle.Text = LanguageManager.Traducir("SideMenu_Venta");
             panelContenido.Controls.Clear();
 
@@ -364,6 +374,41 @@ namespace UI
         private void lblTitle_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private async void Btn_Clientes_Click(object sender, EventArgs e)
+        {
+            pantallaActual = "Clientes";
+            lblTitle.Text = LanguageManager.Traducir("SideMenu_Cliente");
+
+            panelContenido.Controls.Clear();
+
+            bool oscuro = ThemeManager.ModoOscuro;
+            Label lblCargando = new Label()
+            {
+                Text = "Cargando ...",
+                ForeColor = Color.Gray,
+                BackColor = (oscuro == true) ? Color.Black : Color.White,
+                Dock = DockStyle.Fill,
+                TextAlign = ContentAlignment.MiddleCenter
+            };
+            panelContenido.Controls.Add(lblCargando);
+            panelContenido.Refresh();
+
+            await Task.Run(() =>
+            {
+                System.Threading.Thread.Sleep(500);
+            });
+
+            FormClientes formCliente = new FormClientes();
+            formCliente.TopLevel = false;
+            formCliente.FormBorderStyle = FormBorderStyle.None;
+            formCliente.Dock = DockStyle.Fill;
+
+            panelContenido.Controls.Clear();
+            panelContenido.Controls.Add(formCliente);
+            ThemeManager.ApplyTheme(formCliente, ThemeManager.ModoOscuro);
+            formCliente.Show();
         }
     }
 }

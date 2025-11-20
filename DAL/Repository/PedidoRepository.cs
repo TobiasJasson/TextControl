@@ -124,10 +124,14 @@ namespace DAL.Repository
                 {
                     // Insert Pedido
                     string insertPedido = @"
-                        INSERT INTO Pedido
-                        (FechaPedido, FechaEntrega, PrecioTotal, SaldoPendiente, PagoAdelantado, IdCliente, IdEmpleado)
-                        OUTPUT INSERTED.IdPedido
-                        VALUES (@fechaPedido, @fechaEntrega, @precioTotal, @saldoPendiente, @pagoAdelantado, @idCliente, @idEmpleado)";
+                INSERT INTO Pedidos
+                (FechaPedido, FechaEntrega_pedido, PrecioTotal_pedido, SaldoPendiente_pedido, 
+                 pagoAdelanto_pedido, ID_Cliente, ID_Empleado, ID_EstadoPedido, ID_Prioridad)
+                OUTPUT INSERTED.ID_pedido
+                VALUES
+                (@fechaPedido, @fechaEntrega, @precioTotal, @saldoPendiente, 
+                 @pagoAdelantado, @idCliente, @idEmpleado, @idEstado, @idPrioridad)";
+
                     SqlCommand cmdPedido = new SqlCommand(insertPedido, con, tran);
                     cmdPedido.Parameters.AddWithValue("@fechaPedido", pedido.FechaPedido);
                     cmdPedido.Parameters.AddWithValue("@fechaEntrega", pedido.FechaEtrega);
@@ -136,28 +140,46 @@ namespace DAL.Repository
                     cmdPedido.Parameters.AddWithValue("@pagoAdelantado", pedido.PagoAdelantado);
                     cmdPedido.Parameters.AddWithValue("@idCliente", pedido.IdCliente);
                     cmdPedido.Parameters.AddWithValue("@idEmpleado", pedido.IdEmpleado);
+                    cmdPedido.Parameters.AddWithValue("@idEstado", 1);
+                    cmdPedido.Parameters.AddWithValue("@idPrioridad", 2);
+
                     int idPedido = (int)cmdPedido.ExecuteScalar();
 
                     // Insert detalles
                     foreach (var det in detalles)
                     {
                         string insertDetalle = @"
-                            INSERT INTO DetallePedido
-                            (IdPedido, IdTela, Color_Detalle, Talle_Detalle, Cantidad_Detalle, PrecioUnitario)
-                            VALUES (@idPedido, @idTela, @color, @talle, @cantidad, @precio)";
+                    INSERT INTO Detalle_Pedido
+                    (ID_Pedido, ID_Tela, Color_Detalle, ID_Talle, Cantidad_Detalle, PrecioUnitario)
+                    VALUES
+                    (@idPedido, @idTela, @color, @idTalle, @cantidad, @precio)";
+
                         SqlCommand cmdDetalle = new SqlCommand(insertDetalle, con, tran);
                         cmdDetalle.Parameters.AddWithValue("@idPedido", idPedido);
                         cmdDetalle.Parameters.AddWithValue("@idTela", det.IdTela);
                         cmdDetalle.Parameters.AddWithValue("@color", det.Color_Detalle ?? "");
-                        cmdDetalle.Parameters.AddWithValue("@talle", det.Talle_Detalle ?? "");
+                        cmdDetalle.Parameters.AddWithValue("@idTalle", det.IdTalle);
                         cmdDetalle.Parameters.AddWithValue("@cantidad", det.Cantidad_Detalle);
                         cmdDetalle.Parameters.AddWithValue("@precio", det.PrecioUnitario);
                         cmdDetalle.ExecuteNonQuery();
+
+                        // Insert movimiento stock
+                        string insertMov = @"
+                    INSERT INTO Movimiento_Stock
+                    (ID_TipoMovimiento, ID_Insumo, Cantidad, Fecha, ID_Pedido)
+                    VALUES
+                    (2, @idInsumo, @cantidad, GETDATE(), @idPedido)";
+
+                        SqlCommand cmdMov = new SqlCommand(insertMov, con, tran);
+                        cmdMov.Parameters.AddWithValue("@idInsumo", det.IdTela);
+                        cmdMov.Parameters.AddWithValue("@cantidad", det.Cantidad_Detalle);
+                        cmdMov.Parameters.AddWithValue("@idPedido", idPedido);
+                        cmdMov.ExecuteNonQuery();
                     }
 
                     tran.Commit();
                 }
-                catch
+                catch (Exception ex)
                 {
                     tran.Rollback();
                     throw;

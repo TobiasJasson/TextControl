@@ -13,5 +13,10 @@ namespace BLL.Servicios
         private readonly ClienteRepository _repo = new ClienteRepository();
 
         public List<Cliente> GetAll() => _repo.ObtenerTodos();
+        public void AgregarCliente(Cliente cliente) => _repo.Insertar(cliente);
+
+        public void EditarCliente(Cliente cliente) => _repo.Actualizar(cliente);
+
+        public void EliminarCliente(int idCliente) => _repo.Eliminar(idCliente);
     }
 }

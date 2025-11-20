@@ -37,6 +37,13 @@
             this.Btn_NuevoMail = new System.Windows.Forms.Button();
             this.Txt_NuevoMail = new System.Windows.Forms.TextBox();
             this.Lbl_titleCambioMail = new System.Windows.Forms.Label();
+            this.Btn_NameUser = new System.Windows.Forms.Button();
+            this.Txt_NameUser = new System.Windows.Forms.TextBox();
+            this.Lbl_NameUser = new System.Windows.Forms.Label();
+            this.Btn_GenerarBackUp = new System.Windows.Forms.Button();
+            this.Btn_RestaurarBackUp = new System.Windows.Forms.Button();
+            this.Btn_ImportarBackUP = new System.Windows.Forms.Button();
+            this.Btn_ExportarBackUp = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Switch_modoOscuro
@@ -102,6 +109,7 @@
             this.TxtConfirmarClave.Size = new System.Drawing.Size(307, 25);
             this.TxtConfirmarClave.TabIndex = 4;
             this.TxtConfirmarClave.Text = "Confirmar Contraseña";
+            this.TxtConfirmarClave.TextChanged += new System.EventHandler(this.TxtConfirmarClave_TextChanged);
             // 
             // BtnCambiarClave
             // 
@@ -150,11 +158,102 @@
             this.Lbl_titleCambioMail.TabIndex = 6;
             this.Lbl_titleCambioMail.Text = "Cambiar Mail";
             // 
+            // Btn_NameUser
+            // 
+            this.Btn_NameUser.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_NameUser.Location = new System.Drawing.Point(468, 121);
+            this.Btn_NameUser.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Btn_NameUser.Name = "Btn_NameUser";
+            this.Btn_NameUser.Size = new System.Drawing.Size(203, 43);
+            this.Btn_NameUser.TabIndex = 11;
+            this.Btn_NameUser.Text = "Cambiar Nombre Usuario";
+            this.Btn_NameUser.UseVisualStyleBackColor = true;
+            this.Btn_NameUser.Click += new System.EventHandler(this.Btn_NameUser_Click);
+            // 
+            // Txt_NameUser
+            // 
+            this.Txt_NameUser.BackColor = System.Drawing.Color.White;
+            this.Txt_NameUser.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.Txt_NameUser.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Txt_NameUser.ForeColor = System.Drawing.Color.Black;
+            this.Txt_NameUser.Location = new System.Drawing.Point(468, 79);
+            this.Txt_NameUser.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Txt_NameUser.Name = "Txt_NameUser";
+            this.Txt_NameUser.Size = new System.Drawing.Size(307, 25);
+            this.Txt_NameUser.TabIndex = 10;
+            this.Txt_NameUser.TextChanged += new System.EventHandler(this.Txt_NameUser_TextChanged);
+            // 
+            // Lbl_NameUser
+            // 
+            this.Lbl_NameUser.AutoSize = true;
+            this.Lbl_NameUser.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_NameUser.Location = new System.Drawing.Point(462, 28);
+            this.Lbl_NameUser.Name = "Lbl_NameUser";
+            this.Lbl_NameUser.Size = new System.Drawing.Size(290, 23);
+            this.Lbl_NameUser.TabIndex = 9;
+            this.Lbl_NameUser.Text = "Cambiar Nombre de Usuario";
+            this.Lbl_NameUser.Click += new System.EventHandler(this.Lbl_NameUser_Click);
+            // 
+            // Btn_GenerarBackUp
+            // 
+            this.Btn_GenerarBackUp.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_GenerarBackUp.Location = new System.Drawing.Point(549, 246);
+            this.Btn_GenerarBackUp.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Btn_GenerarBackUp.Name = "Btn_GenerarBackUp";
+            this.Btn_GenerarBackUp.Size = new System.Drawing.Size(269, 53);
+            this.Btn_GenerarBackUp.TabIndex = 12;
+            this.Btn_GenerarBackUp.Text = "Generar BackUp";
+            this.Btn_GenerarBackUp.UseVisualStyleBackColor = true;
+            this.Btn_GenerarBackUp.Click += new System.EventHandler(this.Btn_GenerarBackUp_Click);
+            // 
+            // Btn_RestaurarBackUp
+            // 
+            this.Btn_RestaurarBackUp.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_RestaurarBackUp.Location = new System.Drawing.Point(549, 417);
+            this.Btn_RestaurarBackUp.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Btn_RestaurarBackUp.Name = "Btn_RestaurarBackUp";
+            this.Btn_RestaurarBackUp.Size = new System.Drawing.Size(269, 53);
+            this.Btn_RestaurarBackUp.TabIndex = 13;
+            this.Btn_RestaurarBackUp.Text = "Restaurar BackUp";
+            this.Btn_RestaurarBackUp.UseVisualStyleBackColor = true;
+            this.Btn_RestaurarBackUp.Click += new System.EventHandler(this.Btn_RestaurarBackUp_Click);
+            // 
+            // Btn_ImportarBackUP
+            // 
+            this.Btn_ImportarBackUP.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_ImportarBackUP.Location = new System.Drawing.Point(549, 360);
+            this.Btn_ImportarBackUP.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Btn_ImportarBackUP.Name = "Btn_ImportarBackUP";
+            this.Btn_ImportarBackUP.Size = new System.Drawing.Size(269, 53);
+            this.Btn_ImportarBackUP.TabIndex = 14;
+            this.Btn_ImportarBackUP.Text = "Importar BackUp";
+            this.Btn_ImportarBackUP.UseVisualStyleBackColor = true;
+            this.Btn_ImportarBackUP.Click += new System.EventHandler(this.Btn_ImportarBackUP_Click);
+            // 
+            // Btn_ExportarBackUp
+            // 
+            this.Btn_ExportarBackUp.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_ExportarBackUp.Location = new System.Drawing.Point(549, 303);
+            this.Btn_ExportarBackUp.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Btn_ExportarBackUp.Name = "Btn_ExportarBackUp";
+            this.Btn_ExportarBackUp.Size = new System.Drawing.Size(269, 53);
+            this.Btn_ExportarBackUp.TabIndex = 15;
+            this.Btn_ExportarBackUp.Text = "Exportar BackUp";
+            this.Btn_ExportarBackUp.UseVisualStyleBackColor = true;
+            this.Btn_ExportarBackUp.Click += new System.EventHandler(this.Btn_ExportarBackUp_Click);
+            // 
             // FormConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(821, 481);
+            this.Controls.Add(this.Btn_ExportarBackUp);
+            this.Controls.Add(this.Btn_ImportarBackUP);
+            this.Controls.Add(this.Btn_RestaurarBackUp);
+            this.Controls.Add(this.Btn_GenerarBackUp);
+            this.Controls.Add(this.Btn_NameUser);
+            this.Controls.Add(this.Txt_NameUser);
+            this.Controls.Add(this.Lbl_NameUser);
             this.Controls.Add(this.Btn_NuevoMail);
             this.Controls.Add(this.Txt_NuevoMail);
             this.Controls.Add(this.Lbl_titleCambioMail);
@@ -185,5 +284,12 @@
         private System.Windows.Forms.Button Btn_NuevoMail;
         private System.Windows.Forms.TextBox Txt_NuevoMail;
         private System.Windows.Forms.Label Lbl_titleCambioMail;
+        private System.Windows.Forms.Button Btn_NameUser;
+        private System.Windows.Forms.TextBox Txt_NameUser;
+        private System.Windows.Forms.Label Lbl_NameUser;
+        private System.Windows.Forms.Button Btn_GenerarBackUp;
+        private System.Windows.Forms.Button Btn_RestaurarBackUp;
+        private System.Windows.Forms.Button Btn_ImportarBackUP;
+        private System.Windows.Forms.Button Btn_ExportarBackUp;
     }
 }

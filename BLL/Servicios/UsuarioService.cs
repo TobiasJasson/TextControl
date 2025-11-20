@@ -63,6 +63,10 @@ namespace BLL.Servicios
             return _repo.ActualizarClave(username, passwordBase64);
         }
 
+        public bool CambiarNameUser(string username, int idUser)
+        {
+            return _repo.ActualizarNameUser(username, idUser);
+        }
         public DataTable ObtenerGrid()
         {
             return _repo2.ObtenerUsuarios();

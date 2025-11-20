@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.CBX_TipoInsumo = new System.Windows.Forms.ComboBox();
-            this.Txt_NombreInsumo = new System.Windows.Forms.TextBox();
             this.Txt_StockActual = new System.Windows.Forms.TextBox();
             this.Txt_StockMinimo = new System.Windows.Forms.TextBox();
             this.Txt_CantidadUnidad = new System.Windows.Forms.TextBox();
@@ -44,6 +43,7 @@
             this.Lbl_StockActual = new System.Windows.Forms.Label();
             this.Lbl_PrecioUnitario = new System.Windows.Forms.Label();
             this.Lbl_CantidadUnidad = new System.Windows.Forms.Label();
+            this.Cbx_NombreInsumo = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // CBX_TipoInsumo
@@ -54,14 +54,6 @@
             this.CBX_TipoInsumo.Size = new System.Drawing.Size(246, 24);
             this.CBX_TipoInsumo.TabIndex = 0;
             this.CBX_TipoInsumo.SelectedIndexChanged += new System.EventHandler(this.CBX_TipoInsumo_SelectedIndexChanged);
-            // 
-            // Txt_NombreInsumo
-            // 
-            this.Txt_NombreInsumo.Location = new System.Drawing.Point(81, 162);
-            this.Txt_NombreInsumo.Name = "Txt_NombreInsumo";
-            this.Txt_NombreInsumo.Size = new System.Drawing.Size(246, 22);
-            this.Txt_NombreInsumo.TabIndex = 1;
-            this.Txt_NombreInsumo.TextChanged += new System.EventHandler(this.Txt_NombreInsumo_TextChanged);
             // 
             // Txt_StockActual
             // 
@@ -201,11 +193,21 @@
             this.Lbl_CantidadUnidad.Text = "Cantidad Unitaria";
             this.Lbl_CantidadUnidad.Click += new System.EventHandler(this.Lbl_CantidadUnidad_Click);
             // 
+            // Cbx_NombreInsumo
+            // 
+            this.Cbx_NombreInsumo.FormattingEnabled = true;
+            this.Cbx_NombreInsumo.Location = new System.Drawing.Point(81, 162);
+            this.Cbx_NombreInsumo.Name = "Cbx_NombreInsumo";
+            this.Cbx_NombreInsumo.Size = new System.Drawing.Size(246, 24);
+            this.Cbx_NombreInsumo.TabIndex = 16;
+            this.Cbx_NombreInsumo.SelectedIndexChanged += new System.EventHandler(this.Cbx_NombreInsumo_SelectedIndexChanged);
+            // 
             // FormAgregarStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.Cbx_NombreInsumo);
             this.Controls.Add(this.Lbl_CantidadUnidad);
             this.Controls.Add(this.Lbl_PrecioUnitario);
             this.Controls.Add(this.Lbl_StockActual);
@@ -220,7 +222,6 @@
             this.Controls.Add(this.Txt_CantidadUnidad);
             this.Controls.Add(this.Txt_StockMinimo);
             this.Controls.Add(this.Txt_StockActual);
-            this.Controls.Add(this.Txt_NombreInsumo);
             this.Controls.Add(this.CBX_TipoInsumo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormAgregarStock";
@@ -233,7 +234,6 @@
         #endregion
 
         private System.Windows.Forms.ComboBox CBX_TipoInsumo;
-        private System.Windows.Forms.TextBox Txt_NombreInsumo;
         private System.Windows.Forms.TextBox Txt_StockActual;
         private System.Windows.Forms.TextBox Txt_StockMinimo;
         private System.Windows.Forms.TextBox Txt_CantidadUnidad;
@@ -248,5 +248,6 @@
         private System.Windows.Forms.Label Lbl_StockActual;
         private System.Windows.Forms.Label Lbl_PrecioUnitario;
         private System.Windows.Forms.Label Lbl_CantidadUnidad;
+        private System.Windows.Forms.ComboBox Cbx_NombreInsumo;
     }
 }

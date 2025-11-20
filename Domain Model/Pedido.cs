@@ -25,6 +25,8 @@ namespace Domain_Model
         public int IdDetalle { get; set; }
         public int IdPedido { get; set; }
         public int IdTela { get; set; }
+        public int IdTalle { get; set; }
+        public string Nombre { get; set; }
         public string Color_Detalle { get; set; }
         public string Talle_Detalle { get; set; }
         public int Cantidad_Detalle { get; set; }

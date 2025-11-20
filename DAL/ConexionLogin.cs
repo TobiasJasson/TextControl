@@ -13,7 +13,7 @@ namespace DAL
 
         public ConexionLogin()
         {
-            _connectionString = DAL.ScriptsSQL.DatabaseInitializer.GetConnectionStringSeguridad();
+            _connectionString = DAL.ScriptsSQL.DatabaseInitializer.GetSeguridadConnectionString();
         }
 
         public SqlConnection GetConnection()

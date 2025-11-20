@@ -100,6 +100,23 @@ namespace DAL.Repository
                 }
             }
         }
+        public bool ActualizarNameUser(string username, int idUser)
+        {
+            using (var conn = _conexion.GetConnection())
+            {
+                conn.Open();
+                var query = @"UPDATE Usuario 
+                              SET UserName = @username 
+                              WHERE ID_Usuario = @ID_Usuario";
+
+                using (var cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@username", username);
+                    cmd.Parameters.AddWithValue("@ID_Usuario", idUser);
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
         public Usuario GetByUserNameAndToken(string username, string token)
         {
             using (var conn = _conexion.GetConnection())

@@ -35,7 +35,7 @@
             this.Btn_Minimize = new System.Windows.Forms.Button();
             this.Btn_Cerrar = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.panel_Menu = new System.Windows.Forms.Panel();
+            this.Btn_Clientes = new System.Windows.Forms.Button();
             this.Btn_Venta = new System.Windows.Forms.Button();
             this.Btn_Usuarios = new System.Windows.Forms.Button();
             this.BtnReporte = new System.Windows.Forms.Button();
@@ -45,6 +45,7 @@
             this.BtnCambiarIdioma = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panelContenido = new System.Windows.Forms.Panel();
+            this.panel_Menu = new System.Windows.Forms.Panel();
             this.Panel_Title.SuspendLayout();
             this.panel_Menu.SuspendLayout();
             this.SuspendLayout();
@@ -148,23 +149,21 @@
             this.lblTitle.Text = "Menu Principal";
             this.lblTitle.Click += new System.EventHandler(this.lblTitle_Click);
             // 
-            // panel_Menu
+            // Btn_Clientes
             // 
-            this.panel_Menu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(47)))), ((int)(((byte)(90)))));
-            this.panel_Menu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panel_Menu.Controls.Add(this.Btn_Venta);
-            this.panel_Menu.Controls.Add(this.Btn_Usuarios);
-            this.panel_Menu.Controls.Add(this.BtnReporte);
-            this.panel_Menu.Controls.Add(this.BtnStock);
-            this.panel_Menu.Controls.Add(this.BtnConfig);
-            this.panel_Menu.Controls.Add(this.Btn_LogOut);
-            this.panel_Menu.Controls.Add(this.BtnCambiarIdioma);
-            this.panel_Menu.Location = new System.Drawing.Point(1, 63);
-            this.panel_Menu.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panel_Menu.Name = "panel_Menu";
-            this.panel_Menu.Size = new System.Drawing.Size(281, 674);
-            this.panel_Menu.TabIndex = 5;
-            this.panel_Menu.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Menu_Paint);
+            this.Btn_Clientes.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(47)))), ((int)(((byte)(90)))));
+            this.Btn_Clientes.FlatAppearance.BorderSize = 0;
+            this.Btn_Clientes.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.Btn_Clientes.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_Clientes.ForeColor = System.Drawing.Color.Silver;
+            this.Btn_Clientes.Location = new System.Drawing.Point(11, 179);
+            this.Btn_Clientes.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Btn_Clientes.Name = "Btn_Clientes";
+            this.Btn_Clientes.Size = new System.Drawing.Size(265, 59);
+            this.Btn_Clientes.TabIndex = 18;
+            this.Btn_Clientes.Text = "Clientes";
+            this.Btn_Clientes.UseVisualStyleBackColor = true;
+            this.Btn_Clientes.Click += new System.EventHandler(this.Btn_Clientes_Click);
             // 
             // Btn_Venta
             // 
@@ -189,7 +188,7 @@
             this.Btn_Usuarios.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.Btn_Usuarios.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_Usuarios.ForeColor = System.Drawing.Color.Silver;
-            this.Btn_Usuarios.Location = new System.Drawing.Point(11, 84);
+            this.Btn_Usuarios.Location = new System.Drawing.Point(11, 253);
             this.Btn_Usuarios.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Btn_Usuarios.Name = "Btn_Usuarios";
             this.Btn_Usuarios.Size = new System.Drawing.Size(265, 59);
@@ -205,7 +204,7 @@
             this.BtnReporte.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnReporte.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnReporte.ForeColor = System.Drawing.Color.Silver;
-            this.BtnReporte.Location = new System.Drawing.Point(11, 155);
+            this.BtnReporte.Location = new System.Drawing.Point(11, 331);
             this.BtnReporte.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BtnReporte.Name = "BtnReporte";
             this.BtnReporte.Size = new System.Drawing.Size(265, 64);
@@ -221,7 +220,7 @@
             this.BtnStock.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnStock.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnStock.ForeColor = System.Drawing.Color.Silver;
-            this.BtnStock.Location = new System.Drawing.Point(11, 230);
+            this.BtnStock.Location = new System.Drawing.Point(11, 96);
             this.BtnStock.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BtnStock.Name = "BtnStock";
             this.BtnStock.Size = new System.Drawing.Size(265, 59);
@@ -232,12 +231,13 @@
             // 
             // BtnConfig
             // 
+            this.BtnConfig.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.BtnConfig.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(47)))), ((int)(((byte)(90)))));
             this.BtnConfig.FlatAppearance.BorderSize = 0;
             this.BtnConfig.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnConfig.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnConfig.ForeColor = System.Drawing.Color.Silver;
-            this.BtnConfig.Location = new System.Drawing.Point(11, 309);
+            this.BtnConfig.Location = new System.Drawing.Point(3, 509);
             this.BtnConfig.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BtnConfig.Name = "BtnConfig";
             this.BtnConfig.Size = new System.Drawing.Size(265, 69);
@@ -254,7 +254,7 @@
             this.Btn_LogOut.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.Btn_LogOut.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_LogOut.ForeColor = System.Drawing.Color.Silver;
-            this.Btn_LogOut.Location = new System.Drawing.Point(11, 582);
+            this.Btn_LogOut.Location = new System.Drawing.Point(11, 623);
             this.Btn_LogOut.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Btn_LogOut.Name = "Btn_LogOut";
             this.Btn_LogOut.Size = new System.Drawing.Size(136, 41);
@@ -272,7 +272,7 @@
             this.BtnCambiarIdioma.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(118)))), ((int)(((byte)(126)))));
             this.BtnCambiarIdioma.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnCambiarIdioma.ForeColor = System.Drawing.Color.LightGray;
-            this.BtnCambiarIdioma.Location = new System.Drawing.Point(189, 582);
+            this.BtnCambiarIdioma.Location = new System.Drawing.Point(192, 625);
             this.BtnCambiarIdioma.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BtnCambiarIdioma.Name = "BtnCambiarIdioma";
             this.BtnCambiarIdioma.Size = new System.Drawing.Size(76, 39);
@@ -296,6 +296,25 @@
             this.panelContenido.Size = new System.Drawing.Size(1032, 672);
             this.panelContenido.TabIndex = 6;
             this.panelContenido.Paint += new System.Windows.Forms.PaintEventHandler(this.panelContenido_Paint);
+            // 
+            // panel_Menu
+            // 
+            this.panel_Menu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(47)))), ((int)(((byte)(90)))));
+            this.panel_Menu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.panel_Menu.Controls.Add(this.Btn_Clientes);
+            this.panel_Menu.Controls.Add(this.Btn_Venta);
+            this.panel_Menu.Controls.Add(this.Btn_Usuarios);
+            this.panel_Menu.Controls.Add(this.BtnReporte);
+            this.panel_Menu.Controls.Add(this.BtnStock);
+            this.panel_Menu.Controls.Add(this.BtnConfig);
+            this.panel_Menu.Controls.Add(this.Btn_LogOut);
+            this.panel_Menu.Controls.Add(this.BtnCambiarIdioma);
+            this.panel_Menu.Location = new System.Drawing.Point(1, 63);
+            this.panel_Menu.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel_Menu.Name = "panel_Menu";
+            this.panel_Menu.Size = new System.Drawing.Size(281, 674);
+            this.panel_Menu.TabIndex = 5;
+            this.panel_Menu.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Menu_Paint);
             // 
             // MainScreen
             // 
@@ -324,7 +343,6 @@
 
         private System.Windows.Forms.Panel Panel_Title;
         public System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.Panel panel_Menu;
         private System.Windows.Forms.Button Btn_Minimize;
         private System.Windows.Forms.Button Btn_Cerrar;
         private System.Windows.Forms.Button BtnMaximize;
@@ -338,5 +356,7 @@
         public System.Windows.Forms.Button BtnConfig;
         public System.Windows.Forms.Button BtnStock;
         public System.Windows.Forms.Button Btn_Venta;
+        public System.Windows.Forms.Button Btn_Clientes;
+        private System.Windows.Forms.Panel panel_Menu;
     }
 }
