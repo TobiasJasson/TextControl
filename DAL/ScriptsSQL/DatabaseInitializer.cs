@@ -24,8 +24,8 @@ namespace DAL.ScriptsSQL
 
         public static void Initialize()
         {
-            InitializeDatabase(_dbNegocio, "TextControlDB.sql");
             InitializeDatabase(_dbSeguridad, "SeguridadTextControlDB.sql");
+            InitializeDatabase(_dbNegocio, "TextControlDB.sql");
         }
 
         public static void InitializeDatabase(string dbName, string scriptFile)
