@@ -14,8 +14,8 @@ namespace DAL.ScriptsSQL
     {
         private static readonly string[] PossibleServers =
         {
-            @"(localdb)\MSSQLLocalDB",
             @"localhost\SQLEXPRESS",
+            @"(localdb)\MSSQLLocalDB",
             @"localhost"
         };
 
@@ -27,6 +27,8 @@ namespace DAL.ScriptsSQL
             InitializeDatabase(_dbSeguridad, "SeguridadTextControlDB.sql");
             InitializeDatabase(_dbNegocio, "TextControlDB.sql");
         }
+
+        
 
         public static void InitializeDatabase(string dbName, string scriptFile)
         {
@@ -61,13 +63,16 @@ namespace DAL.ScriptsSQL
             {
                 try
                 {
+                    //if (server.ToLower().Contains("(localdb)"))
+                    //    throw new Exception("LocalDB no soporta características requeridas por tu base. Instala SQL Server Express.");
+
                     using (var conn = new SqlConnection($"Server={server};Database=master;Trusted_Connection=True;"))
                     {
                         conn.Open();
                         return server;
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
                     Console.WriteLine($"No se pudo conectar a {server}: {ex.Message}");
                 }

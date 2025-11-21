@@ -52,7 +52,7 @@ namespace UI.FormsComun.Admin
                 Apellido = u["Apellido_Empleado"]?.ToString(),
                 Email = u["Email"]?.ToString(),
                 Contacto = u["Contacto"]?.ToString(),
-                Rol = u["Rol"]?.ToString(),
+                Rol = u["NombreRol"]?.ToString(),
                 DNI = u["DNI_Empleado"]?.ToString(),
                 UsuarioActivo = (bool)u["UsuarioActivo"] ? LanguageManager.Traducir("Activo") : LanguageManager.Traducir("Inactivo"),
                 ID_Usuario = (int)u["ID_Usuario"],
