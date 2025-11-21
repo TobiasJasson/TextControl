@@ -69,6 +69,7 @@ namespace DAL.ScriptsSQL
                 }
                 catch
                 {
+                    Console.WriteLine($"No se pudo conectar a {server}: {ex.Message}");
                 }
             }
 
